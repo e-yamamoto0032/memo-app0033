@@ -2,7 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b72aea3c-49a3-4917-93bf-00451c6a6733" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/memo-app0033.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/memo-app0033.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laravel/app/Http/Controllers/Auth/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/laravel/app/Http/Controllers/Auth/LoginController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laravel/app/Http/Controllers/Auth/RegisterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/laravel/app/Http/Controllers/Auth/RegisterController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laravel/app/Http/Middleware/RedirectIfAuthenticated.php" beforeDir="false" afterPath="$PROJECT_DIR$/laravel/app/Http/Middleware/RedirectIfAuthenticated.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laravel/app/Providers/RouteServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/laravel/app/Providers/RouteServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laravel/config/database.php" beforeDir="false" afterPath="$PROJECT_DIR$/laravel/config/database.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laravel/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/laravel/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laravel/phpunit.xml" beforeDir="false" afterPath="$PROJECT_DIR$/laravel/phpunit.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laravel/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/laravel/resources/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laravel/resources/js/bootstrap.js" beforeDir="false" afterPath="$PROJECT_DIR$/laravel/resources/js/bootstrap.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laravel/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/laravel/routes/api.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laravel/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/laravel/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laravel/webpack.mix.js" beforeDir="false" afterPath="$PROJECT_DIR$/laravel/webpack.mix.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -155,7 +169,23 @@
       <workItem from="1621045538610" duration="147000" />
       <workItem from="1621046051631" duration="2030000" />
       <workItem from="1621048192733" duration="109000" />
-      <workItem from="1621048547953" duration="1111000" />
+      <workItem from="1621048547953" duration="1432000" />
+      <workItem from="1621050041531" duration="2709000" />
+      <workItem from="1621056801557" duration="75000" />
+      <workItem from="1621056917999" duration="226000" />
+      <workItem from="1621057205384" duration="61000" />
+      <workItem from="1621057308652" duration="783000" />
+      <workItem from="1621058165529" duration="38000" />
+      <workItem from="1621058263102" duration="70000" />
+      <workItem from="1621058385925" duration="29000" />
+      <workItem from="1621058468681" duration="100000" />
+      <workItem from="1621058607061" duration="172000" />
+      <workItem from="1621058824541" duration="3556000" />
+      <workItem from="1621062566253" duration="996000" />
+      <workItem from="1621063692640" duration="285000" />
+      <workItem from="1621064028914" duration="114000" />
+      <workItem from="1621064180843" duration="310000" />
+      <workItem from="1621064542146" duration="1217000" />
     </task>
     <servers />
   </component>
