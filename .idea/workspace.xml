@@ -3,15 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="b72aea3c-49a3-4917-93bf-00451c6a6733" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/laravel/app/Http/Controllers/SheetController.php" beforeDir="false" afterPath="$PROJECT_DIR$/laravel/app/Http/Controllers/SheetController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/laravel/config/database.php" beforeDir="false" afterPath="$PROJECT_DIR$/laravel/config/database.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laravel/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/laravel/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laravel/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/laravel/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/laravel/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/laravel/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/laravel/public/mix-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/laravel/public/mix-manifest.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/laravel/resources/js/components/Board.vue" beforeDir="false" afterPath="$PROJECT_DIR$/laravel/resources/js/components/Board.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/laravel/resources/js/components/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/laravel/resources/js/components/Login.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/laravel/resources/js/components/Navbar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/laravel/resources/js/components/Navbar.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/laravel/resources/js/components/SheetAdd.vue" beforeDir="false" afterPath="$PROJECT_DIR$/laravel/resources/js/components/SheetAdd.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/laravel/resources/js/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/laravel/resources/js/router.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laravel/resources/js/components/Sheet.vue" beforeDir="false" afterPath="$PROJECT_DIR$/laravel/resources/js/components/Sheet.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laravel/resources/js/components/SheetDone.vue" beforeDir="false" afterPath="$PROJECT_DIR$/laravel/resources/js/components/SheetDone.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/laravel/resources/js/store/sheet.js" beforeDir="false" afterPath="$PROJECT_DIR$/laravel/resources/js/store/sheet.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -182,7 +180,9 @@
       <workItem from="1621064028914" duration="114000" />
       <workItem from="1621064180843" duration="310000" />
       <workItem from="1621064542146" duration="2228000" />
-      <workItem from="1621067137099" duration="3910000" />
+      <workItem from="1621067137099" duration="9564000" />
+      <workItem from="1621078147713" duration="1313000" />
+      <workItem from="1621079585054" duration="2960000" />
     </task>
     <servers />
   </component>

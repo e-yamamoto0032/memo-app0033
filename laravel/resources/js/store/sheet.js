@@ -1,5 +1,5 @@
 const state = {
-    sheets: null
+    sheets: []
 }
 
 const mutations = {
