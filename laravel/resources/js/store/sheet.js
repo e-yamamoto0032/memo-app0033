@@ -1,5 +1,5 @@
 const state = {
-    sheets: []
+    sheets: null
 }
 
 const mutations = {
@@ -7,7 +7,9 @@ const mutations = {
         state.sheets.push({
             title: payload.title,
             body: payload.body,
-            deadline: payload.deadline
+            deadline: payload.deadline,
+            status: payload.status,
+            user_id: payload.user_id
         })
     },
 
@@ -15,7 +17,6 @@ const mutations = {
 
 const actions = {
     addSheet(context, payload) {
-        console.log(payload)
         axios.post('/api/sheets', payload)
         context.commit('setSheet', payload)
     },

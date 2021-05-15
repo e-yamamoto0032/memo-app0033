@@ -33,6 +33,8 @@ class SheetController extends Controller
         $sheet->title = $request->title;
         $sheet->body = $request->body;
         $sheet->deadline = $request->deadline;
+        $sheet->status = $request->status;
+        $sheet->user_id = $request->user_id;
         $sheet->save();
 
     }

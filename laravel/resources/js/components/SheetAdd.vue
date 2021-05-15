@@ -31,7 +31,7 @@
                         </div>
                         <div class="d-flex justify-content-center">
                             <div>
-                                <button type="submit" class="btn btn-info">シートを追加</button>
+                                <button type="submit" class="btn btn-info" @click="$emit('close')">シートを追加</button>
                             </div>
                         </div>
                     </form>
@@ -55,9 +55,16 @@ export default {
             this.$store.dispatch('sheet/addSheet', {
                 title:this.title,
                 body:this.body,
-                deadline:this.deadline
+                deadline:this.deadline,
+                status: 0,
+                user_id:this.userid
             })
         }
+    },
+    computed: {
+        userid() {
+            return this.$store.getters['auth/userid']
+        },
     }
 }
 

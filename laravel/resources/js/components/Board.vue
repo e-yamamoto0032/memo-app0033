@@ -1,16 +1,16 @@
 <template>
     <div>
         <header>
-            シート一覧
+            {{ username }}さんのシート一覧
         </header>
 
         <div>
             <p>All: 0 sheets</p>
             <div class="h5 mb-3">作業中</div>
             <sheet/>
-
+            <hr>
             <div class="h5 mb-3">完了済</div>
-            <sheet-done />
+            <sheet-done/>
         </div>
     </div>
 </template>
@@ -27,6 +27,11 @@ export default {
         SheetAdd,
         SheetDone
     },
+    computed: {
+        username() {
+            return this.$store.getters['auth/username']
+        },
+    }
 
 }
 </script>

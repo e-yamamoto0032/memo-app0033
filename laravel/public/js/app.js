@@ -1918,6 +1918,11 @@ __webpack_require__.r(__webpack_exports__);
     Sheet: _Sheet__WEBPACK_IMPORTED_MODULE_2__.default,
     SheetAdd: _SheetAdd__WEBPACK_IMPORTED_MODULE_0__.default,
     SheetDone: _SheetDone__WEBPACK_IMPORTED_MODULE_1__.default
+  },
+  computed: {
+    username: function username() {
+      return this.$store.getters['auth/username'];
+    }
   }
 });
 
@@ -2015,7 +2020,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 2:
                 //
-                _this.$router.push('/board');
+                _this.$router.push({
+                  name: 'board',
+                  params: {
+                    username: _this.username
+                  }
+                });
 
               case 3:
               case "end":
@@ -2037,8 +2047,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _this2.$store.dispatch('auth/register', _this2.registerForm);
 
               case 2:
-                // トップページに移動する
-                _this2.$router.push('/');
+                _this2.$router.push({
+                  name: 'board',
+                  params: {
+                    username: _this2.username
+                  }
+                });
 
               case 3:
               case "end":
@@ -2052,6 +2066,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   computed: {
     userid: function userid() {
       return this.$store.getters['auth/userid'];
+    },
+    username: function username() {
+      return this.$store.getters['auth/username'];
     }
   }
 });
@@ -2116,7 +2133,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _this.$store.dispatch('auth/logout');
 
               case 2:
-                _this.$router.push('/main');
+                _this.$router.push('/');
 
               case 3:
               case "end":
@@ -2284,8 +2301,15 @@ __webpack_require__.r(__webpack_exports__);
       this.$store.dispatch('sheet/addSheet', {
         title: this.title,
         body: this.body,
-        deadline: this.deadline
+        deadline: this.deadline,
+        status: 0,
+        user_id: this.userid
       });
+    }
+  },
+  computed: {
+    userid: function userid() {
+      return this.$store.getters['auth/userid'];
     }
   }
 });
@@ -2464,7 +2488,8 @@ var routes = [{
   path: '/',
   component: _components_Main_vue__WEBPACK_IMPORTED_MODULE_0__.default
 }, {
-  path: '/board',
+  path: '/board/:username',
+  name: 'board',
   component: _components_Board_vue__WEBPACK_IMPORTED_MODULE_1__.default
 }, {
   path: '/login',
@@ -2666,20 +2691,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 var state = {
-  sheets: []
+  sheets: null
 };
 var mutations = {
   setSheet: function setSheet(state, payload) {
     state.sheets.push({
       title: payload.title,
       body: payload.body,
-      deadline: payload.deadline
+      deadline: payload.deadline,
+      status: payload.status,
+      user_id: payload.user_id
     });
   }
 };
 var actions = {
   addSheet: function addSheet(context, payload) {
-    console.log(payload);
     axios.post('/api/sheets', payload);
     context.commit('setSheet', payload);
   }
@@ -4439,7 +4465,9 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("header", [_vm._v("\n        シート一覧\n    ")]),
+    _c("header", [
+      _vm._v("\n        " + _vm._s(_vm.username) + "さんのシート一覧\n    ")
+    ]),
     _vm._v(" "),
     _c(
       "div",
@@ -4449,6 +4477,8 @@ var render = function() {
         _c("div", { staticClass: "h5 mb-3" }, [_vm._v("作業中")]),
         _vm._v(" "),
         _c("sheet"),
+        _vm._v(" "),
+        _c("hr"),
         _vm._v(" "),
         _c("div", { staticClass: "h5 mb-3" }, [_vm._v("完了済")]),
         _vm._v(" "),
@@ -5193,7 +5223,23 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
-              _vm._m(0)
+              _c("div", { staticClass: "d-flex justify-content-center" }, [
+                _c("div", [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-info",
+                      attrs: { type: "submit" },
+                      on: {
+                        click: function($event) {
+                          return _vm.$emit("close")
+                        }
+                      }
+                    },
+                    [_vm._v("シートを追加")]
+                  )
+                ])
+              ])
             ]
           )
         ])
@@ -5201,22 +5247,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "d-flex justify-content-center" }, [
-      _c("div", [
-        _c(
-          "button",
-          { staticClass: "btn btn-info", attrs: { type: "submit" } },
-          [_vm._v("シートを追加")]
-        )
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
