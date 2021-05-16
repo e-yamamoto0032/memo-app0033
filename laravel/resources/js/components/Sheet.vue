@@ -1,10 +1,12 @@
 <template>
-    <div class="card mb-3" style="width: 21rem;">
+    <div class="card mb-3" style="width: 21rem; height: 13rem;">
         <div class="card-body d-flex flex-row">
             <div>
                 <h6 class="card-title">{{ title }}</h6>
                 <p class="card-text">{{ body }}</p>
                 <p class="card-text">期日　{{ deadline }}</p>
+                <p class="card-text" v-if="dateAlert === deadline" style="color: blue; font-weight: bold">本日まで！</p>
+                <p class="card-text" v-if="dateAlert > deadline" style="color: red; font-weight: bold">期限切れ！</p>
             </div>
             <div class="ml-auto card-text">
                 <div class="dropdown">
@@ -31,6 +33,8 @@
 
 <script>
 
+
+import moment from "moment";
 
 export default {
 
@@ -64,6 +68,11 @@ export default {
         },
 
     },
+    computed: {
+        dateAlert() {
+            return moment().format("YYYY年MM月DD日")
+        },
+    }
 
 
 }

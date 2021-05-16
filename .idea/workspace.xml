@@ -7,7 +7,6 @@
       <change beforePath="$PROJECT_DIR$/laravel/public/mix-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/laravel/public/mix-manifest.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/laravel/resources/js/components/Board.vue" beforeDir="false" afterPath="$PROJECT_DIR$/laravel/resources/js/components/Board.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/laravel/resources/js/components/Sheet.vue" beforeDir="false" afterPath="$PROJECT_DIR$/laravel/resources/js/components/Sheet.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/laravel/resources/js/components/SheetDone.vue" beforeDir="false" afterPath="$PROJECT_DIR$/laravel/resources/js/components/SheetDone.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -188,7 +187,7 @@
       <workItem from="1621067137099" duration="9564000" />
       <workItem from="1621078147713" duration="1313000" />
       <workItem from="1621079585054" duration="3654000" />
-      <workItem from="1621131424122" duration="16332000" />
+      <workItem from="1621131424122" duration="21362000" />
     </task>
     <servers />
   </component>

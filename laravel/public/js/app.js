@@ -2038,70 +2038,70 @@ __webpack_require__.r(__webpack_exports__);
       sheets: [{
         title: 'タイトル1',
         body: '内容1',
-        deadline: moment__WEBPACK_IMPORTED_MODULE_3___default()("2020-01-01").format("YYYY年MM月DD日"),
+        deadline: moment__WEBPACK_IMPORTED_MODULE_3___default()("2021-06-01").format("YYYY年MM月DD日"),
         status: 0,
-        end_date: moment__WEBPACK_IMPORTED_MODULE_3___default()("2021-01-01").format("YYYY年MM月DD日"),
+        end_date: moment__WEBPACK_IMPORTED_MODULE_3___default()("2021-06-01").format("YYYY年MM月DD日"),
         user_id: 1
       }, {
         title: 'タイトル2',
         body: '内容2',
-        deadline: moment__WEBPACK_IMPORTED_MODULE_3___default()("2020-02-02").format("YYYY年MM月DD日"),
+        deadline: moment__WEBPACK_IMPORTED_MODULE_3___default()("2021-05-02").format("YYYY年MM月DD日"),
         status: 0,
-        end_date: moment__WEBPACK_IMPORTED_MODULE_3___default()("2021-02-02").format("YYYY年MM月DD日"),
+        end_date: moment__WEBPACK_IMPORTED_MODULE_3___default()("2021-05-02").format("YYYY年MM月DD日"),
         user_id: 1
       }, {
         title: 'タイトル3',
         body: '内容3',
-        deadline: moment__WEBPACK_IMPORTED_MODULE_3___default()("2020-03-03").format("YYYY年MM月DD日"),
+        deadline: moment__WEBPACK_IMPORTED_MODULE_3___default()().format("YYYY年MM月DD日"),
         status: 0,
         end_date: moment__WEBPACK_IMPORTED_MODULE_3___default()("2021-03-03").format("YYYY年MM月DD日"),
         user_id: 1
       }, {
         title: 'タイトル4',
         body: '内容4',
-        deadline: moment__WEBPACK_IMPORTED_MODULE_3___default()("2020-04-04").format("YYYY年MM月DD日"),
+        deadline: moment__WEBPACK_IMPORTED_MODULE_3___default()("2021-06-04").format("YYYY年MM月DD日"),
         status: 1,
-        end_date: moment__WEBPACK_IMPORTED_MODULE_3___default()("2021-04-04").format("YYYY年MM月DD日"),
+        end_date: moment__WEBPACK_IMPORTED_MODULE_3___default()("2021-06-04").format("YYYY年MM月DD日"),
         user_id: 1
       }, {
         title: 'タイトル5',
         body: '内容5',
-        deadline: moment__WEBPACK_IMPORTED_MODULE_3___default()("2020-05-05").format("YYYY年MM月DD日"),
+        deadline: moment__WEBPACK_IMPORTED_MODULE_3___default()("2021-05-05").format("YYYY年MM月DD日"),
         status: 0,
         end_date: moment__WEBPACK_IMPORTED_MODULE_3___default()("2021-05-05").format("YYYY年MM月DD日"),
         user_id: 2
       }, {
         title: 'タイトル6',
         body: '内容6',
-        deadline: moment__WEBPACK_IMPORTED_MODULE_3___default()("2020-06-06").format("YYYY年MM月DD日"),
+        deadline: moment__WEBPACK_IMPORTED_MODULE_3___default()("2021-06-06").format("YYYY年MM月DD日"),
         status: 0,
         end_date: moment__WEBPACK_IMPORTED_MODULE_3___default()("2021-06-06").format("YYYY年MM月DD日"),
         user_id: 2
       }, {
         title: 'タイトル7',
         body: '内容7',
-        deadline: moment__WEBPACK_IMPORTED_MODULE_3___default()("2020-07-07").format("YYYY年MM月DD日"),
+        deadline: moment__WEBPACK_IMPORTED_MODULE_3___default()("2021-04-07").format("YYYY年MM月DD日"),
         status: 0,
         end_date: moment__WEBPACK_IMPORTED_MODULE_3___default()("2021-07-07").format("YYYY年MM月DD日"),
         user_id: 1
       }, {
         title: 'タイトル8',
         body: '内容8',
-        deadline: moment__WEBPACK_IMPORTED_MODULE_3___default()("2020-08-08").format("YYYY年MM月DD日"),
+        deadline: moment__WEBPACK_IMPORTED_MODULE_3___default()("2021-08-08").format("YYYY年MM月DD日"),
         status: 1,
         end_date: moment__WEBPACK_IMPORTED_MODULE_3___default()("2021-08-08").format("YYYY年MM月DD日"),
         user_id: 1
       }, {
         title: 'タイトル9',
         body: '内容9',
-        deadline: moment__WEBPACK_IMPORTED_MODULE_3___default()("2020-09-09").format("YYYY年MM月DD日"),
+        deadline: moment__WEBPACK_IMPORTED_MODULE_3___default()("2021-09-09").format("YYYY年MM月DD日"),
         status: 1,
         end_date: moment__WEBPACK_IMPORTED_MODULE_3___default()("2021-09-09").format("YYYY年MM月DD日"),
         user_id: 1
       }, {
         title: 'タイトル10',
         body: '内容10',
-        deadline: moment__WEBPACK_IMPORTED_MODULE_3___default()("2020-10-10").format("YYYY年MM月DD日"),
+        deadline: moment__WEBPACK_IMPORTED_MODULE_3___default()("2021-05-10").format("YYYY年MM月DD日"),
         status: 0,
         end_date: moment__WEBPACK_IMPORTED_MODULE_3___default()("2021-10-10").format("YYYY年MM月DD日"),
         user_id: 1
@@ -2355,6 +2355,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -2386,6 +2388,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     title: {
@@ -2414,6 +2419,11 @@ __webpack_require__.r(__webpack_exports__);
     sheetIndex: {
       type: Number,
       required: true
+    }
+  },
+  computed: {
+    dateAlert: function dateAlert() {
+      return moment__WEBPACK_IMPORTED_MODULE_0___default()().format("YYYY年MM月DD日");
     }
   }
 });
@@ -26167,7 +26177,7 @@ var render = function() {
       _vm._v(" "),
       _c(
         "div",
-        { staticClass: "card-deck" },
+        { staticClass: "card-deck justify-content-center" },
         _vm._l(_vm.workSheets, function(item, index) {
           return _c(
             "div",
@@ -26228,7 +26238,7 @@ var render = function() {
       _vm._v(" "),
       _c(
         "div",
-        { staticClass: "card-deck" },
+        { staticClass: "card-deck justify-content-center" },
         _vm._l(_vm.doneSheets, function(item, index) {
           return _c(
             "div",
@@ -26682,7 +26692,10 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "card mb-3", staticStyle: { width: "21rem" } },
+    {
+      staticClass: "card mb-3",
+      staticStyle: { width: "21rem", height: "13rem" }
+    },
     [
       _c("div", { staticClass: "card-body d-flex flex-row" }, [
         _c("div", [
@@ -26692,7 +26705,29 @@ var render = function() {
           _vm._v(" "),
           _c("p", { staticClass: "card-text" }, [
             _vm._v("期日　" + _vm._s(_vm.deadline))
-          ])
+          ]),
+          _vm._v(" "),
+          _vm.dateAlert === _vm.deadline
+            ? _c(
+                "p",
+                {
+                  staticClass: "card-text",
+                  staticStyle: { color: "blue", "font-weight": "bold" }
+                },
+                [_vm._v("本日まで！")]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.dateAlert > _vm.deadline
+            ? _c(
+                "p",
+                {
+                  staticClass: "card-text",
+                  staticStyle: { color: "red", "font-weight": "bold" }
+                },
+                [_vm._v("期限切れ！")]
+              )
+            : _vm._e()
         ]),
         _vm._v(" "),
         _vm._m(0)
