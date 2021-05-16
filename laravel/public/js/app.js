@@ -1973,30 +1973,64 @@ __webpack_require__.r(__webpack_exports__);
     userid: function userid() {
       return this.$store.getters['auth/userid'];
     },
-    showSheets: function showSheets() {
+    workSheets: function workSheets() {
       var _this = this;
 
-      var workingSheet = this.sheets.filter(function (x) {
+      var workingSheets = this.sheets.filter(function (x) {
         return x.status === 0;
       });
-      var showSheet = workingSheet.filter(function (y) {
+      var doSheets = workingSheets.filter(function (y) {
         return y.user_id === _this.userid;
       });
-      return showSheet;
+
+      if (this.sheetOrder === 0) {
+        return doSheets.sort(function (a, b) {
+          if (a.deadline > b.deadline) {
+            return 1;
+          } else {
+            return -1;
+          }
+        });
+      } else if (this.sheetOrder === 1) {
+        return doSheets.sort(function (a, b) {
+          if (b.deadline > a.deadline) {
+            return 1;
+          } else {
+            return -1;
+          }
+        });
+      }
     },
     doneSheets: function doneSheets() {
       var _this2 = this;
 
-      var endSheet = this.sheets.filter(function (x) {
+      var endSheets = this.sheets.filter(function (x) {
         return x.status === 1;
       });
-      var doneSheet = endSheet.filter(function (y) {
+      var doneSheets = endSheets.filter(function (y) {
         return y.user_id === _this2.userid;
       });
-      return doneSheet;
+
+      if (this.doneOrder === 0) {
+        return doneSheets.sort(function (a, b) {
+          if (a.deadline > b.deadline) {
+            return 1;
+          } else {
+            return -1;
+          }
+        });
+      } else if (this.doneOrder === 1) {
+        return doneSheets.sort(function (a, b) {
+          if (b.deadline > a.deadline) {
+            return 1;
+          } else {
+            return -1;
+          }
+        });
+      }
     },
     totalSheet: function totalSheet() {
-      return this.showSheets.length;
+      return this.workSheets.length;
     }
   },
   data: function data() {
@@ -2072,7 +2106,9 @@ __webpack_require__.r(__webpack_exports__);
         end_date: moment__WEBPACK_IMPORTED_MODULE_3___default()("2021-10-10").format("YYYY年MM月DD日"),
         user_id: 1
       }],
-      showContent: false
+      showContent: false,
+      sheetOrder: 0,
+      doneOrder: 0
     };
   },
   methods: {
@@ -26073,7 +26109,34 @@ var render = function() {
         "div",
         { staticClass: "row" },
         [
-          _vm._m(0),
+          _c("div", { staticClass: "btn-group btn-group-sm ml-5" }, [
+            _c(
+              "div",
+              {
+                staticClass: "btn btn-primary",
+                attrs: { "aria-current": "page" },
+                on: {
+                  click: function($event) {
+                    _vm.sheetOrder = 0
+                  }
+                }
+              },
+              [_vm._v("昇順")]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "btn btn-primary",
+                on: {
+                  click: function($event) {
+                    _vm.sheetOrder = 1
+                  }
+                }
+              },
+              [_vm._v("降順")]
+            )
+          ]),
           _vm._v(" "),
           _c(
             "div",
@@ -26104,8 +26167,8 @@ var render = function() {
       _vm._v(" "),
       _c(
         "div",
-        { staticClass: "card-columns" },
-        _vm._l(_vm.showSheets, function(item, index) {
+        { staticClass: "card-deck" },
+        _vm._l(_vm.workSheets, function(item, index) {
           return _c(
             "div",
             [
@@ -26132,11 +26195,40 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "h5 mb-3" }, [_vm._v("完了済")]),
       _vm._v(" "),
-      _vm._m(1),
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "btn-group btn-group-sm ml-5" }, [
+          _c(
+            "div",
+            {
+              staticClass: "btn btn-primary",
+              attrs: { "aria-current": "page" },
+              on: {
+                click: function($event) {
+                  _vm.doneOrder = 0
+                }
+              }
+            },
+            [_vm._v("昇順")]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "btn btn-primary",
+              on: {
+                click: function($event) {
+                  _vm.doneOrder = 1
+                }
+              }
+            },
+            [_vm._v("降順")]
+          )
+        ])
+      ]),
       _vm._v(" "),
       _c(
         "div",
-        { staticClass: "card-columns" },
+        { staticClass: "card-deck" },
         _vm._l(_vm.doneSheets, function(item, index) {
           return _c(
             "div",
@@ -26161,38 +26253,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "btn-group btn-group-sm ml-5" }, [
-      _c(
-        "div",
-        { staticClass: "btn btn-primary", attrs: { "aria-current": "page" } },
-        [_vm._v("昇順")]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "btn btn-primary" }, [_vm._v("降順")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "btn-group btn-group-sm ml-5" }, [
-        _c(
-          "div",
-          { staticClass: "btn btn-primary", attrs: { "aria-current": "page" } },
-          [_vm._v("昇順")]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "btn btn-primary" }, [_vm._v("降順")])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -26619,23 +26680,27 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "card" }, [
-    _c("div", { staticClass: "card-body d-flex flex-row" }, [
-      _c("div", [
-        _c("h6", { staticClass: "card-title" }, [_vm._v(_vm._s(_vm.title))]),
+  return _c(
+    "div",
+    { staticClass: "card mb-3", staticStyle: { width: "21rem" } },
+    [
+      _c("div", { staticClass: "card-body d-flex flex-row" }, [
+        _c("div", [
+          _c("h6", { staticClass: "card-title" }, [_vm._v(_vm._s(_vm.title))]),
+          _vm._v(" "),
+          _c("p", { staticClass: "card-text" }, [_vm._v(_vm._s(_vm.body))]),
+          _vm._v(" "),
+          _c("p", { staticClass: "card-text" }, [
+            _vm._v("期日　" + _vm._s(_vm.deadline))
+          ])
+        ]),
         _vm._v(" "),
-        _c("p", { staticClass: "card-text" }, [_vm._v(_vm._s(_vm.body))]),
-        _vm._v(" "),
-        _c("p", { staticClass: "card-text" }, [
-          _vm._v("期日　" + _vm._s(_vm.deadline))
-        ])
+        _vm._m(0)
       ]),
       _vm._v(" "),
-      _vm._m(0)
-    ]),
-    _vm._v(" "),
-    _vm._m(1)
-  ])
+      _vm._m(1)
+    ]
+  )
 }
 var staticRenderFns = [
   function() {
@@ -26902,23 +26967,27 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "card" }, [
-    _c("div", { staticClass: "card-body d-flex flex-row" }, [
-      _c("div", [
-        _c("h6", { staticClass: "card-title" }, [_vm._v(_vm._s(_vm.title))]),
+  return _c(
+    "div",
+    { staticClass: "card mb-3", staticStyle: { width: "21rem" } },
+    [
+      _c("div", { staticClass: "card-body d-flex flex-row" }, [
+        _c("div", [
+          _c("h6", { staticClass: "card-title" }, [_vm._v(_vm._s(_vm.title))]),
+          _vm._v(" "),
+          _c("p", { staticClass: "card-text" }, [_vm._v(_vm._s(_vm.body))]),
+          _vm._v(" "),
+          _c("p", { staticClass: "card-text" }, [
+            _vm._v("完了日　" + _vm._s(_vm.end_date))
+          ])
+        ]),
         _vm._v(" "),
-        _c("p", { staticClass: "card-text" }, [_vm._v(_vm._s(_vm.body))]),
-        _vm._v(" "),
-        _c("p", { staticClass: "card-text" }, [
-          _vm._v("完了日　" + _vm._s(_vm.end_date))
-        ])
+        _vm._m(0)
       ]),
       _vm._v(" "),
-      _vm._m(0)
-    ]),
-    _vm._v(" "),
-    _vm._m(1)
-  ])
+      _vm._m(1)
+    ]
+  )
 }
 var staticRenderFns = [
   function() {

@@ -6,9 +6,7 @@
       <change beforePath="$PROJECT_DIR$/laravel/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/laravel/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/laravel/public/mix-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/laravel/public/mix-manifest.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/laravel/resources/js/components/Board.vue" beforeDir="false" afterPath="$PROJECT_DIR$/laravel/resources/js/components/Board.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/laravel/resources/js/components/Navbar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/laravel/resources/js/components/Navbar.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/laravel/resources/js/components/Sheet.vue" beforeDir="false" afterPath="$PROJECT_DIR$/laravel/resources/js/components/Sheet.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/laravel/resources/js/components/SheetAdd.vue" beforeDir="false" afterPath="$PROJECT_DIR$/laravel/resources/js/components/SheetAdd.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/laravel/resources/js/components/SheetDone.vue" beforeDir="false" afterPath="$PROJECT_DIR$/laravel/resources/js/components/SheetDone.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -22,6 +20,14 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
@@ -182,7 +188,7 @@
       <workItem from="1621067137099" duration="9564000" />
       <workItem from="1621078147713" duration="1313000" />
       <workItem from="1621079585054" duration="3654000" />
-      <workItem from="1621131424122" duration="8725000" />
+      <workItem from="1621131424122" duration="16332000" />
     </task>
     <servers />
   </component>

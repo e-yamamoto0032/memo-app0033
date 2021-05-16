@@ -1,5 +1,5 @@
 <template>
-    <div class="card">
+    <div class="card mb-3" style="width: 21rem;">
         <div class="card-body d-flex flex-row">
             <div>
                 <h6 class="card-title">{{ title }}</h6>
