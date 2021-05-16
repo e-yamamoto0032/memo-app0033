@@ -1,6 +1,6 @@
 <template>
     <div id="overlay" class="row">
-        <div id="content" class="col-md-4">
+        <div id="content" class="col-sm-6">
             <div class="card ">
                 <div class="card-body">
                     <div class="d-flex justify-content-end">
@@ -8,23 +8,23 @@
                     </div>
                     <form class="" @submit.prevent="addSheet">
                         <div class="form-group row">
-                            <label for="title" class="col-md-4 col-form-label">シート名</label>
-                            <div class="col-md-8">
+                            <label for="title" class="col-sm-4 col-form-label">シート名</label>
+                            <div class="col-sm-8">
                                 <input v-model="title" type="text" class="form-control" id="title"
                                        placeholder="シート名を入力" value="">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="body" class="col-md-4 col-form-label">内容</label>
-                            <div class="col-md-8">
+                            <label for="body" class="col-sm-4 col-form-label">内容</label>
+                            <div class="col-sm-8">
                                 <textarea v-model="body" rows="4" class="form-control" id="body"
                                           placeholder="タスクの内容を入力">
                                 </textarea>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="deadline" class="col-md-4 col-form-label">期日</label>
-                            <div class="col-md-8">
+                            <label for="deadline" class="col-sm-4 col-form-label">期日</label>
+                            <div class="col-sm-8">
                                 <input v-model="deadline" type="date" class="form-control" id="deadline"
                                        placeholder="タスクの期日を入力">
                             </div>

@@ -1951,6 +1951,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -1966,8 +1970,33 @@ __webpack_require__.r(__webpack_exports__);
     username: function username() {
       return this.$store.getters['auth/username'];
     },
+    userid: function userid() {
+      return this.$store.getters['auth/userid'];
+    },
+    showSheets: function showSheets() {
+      var _this = this;
+
+      var workingSheet = this.sheets.filter(function (x) {
+        return x.status === 0;
+      });
+      var showSheet = workingSheet.filter(function (y) {
+        return y.user_id === _this.userid;
+      });
+      return showSheet;
+    },
+    doneSheets: function doneSheets() {
+      var _this2 = this;
+
+      var endSheet = this.sheets.filter(function (x) {
+        return x.status === 1;
+      });
+      var doneSheet = endSheet.filter(function (y) {
+        return y.user_id === _this2.userid;
+      });
+      return doneSheet;
+    },
     totalSheet: function totalSheet() {
-      return this.sheets.length;
+      return this.showSheets.length;
     }
   },
   data: function data() {
@@ -2007,6 +2036,41 @@ __webpack_require__.r(__webpack_exports__);
         status: 0,
         end_date: moment__WEBPACK_IMPORTED_MODULE_3___default()("2021-05-05").format("YYYY年MM月DD日"),
         user_id: 2
+      }, {
+        title: 'タイトル6',
+        body: '内容6',
+        deadline: moment__WEBPACK_IMPORTED_MODULE_3___default()("2020-06-06").format("YYYY年MM月DD日"),
+        status: 0,
+        end_date: moment__WEBPACK_IMPORTED_MODULE_3___default()("2021-06-06").format("YYYY年MM月DD日"),
+        user_id: 2
+      }, {
+        title: 'タイトル7',
+        body: '内容7',
+        deadline: moment__WEBPACK_IMPORTED_MODULE_3___default()("2020-07-07").format("YYYY年MM月DD日"),
+        status: 0,
+        end_date: moment__WEBPACK_IMPORTED_MODULE_3___default()("2021-07-07").format("YYYY年MM月DD日"),
+        user_id: 1
+      }, {
+        title: 'タイトル8',
+        body: '内容8',
+        deadline: moment__WEBPACK_IMPORTED_MODULE_3___default()("2020-08-08").format("YYYY年MM月DD日"),
+        status: 1,
+        end_date: moment__WEBPACK_IMPORTED_MODULE_3___default()("2021-08-08").format("YYYY年MM月DD日"),
+        user_id: 1
+      }, {
+        title: 'タイトル9',
+        body: '内容9',
+        deadline: moment__WEBPACK_IMPORTED_MODULE_3___default()("2020-09-09").format("YYYY年MM月DD日"),
+        status: 1,
+        end_date: moment__WEBPACK_IMPORTED_MODULE_3___default()("2021-09-09").format("YYYY年MM月DD日"),
+        user_id: 1
+      }, {
+        title: 'タイトル10',
+        body: '内容10',
+        deadline: moment__WEBPACK_IMPORTED_MODULE_3___default()("2020-10-10").format("YYYY年MM月DD日"),
+        status: 0,
+        end_date: moment__WEBPACK_IMPORTED_MODULE_3___default()("2021-10-10").format("YYYY年MM月DD日"),
+        user_id: 1
       }],
       showContent: false
     };
@@ -2228,9 +2292,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _this.$store.dispatch('auth/logout');
 
               case 2:
-                _this.$router.push('/');
+                _context.next = 4;
+                return _this.$router.push('/');
 
-              case 3:
+              case 4:
               case "end":
                 return _context.stop();
             }
@@ -2285,8 +2350,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     title: {
@@ -2302,8 +2365,7 @@ __webpack_require__.r(__webpack_exports__);
       required: true
     },
     end_date: {
-      type: String,
-      required: true
+      type: String
     },
     status: {
       type: Number,
@@ -2446,8 +2508,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     title: {
@@ -2459,8 +2519,7 @@ __webpack_require__.r(__webpack_exports__);
       required: true
     },
     deadline: {
-      type: String,
-      required: true
+      type: String
     },
     end_date: {
       type: String,
@@ -26005,47 +26064,48 @@ var render = function() {
       _vm._v("\n        " + _vm._s(_vm.username) + "さんのシート一覧\n    ")
     ]),
     _vm._v(" "),
-    _c(
-      "div",
-      [
-        _c("p", [_vm._v("All: " + _vm._s(_vm.totalSheet) + " sheets")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "h5 mb-3" }, [_vm._v("作業中")]),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "row" },
-          [
-            _vm._m(0),
-            _vm._v(" "),
-            _c(
-              "div",
+    _c("div", [
+      _c("p", [_vm._v("現在作業中: " + _vm._s(_vm.totalSheet) + " sheets")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "h5 mb-3" }, [_vm._v("作業中")]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "row" },
+        [
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticStyle: { cursor: "pointer" },
+              on: { click: _vm.openModal }
+            },
+            [
+              _c("i", { staticClass: "far fa-plus-square pt-3 ml-3" }),
+              _vm._v("\n                シートを追加\n            ")
+            ]
+          ),
+          _vm._v(" "),
+          _c("sheet-add", {
+            directives: [
               {
-                staticStyle: { cursor: "pointer" },
-                on: { click: _vm.openModal }
-              },
-              [
-                _c("i", { staticClass: "far fa-plus-square pt-3 ml-3" }),
-                _vm._v("\n                シートを追加\n            ")
-              ]
-            ),
-            _vm._v(" "),
-            _c("sheet-add", {
-              directives: [
-                {
-                  name: "show",
-                  rawName: "v-show",
-                  value: _vm.showContent,
-                  expression: "showContent"
-                }
-              ],
-              on: { close: _vm.closeModal }
-            })
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _vm._l(_vm.sheets, function(item, index) {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.showContent,
+                expression: "showContent"
+              }
+            ],
+            on: { close: _vm.closeModal }
+          })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "card-columns" },
+        _vm._l(_vm.showSheets, function(item, index) {
           return _c(
             "div",
             [
@@ -26065,14 +26125,19 @@ var render = function() {
             1
           )
         }),
-        _vm._v(" "),
-        _c("hr"),
-        _vm._v(" "),
-        _c("div", { staticClass: "h5 mb-3" }, [_vm._v("完了済")]),
-        _vm._v(" "),
-        _vm._m(1),
-        _vm._v(" "),
-        _vm._l(_vm.sheets, function(item, index) {
+        0
+      ),
+      _vm._v(" "),
+      _c("hr"),
+      _vm._v(" "),
+      _c("div", { staticClass: "h5 mb-3" }, [_vm._v("完了済")]),
+      _vm._v(" "),
+      _vm._m(1),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "card-columns" },
+        _vm._l(_vm.doneSheets, function(item, index) {
           return _c(
             "div",
             [
@@ -26090,10 +26155,10 @@ var render = function() {
             ],
             1
           )
-        })
-      ],
-      2
-    )
+        }),
+        0
+      )
+    ])
   ])
 }
 var staticRenderFns = [
@@ -26502,14 +26567,10 @@ var render = function() {
     "nav",
     { staticClass: "navbar navbar-dark bg-dark text-white mt-3 mb-3" },
     [
-      _c(
-        "RouterLink",
-        { staticClass: "navbar__brand", attrs: { to: "/main" } },
-        [
-          _c("i", { staticClass: "fas fa-sticky-note fa-lg" }),
-          _vm._v("\n        MemoApp\n    ")
-        ]
-      ),
+      _c("RouterLink", { staticClass: "navbar__brand", attrs: { to: "/" } }, [
+        _c("i", { staticClass: "fas fa-sticky-note fa-lg" }),
+        _vm._v("\n        MemoApp\n    ")
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "navbar__menu" }, [
         _vm.isLogin
@@ -26558,24 +26619,22 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "col-lg-4 mb-3" }, [
-    _c("div", { staticClass: "card" }, [
-      _c("div", { staticClass: "card-body d-flex flex-row" }, [
-        _c("div", [
-          _c("h6", { staticClass: "card-title" }, [_vm._v(_vm._s(_vm.title))]),
-          _vm._v(" "),
-          _c("p", { staticClass: "card-text" }, [_vm._v(_vm._s(_vm.body))]),
-          _vm._v(" "),
-          _c("p", { staticClass: "card-text" }, [
-            _vm._v("期日　" + _vm._s(_vm.deadline))
-          ])
-        ]),
+  return _c("div", { staticClass: "card" }, [
+    _c("div", { staticClass: "card-body d-flex flex-row" }, [
+      _c("div", [
+        _c("h6", { staticClass: "card-title" }, [_vm._v(_vm._s(_vm.title))]),
         _vm._v(" "),
-        _vm._m(0)
+        _c("p", { staticClass: "card-text" }, [_vm._v(_vm._s(_vm.body))]),
+        _vm._v(" "),
+        _c("p", { staticClass: "card-text" }, [
+          _vm._v("期日　" + _vm._s(_vm.deadline))
+        ])
       ]),
       _vm._v(" "),
-      _vm._m(1)
-    ])
+      _vm._m(0)
+    ]),
+    _vm._v(" "),
+    _vm._m(1)
   ])
 }
 var staticRenderFns = [
@@ -26600,14 +26659,14 @@ var staticRenderFns = [
         _c("div", { staticClass: "dropdown-menu dropdown-menu-right" }, [
           _c("a", { staticClass: "dropdown-item", attrs: { href: "#" } }, [
             _c("i", { staticClass: "fas fa-pen mr-1" }),
-            _vm._v("記事を更新する\n                        ")
+            _vm._v("記事を更新する\n                    ")
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "dropdown-divider" }),
           _vm._v(" "),
           _c("a", { staticClass: "dropdown-item text-danger" }, [
             _c("i", { staticClass: "fas fa-trash-alt mr-1" }),
-            _vm._v("記事を削除する\n                        ")
+            _vm._v("記事を削除する\n                    ")
           ])
         ])
       ])
@@ -26649,7 +26708,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "row", attrs: { id: "overlay" } }, [
-    _c("div", { staticClass: "col-md-4", attrs: { id: "content" } }, [
+    _c("div", { staticClass: "col-sm-6", attrs: { id: "content" } }, [
       _c("div", { staticClass: "card " }, [
         _c("div", { staticClass: "card-body" }, [
           _c("div", { staticClass: "d-flex justify-content-end" }, [
@@ -26682,13 +26741,13 @@ var render = function() {
                 _c(
                   "label",
                   {
-                    staticClass: "col-md-4 col-form-label",
+                    staticClass: "col-sm-4 col-form-label",
                     attrs: { for: "title" }
                   },
                   [_vm._v("シート名")]
                 ),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-md-8" }, [
+                _c("div", { staticClass: "col-sm-8" }, [
                   _c("input", {
                     directives: [
                       {
@@ -26722,13 +26781,13 @@ var render = function() {
                 _c(
                   "label",
                   {
-                    staticClass: "col-md-4 col-form-label",
+                    staticClass: "col-sm-4 col-form-label",
                     attrs: { for: "body" }
                   },
                   [_vm._v("内容")]
                 ),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-md-8" }, [
+                _c("div", { staticClass: "col-sm-8" }, [
                   _c("textarea", {
                     directives: [
                       {
@@ -26761,13 +26820,13 @@ var render = function() {
                 _c(
                   "label",
                   {
-                    staticClass: "col-md-4 col-form-label",
+                    staticClass: "col-sm-4 col-form-label",
                     attrs: { for: "deadline" }
                   },
                   [_vm._v("期日")]
                 ),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-md-8" }, [
+                _c("div", { staticClass: "col-sm-8" }, [
                   _c("input", {
                     directives: [
                       {
@@ -26843,24 +26902,22 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "col-lg-4 mb-3" }, [
-    _c("div", { staticClass: "card" }, [
-      _c("div", { staticClass: "card-body d-flex flex-row" }, [
-        _c("div", [
-          _c("h6", { staticClass: "card-title" }, [_vm._v(_vm._s(_vm.title))]),
-          _vm._v(" "),
-          _c("p", { staticClass: "card-text" }, [_vm._v(_vm._s(_vm.body))]),
-          _vm._v(" "),
-          _c("p", { staticClass: "card-text" }, [
-            _vm._v("完了日　" + _vm._s(_vm.end_date))
-          ])
-        ]),
+  return _c("div", { staticClass: "card" }, [
+    _c("div", { staticClass: "card-body d-flex flex-row" }, [
+      _c("div", [
+        _c("h6", { staticClass: "card-title" }, [_vm._v(_vm._s(_vm.title))]),
         _vm._v(" "),
-        _vm._m(0)
+        _c("p", { staticClass: "card-text" }, [_vm._v(_vm._s(_vm.body))]),
+        _vm._v(" "),
+        _c("p", { staticClass: "card-text" }, [
+          _vm._v("完了日　" + _vm._s(_vm.end_date))
+        ])
       ]),
       _vm._v(" "),
-      _vm._m(1)
-    ])
+      _vm._m(0)
+    ]),
+    _vm._v(" "),
+    _vm._m(1)
   ])
 }
 var staticRenderFns = [
@@ -26885,14 +26942,14 @@ var staticRenderFns = [
         _c("div", { staticClass: "dropdown-menu dropdown-menu-right" }, [
           _c("a", { staticClass: "dropdown-item", attrs: { href: "#" } }, [
             _c("i", { staticClass: "fas fa-pen mr-1" }),
-            _vm._v("記事を更新する\n                        ")
+            _vm._v("記事を更新する\n                    ")
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "dropdown-divider" }),
           _vm._v(" "),
           _c("a", { staticClass: "dropdown-item text-danger" }, [
             _c("i", { staticClass: "fas fa-trash-alt mr-1" }),
-            _vm._v("記事を削除する\n                        ")
+            _vm._v("記事を削除する\n                    ")
           ])
         ])
       ])

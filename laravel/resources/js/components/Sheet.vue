@@ -1,5 +1,4 @@
 <template>
-    <div class="col-lg-4 mb-3">
         <div class="card">
             <div class="card-body d-flex flex-row">
                 <div>
@@ -28,7 +27,6 @@
                 <button type="submit" class="btn btn-success btn-sm">完了</button>
             </div>
         </div>
-    </div>
 </template>
 
 <script>
@@ -51,7 +49,6 @@ export default {
         },
         end_date: {
             type: String,
-            required: true
         },
         status: {
             type: Number,
