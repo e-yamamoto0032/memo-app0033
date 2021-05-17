@@ -1,3 +1,5 @@
+import moment from "moment";
+
 const state = {
     sheets: []
 }
@@ -7,7 +9,7 @@ const mutations = {
         state.sheets.push({
             title: payload.title,
             body: payload.body,
-            deadline: payload.deadline,
+            deadline: moment(payload.deadline).format("YYYY年MM月DD日"),
             status: payload.status,
             user_id: payload.user_id
         })
@@ -23,7 +25,9 @@ const actions = {
 
 }
 
-const getters = {}
+const getters = {
+    getSheet: state => state.sheets
+}
 
 
 export default {

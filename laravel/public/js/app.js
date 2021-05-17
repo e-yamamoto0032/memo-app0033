@@ -1973,6 +1973,9 @@ __webpack_require__.r(__webpack_exports__);
     userid: function userid() {
       return this.$store.getters['auth/userid'];
     },
+    sheets: function sheets() {
+      return this.$store.getters['sheet/getSheet'];
+    },
     workSheets: function workSheets() {
       var _this = this;
 
@@ -2035,77 +2038,90 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      sheets: [{
-        title: 'タイトル1',
-        body: '内容1',
-        deadline: moment__WEBPACK_IMPORTED_MODULE_3___default()("2021-06-01").format("YYYY年MM月DD日"),
-        status: 0,
-        end_date: moment__WEBPACK_IMPORTED_MODULE_3___default()("2021-06-01").format("YYYY年MM月DD日"),
-        user_id: 1
-      }, {
-        title: 'タイトル2',
-        body: '内容2',
-        deadline: moment__WEBPACK_IMPORTED_MODULE_3___default()("2021-05-02").format("YYYY年MM月DD日"),
-        status: 0,
-        end_date: moment__WEBPACK_IMPORTED_MODULE_3___default()("2021-05-02").format("YYYY年MM月DD日"),
-        user_id: 1
-      }, {
-        title: 'タイトル3',
-        body: '内容3',
-        deadline: moment__WEBPACK_IMPORTED_MODULE_3___default()().format("YYYY年MM月DD日"),
-        status: 0,
-        end_date: moment__WEBPACK_IMPORTED_MODULE_3___default()("2021-03-03").format("YYYY年MM月DD日"),
-        user_id: 1
-      }, {
-        title: 'タイトル4',
-        body: '内容4',
-        deadline: moment__WEBPACK_IMPORTED_MODULE_3___default()("2021-06-04").format("YYYY年MM月DD日"),
-        status: 1,
-        end_date: moment__WEBPACK_IMPORTED_MODULE_3___default()("2021-06-04").format("YYYY年MM月DD日"),
-        user_id: 1
-      }, {
-        title: 'タイトル5',
-        body: '内容5',
-        deadline: moment__WEBPACK_IMPORTED_MODULE_3___default()("2021-05-05").format("YYYY年MM月DD日"),
-        status: 0,
-        end_date: moment__WEBPACK_IMPORTED_MODULE_3___default()("2021-05-05").format("YYYY年MM月DD日"),
-        user_id: 2
-      }, {
-        title: 'タイトル6',
-        body: '内容6',
-        deadline: moment__WEBPACK_IMPORTED_MODULE_3___default()("2021-06-06").format("YYYY年MM月DD日"),
-        status: 0,
-        end_date: moment__WEBPACK_IMPORTED_MODULE_3___default()("2021-06-06").format("YYYY年MM月DD日"),
-        user_id: 2
-      }, {
-        title: 'タイトル7',
-        body: '内容7',
-        deadline: moment__WEBPACK_IMPORTED_MODULE_3___default()("2021-04-07").format("YYYY年MM月DD日"),
-        status: 0,
-        end_date: moment__WEBPACK_IMPORTED_MODULE_3___default()("2021-07-07").format("YYYY年MM月DD日"),
-        user_id: 1
-      }, {
-        title: 'タイトル8',
-        body: '内容8',
-        deadline: moment__WEBPACK_IMPORTED_MODULE_3___default()("2021-08-08").format("YYYY年MM月DD日"),
-        status: 1,
-        end_date: moment__WEBPACK_IMPORTED_MODULE_3___default()("2021-08-08").format("YYYY年MM月DD日"),
-        user_id: 1
-      }, {
-        title: 'タイトル9',
-        body: '内容9',
-        deadline: moment__WEBPACK_IMPORTED_MODULE_3___default()("2021-09-09").format("YYYY年MM月DD日"),
-        status: 1,
-        end_date: moment__WEBPACK_IMPORTED_MODULE_3___default()("2021-09-09").format("YYYY年MM月DD日"),
-        user_id: 1
-      }, {
-        title: 'タイトル10',
-        body: '内容10',
-        deadline: moment__WEBPACK_IMPORTED_MODULE_3___default()("2021-05-10").format("YYYY年MM月DD日"),
-        status: 0,
-        end_date: moment__WEBPACK_IMPORTED_MODULE_3___default()("2021-10-10").format("YYYY年MM月DD日"),
-        user_id: 1
-      }],
+      // sheets: [
+      //     {
+      //         title: 'タイトル1',
+      //         body: '内容1',
+      //         deadline: moment("2021-06-01").format("YYYY年MM月DD日"),
+      //         status: 0,
+      //         end_date: moment("2021-06-01").format("YYYY年MM月DD日"),
+      //         user_id: 1,
+      //     },
+      //     {
+      //         title: 'タイトル2',
+      //         body: '内容2',
+      //         deadline: moment("2021-05-02").format("YYYY年MM月DD日"),
+      //         status: 0,
+      //         end_date: moment("2021-05-02").format("YYYY年MM月DD日"),
+      //         user_id: 1,
+      //     },
+      //     {
+      //         title: 'タイトル3',
+      //         body: '内容3',
+      //         deadline: moment().format("YYYY年MM月DD日"),
+      //         status: 0,
+      //         end_date: moment("2021-03-03").format("YYYY年MM月DD日"),
+      //         user_id: 1,
+      //     },
+      //     {
+      //         title: 'タイトル4',
+      //         body: '内容4',
+      //         deadline: moment("2021-06-04").format("YYYY年MM月DD日"),
+      //         status: 1,
+      //         end_date: moment("2021-06-04").format("YYYY年MM月DD日"),
+      //         user_id: 1,
+      //     },
+      //     {
+      //         title: 'タイトル5',
+      //         body: '内容5',
+      //         deadline: moment("2021-05-05").format("YYYY年MM月DD日"),
+      //         status: 0,
+      //         end_date: moment("2021-05-05").format("YYYY年MM月DD日"),
+      //         user_id: 2,
+      //     },
+      //     {
+      //         title: 'タイトル6',
+      //         body: '内容6',
+      //         deadline: moment("2021-06-06").format("YYYY年MM月DD日"),
+      //         status: 0,
+      //         end_date: moment("2021-06-06").format("YYYY年MM月DD日"),
+      //         user_id: 2,
+      //     },
+      //     {
+      //         title: 'タイトル7',
+      //         body: '内容7',
+      //         deadline: moment("2021-04-07").format("YYYY年MM月DD日"),
+      //         status: 0,
+      //         end_date: moment("2021-07-07").format("YYYY年MM月DD日"),
+      //         user_id: 1,
+      //     },
+      //     {
+      //         title: 'タイトル8',
+      //         body: '内容8',
+      //         deadline: moment("2021-08-08").format("YYYY年MM月DD日"),
+      //         status: 1,
+      //         end_date: moment("2021-08-08").format("YYYY年MM月DD日"),
+      //         user_id: 1,
+      //     },
+      //     {
+      //         title: 'タイトル9',
+      //         body: '内容9',
+      //         deadline: moment("2021-09-09").format("YYYY年MM月DD日"),
+      //         status: 1,
+      //         end_date: moment("2021-09-09").format("YYYY年MM月DD日"),
+      //         user_id: 1,
+      //     },
+      //     {
+      //         title: 'タイトル10',
+      //         body: '内容10',
+      //         deadline: moment("2021-05-10").format("YYYY年MM月DD日"),
+      //         status: 0,
+      //         end_date: moment("2021-10-10").format("YYYY年MM月DD日"),
+      //         user_id: 1,
+      //     },
+      //
+      //
+      // ],
       showContent: false,
       sheetOrder: 0,
       doneOrder: 0
@@ -2904,6 +2920,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
+
 var state = {
   sheets: []
 };
@@ -2912,7 +2931,7 @@ var mutations = {
     state.sheets.push({
       title: payload.title,
       body: payload.body,
-      deadline: payload.deadline,
+      deadline: moment__WEBPACK_IMPORTED_MODULE_0___default()(payload.deadline).format("YYYY年MM月DD日"),
       status: payload.status,
       user_id: payload.user_id
     });
@@ -2924,7 +2943,11 @@ var actions = {
     context.commit('setSheet', payload);
   }
 };
-var getters = {};
+var getters = {
+  getSheet: function getSheet(state) {
+    return state.sheets;
+  }
+};
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   namespaced: true,
   state: state,
