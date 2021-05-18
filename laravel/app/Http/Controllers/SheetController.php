@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreSheet;
 use App\Sheet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,6 +15,13 @@ class SheetController extends Controller
         // 認証が必要
         $this->middleware('auth');
     }
+
+    public function index()
+    {
+        $sheets = Sheet::all();
+        return $this->jsonResponse($sheets);
+    }
+
 
 
 

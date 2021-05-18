@@ -2041,7 +2041,8 @@ __webpack_require__.r(__webpack_exports__);
     return {
       showContent: false,
       sheetOrder: 0,
-      doneOrder: 0
+      doneOrder: 0,
+      dbSheet: this.$store.dispatch('sheet/dbSheet')
     };
   },
   methods: {
@@ -2147,7 +2148,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _this.$store.dispatch('auth/login', _this.loginForm);
 
               case 2:
-                //
                 _this.$router.push({
                   name: 'board',
                   params: {
@@ -2852,12 +2852,25 @@ var mutations = {
       status: payload.status,
       user_id: payload.user_id
     });
+  },
+  dbSheet: function dbSheet(state, response) {
+    state.sheets.push({
+      title: response.title,
+      body: response.body,
+      deadline: moment__WEBPACK_IMPORTED_MODULE_0___default()(response.deadline).format("YYYY年MM月DD日"),
+      status: response.status,
+      user_id: response.user_id
+    });
   }
 };
 var actions = {
   addSheet: function addSheet(context, payload) {
     axios.post('/api/sheets', payload);
     context.commit('setSheet', payload);
+  },
+  dbSheet: function dbSheet(context) {
+    var response = axios.get('/api/sheets');
+    context.commit('dbSheet', response);
   }
 };
 var getters = {

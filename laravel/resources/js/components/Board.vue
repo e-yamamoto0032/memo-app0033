@@ -136,6 +136,7 @@ export default {
             showContent: false,
             sheetOrder: 0,
             doneOrder: 0,
+            dbSheet: this.$store.dispatch('sheet/dbSheet')
         }
     },
     methods: {

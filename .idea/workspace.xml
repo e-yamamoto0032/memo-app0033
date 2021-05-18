@@ -3,14 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="b72aea3c-49a3-4917-93bf-00451c6a6733" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laravel/app/Http/Controllers/Controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/laravel/app/Http/Controllers/Controller.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/laravel/app/Http/Controllers/SheetController.php" beforeDir="false" afterPath="$PROJECT_DIR$/laravel/app/Http/Controllers/SheetController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/laravel/app/Sheet.php" beforeDir="false" afterPath="$PROJECT_DIR$/laravel/app/Sheet.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/laravel/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/laravel/app/User.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/laravel/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/laravel/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/laravel/public/mix-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/laravel/public/mix-manifest.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/laravel/resources/js/components/Board.vue" beforeDir="false" afterPath="$PROJECT_DIR$/laravel/resources/js/components/Board.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laravel/resources/js/components/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/laravel/resources/js/components/Login.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/laravel/resources/js/components/Sheet.vue" beforeDir="false" afterPath="$PROJECT_DIR$/laravel/resources/js/components/Sheet.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/laravel/resources/js/components/SheetDone.vue" beforeDir="false" afterPath="$PROJECT_DIR$/laravel/resources/js/components/SheetDone.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/laravel/resources/js/store/sheet.js" beforeDir="false" afterPath="$PROJECT_DIR$/laravel/resources/js/store/sheet.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/laravel/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/laravel/routes/api.php" afterDir="false" />
     </list>
