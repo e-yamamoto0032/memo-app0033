@@ -1,6 +1,6 @@
 <template>
     <nav class="navbar navbar-dark bg-dark text-white mt-3 mb-3">
-        <RouterLink class="navbar__brand" to="/main">
+        <RouterLink class="navbar__brand" to="/">
             <i class="fas fa-sticky-note fa-lg"></i>
             MemoApp
         </RouterLink>
@@ -31,7 +31,7 @@ export default {
         async logout () {
             await this.$store.dispatch('auth/logout')
 
-            this.$router.push('/main')
+            await this.$router.push('/')
         }
     }
 }

@@ -31,4 +31,7 @@ Route::get('/user', function () {
     return Auth::user();
 })->name('user');
 
-Route::post('/sheets', 'SheetController@store');
+//Route::post('/sheets', 'SheetController@store');
+Route::resource('sheets', 'SheetController',
+    ['only' => ['index', 'show', 'store', 'update', 'destroy']]
+);

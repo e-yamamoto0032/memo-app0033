@@ -64,20 +64,22 @@ export default {
             await this.$store.dispatch('auth/login', this.loginForm)
 
             //
-            this.$router.push('/board')
+            this.$router.push({ name: 'board', params: {username: this.username}})
         },
         async register () {
             // authストアのresigterアクションを呼び出す
             await this.$store.dispatch('auth/register', this.registerForm)
 
-            // トップページに移動する
-            this.$router.push('/')
+            this.$router.push({ name: 'board', params: {username: this.username}})
         }
     },
     computed: {
         userid () {
             return this.$store.getters['auth/userid']
-        }
+        },
+        username() {
+            return this.$store.getters['auth/username']
+        },
 
     }
 }

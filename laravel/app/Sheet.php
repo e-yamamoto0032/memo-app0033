@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Sheet extends Model
 {
@@ -12,7 +13,10 @@ class Sheet extends Model
         'deadline',
         'end_date',
         'status',
-        'user_id',
 
     ];
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo('App\User');
+    }
 }
