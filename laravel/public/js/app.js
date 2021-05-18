@@ -1955,6 +1955,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -2038,90 +2039,6 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      // sheets: [
-      //     {
-      //         title: 'タイトル1',
-      //         body: '内容1',
-      //         deadline: moment("2021-06-01").format("YYYY年MM月DD日"),
-      //         status: 0,
-      //         end_date: moment("2021-06-01").format("YYYY年MM月DD日"),
-      //         user_id: 1,
-      //     },
-      //     {
-      //         title: 'タイトル2',
-      //         body: '内容2',
-      //         deadline: moment("2021-05-02").format("YYYY年MM月DD日"),
-      //         status: 0,
-      //         end_date: moment("2021-05-02").format("YYYY年MM月DD日"),
-      //         user_id: 1,
-      //     },
-      //     {
-      //         title: 'タイトル3',
-      //         body: '内容3',
-      //         deadline: moment().format("YYYY年MM月DD日"),
-      //         status: 0,
-      //         end_date: moment("2021-03-03").format("YYYY年MM月DD日"),
-      //         user_id: 1,
-      //     },
-      //     {
-      //         title: 'タイトル4',
-      //         body: '内容4',
-      //         deadline: moment("2021-06-04").format("YYYY年MM月DD日"),
-      //         status: 1,
-      //         end_date: moment("2021-06-04").format("YYYY年MM月DD日"),
-      //         user_id: 1,
-      //     },
-      //     {
-      //         title: 'タイトル5',
-      //         body: '内容5',
-      //         deadline: moment("2021-05-05").format("YYYY年MM月DD日"),
-      //         status: 0,
-      //         end_date: moment("2021-05-05").format("YYYY年MM月DD日"),
-      //         user_id: 2,
-      //     },
-      //     {
-      //         title: 'タイトル6',
-      //         body: '内容6',
-      //         deadline: moment("2021-06-06").format("YYYY年MM月DD日"),
-      //         status: 0,
-      //         end_date: moment("2021-06-06").format("YYYY年MM月DD日"),
-      //         user_id: 2,
-      //     },
-      //     {
-      //         title: 'タイトル7',
-      //         body: '内容7',
-      //         deadline: moment("2021-04-07").format("YYYY年MM月DD日"),
-      //         status: 0,
-      //         end_date: moment("2021-07-07").format("YYYY年MM月DD日"),
-      //         user_id: 1,
-      //     },
-      //     {
-      //         title: 'タイトル8',
-      //         body: '内容8',
-      //         deadline: moment("2021-08-08").format("YYYY年MM月DD日"),
-      //         status: 1,
-      //         end_date: moment("2021-08-08").format("YYYY年MM月DD日"),
-      //         user_id: 1,
-      //     },
-      //     {
-      //         title: 'タイトル9',
-      //         body: '内容9',
-      //         deadline: moment("2021-09-09").format("YYYY年MM月DD日"),
-      //         status: 1,
-      //         end_date: moment("2021-09-09").format("YYYY年MM月DD日"),
-      //         user_id: 1,
-      //     },
-      //     {
-      //         title: 'タイトル10',
-      //         body: '内容10',
-      //         deadline: moment("2021-05-10").format("YYYY年MM月DD日"),
-      //         status: 0,
-      //         end_date: moment("2021-10-10").format("YYYY年MM月DD日"),
-      //         user_id: 1,
-      //     },
-      //
-      //
-      // ],
       showContent: false,
       sheetOrder: 0,
       doneOrder: 0
@@ -27043,7 +26960,21 @@ var render = function() {
         _vm._m(0)
       ]),
       _vm._v(" "),
-      _vm._m(1)
+      _c("div", { staticClass: "row justify-content-center" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-danger btn-sm",
+            attrs: { type: "submit" },
+            on: {
+              click: function($event) {
+                return _vm.$emit("reverse")
+              }
+            }
+          },
+          [_vm._v("戻す")]
+        )
+      ])
     ]
   )
 }
@@ -27080,18 +27011,6 @@ var staticRenderFns = [
           ])
         ])
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row justify-content-center" }, [
-      _c(
-        "button",
-        { staticClass: "btn btn-danger btn-sm", attrs: { type: "submit" } },
-        [_vm._v("戻す")]
-      )
     ])
   }
 ]

@@ -72,9 +72,7 @@ export default {
         dateAlert() {
             return moment().format("YYYY年MM月DD日")
         },
-    }
-
-
+    },
 }
 
 </script>

@@ -22,7 +22,6 @@ const actions = {
         axios.post('/api/sheets', payload)
         context.commit('setSheet', payload)
     },
-
 }
 
 const getters = {

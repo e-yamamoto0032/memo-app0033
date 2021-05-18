@@ -24,7 +24,7 @@
             </div>
         </div>
         <div class="row justify-content-center">
-            <button type="submit" class="btn btn-danger btn-sm">戻す</button>
+            <button type="submit" class="btn btn-danger btn-sm" @click="$emit('reverse')">戻す</button>
         </div>
     </div>
 </template>
@@ -62,7 +62,6 @@ export default {
         },
 
     },
-
 
 }
 

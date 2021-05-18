@@ -11,20 +11,13 @@ use Illuminate\Support\Facades\Storage;
 
 class SheetController extends Controller
 {
-//    public function __construct()
-//    {
-//        // 認証が必要
-//        $this->middleware('auth');
-//    }
-
-    public function index(){
-
-    }
-
-    public function create()
+    public function __construct()
     {
-
+        // 認証が必要
+        $this->middleware('auth');
     }
+
+
 
     public function store(Request $request)
     {
@@ -38,4 +31,6 @@ class SheetController extends Controller
         $sheet->save();
 
     }
+
+
 }
