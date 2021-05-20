@@ -2278,14 +2278,46 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 2:
                 _context.next = 4;
-                return _this.$router.push('/');
+                return _this.$store.dispatch('sheet/resetSheet');
 
               case 4:
+                _context.next = 6;
+                return _this.$router.push('/');
+
+              case 6:
               case "end":
                 return _context.stop();
             }
           }
         }, _callee);
+      }))();
+    },
+    myBoard: function myBoard() {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return _this2.$store.dispatch('sheet/resetSheet');
+
+              case 2:
+                _context2.next = 4;
+                return _this2.$router.push({
+                  name: 'board',
+                  params: {
+                    username: _this2.username
+                  }
+                });
+
+              case 4:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
       }))();
     }
   }
@@ -2856,9 +2888,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
 
-var state = {
-  sheets: []
-};
+
+function getDefaultState() {
+  return {
+    sheets: []
+  };
+}
+
+var state = getDefaultState();
 var mutations = {
   setSheet: function setSheet(state, payload) {
     state.sheets.push({
@@ -2869,6 +2906,9 @@ var mutations = {
       status: payload.status,
       user_id: payload.user_id
     });
+  },
+  clearAuthData: function clearAuthData(state) {
+    Object.assign(state, getDefaultState());
   }
 };
 var actions = {
@@ -2880,6 +2920,9 @@ var actions = {
   dbSheet: function dbSheet(context, payload) {
     context.commit('setSheet', payload);
     console.log(payload);
+  },
+  resetSheet: function resetSheet(context) {
+    context.commit('clearAuthData');
   }
 };
 var getters = {
@@ -26607,9 +26650,15 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "navbar__menu" }, [
         _vm.isLogin
-          ? _c("span", { staticClass: "navbar__item" }, [
-              _vm._v("\n            " + _vm._s(_vm.username) + "\n        ")
-            ])
+          ? _c(
+              "span",
+              {
+                staticClass: "navbar__item",
+                staticStyle: { cursor: "pointer" },
+                on: { click: _vm.myBoard }
+              },
+              [_vm._v("\n            " + _vm._s(_vm.username) + "\n        ")]
+            )
           : _vm._e(),
         _vm._v(" "),
         _vm.isLogin

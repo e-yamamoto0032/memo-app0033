@@ -5,7 +5,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/laravel/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/laravel/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/laravel/public/mix-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/laravel/public/mix-manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/laravel/resources/js/components/Board.vue" beforeDir="false" afterPath="$PROJECT_DIR$/laravel/resources/js/components/Board.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laravel/resources/js/components/Navbar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/laravel/resources/js/components/Navbar.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/laravel/resources/js/store/sheet.js" beforeDir="false" afterPath="$PROJECT_DIR$/laravel/resources/js/store/sheet.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -193,7 +193,7 @@
       <workItem from="1621242144176" duration="6980000" />
       <workItem from="1621477023531" duration="1702000" />
       <workItem from="1621479457210" duration="3352000" />
-      <workItem from="1621490515881" duration="4720000" />
+      <workItem from="1621490515881" duration="6429000" />
     </task>
     <servers />
   </component>

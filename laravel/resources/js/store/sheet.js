@@ -1,9 +1,13 @@
 import moment from "moment";
 
+function getDefaultState() {
+    return {
+        sheets: []
 
-const state = {
-    sheets: []
+    }
 }
+
+const state = getDefaultState()
 
 const mutations = {
     setSheet(state, payload) {
@@ -16,6 +20,9 @@ const mutations = {
             user_id: payload.user_id
         })
     },
+    clearAuthData(state) {
+        Object.assign(state, getDefaultState())
+    }
 
 }
 
@@ -28,6 +35,9 @@ const actions = {
     dbSheet(context,payload) {
         context.commit('setSheet', payload)
         console.log(payload)
+    },
+    resetSheet(context) {
+        context.commit('clearAuthData')
     }
 }
 
