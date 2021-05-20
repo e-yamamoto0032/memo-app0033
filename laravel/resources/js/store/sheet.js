@@ -14,15 +14,6 @@ const mutations = {
             user_id: payload.user_id
         })
     },
-    dbSheet(state, response) {
-        state.sheets.push({
-            title: response.title,
-            body: response.body,
-            deadline: moment(response.deadline).format("YYYY年MM月DD日"),
-            status: response.status,
-            user_id: response.user_id
-        })
-    }
 
 }
 
@@ -30,10 +21,11 @@ const actions = {
     addSheet(context, payload) {
         axios.post('/api/sheets', payload)
         context.commit('setSheet', payload)
+        console.log(payload)
     },
-    dbSheet(context){
-        const response = axios.get('/api/sheets')
-        context.commit('dbSheet', response)
+    dbSheet(context,payload) {
+        context.commit('setSheet', payload)
+        console.log(payload)
     }
 }
 
@@ -49,3 +41,6 @@ export default {
     mutations,
     actions
 }
+
+
+

@@ -3,15 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="b72aea3c-49a3-4917-93bf-00451c6a6733" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/laravel/app/Http/Controllers/Controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/laravel/app/Http/Controllers/Controller.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/laravel/app/Http/Controllers/SheetController.php" beforeDir="false" afterPath="$PROJECT_DIR$/laravel/app/Http/Controllers/SheetController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laradock" beforeDir="false" afterPath="$PROJECT_DIR$/laradock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laradock/env-example" beforeDir="false" afterPath="$PROJECT_DIR$/laradock/env-example" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/laravel/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/laravel/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/laravel/public/mix-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/laravel/public/mix-manifest.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/laravel/resources/js/components/Board.vue" beforeDir="false" afterPath="$PROJECT_DIR$/laravel/resources/js/components/Board.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/laravel/resources/js/components/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/laravel/resources/js/components/Login.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/laravel/resources/js/components/Sheet.vue" beforeDir="false" afterPath="$PROJECT_DIR$/laravel/resources/js/components/Sheet.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/laravel/resources/js/store/sheet.js" beforeDir="false" afterPath="$PROJECT_DIR$/laravel/resources/js/store/sheet.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/laravel/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/laravel/routes/api.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -196,6 +193,8 @@
       <workItem from="1621079585054" duration="3654000" />
       <workItem from="1621131424122" duration="37491000" />
       <workItem from="1621242144176" duration="6980000" />
+      <workItem from="1621477023531" duration="1702000" />
+      <workItem from="1621479457210" duration="3352000" />
     </task>
     <servers />
   </component>

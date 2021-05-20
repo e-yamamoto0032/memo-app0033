@@ -84,7 +84,9 @@ export default {
             return this.$store.getters['sheet/getSheet']
         },
 
+
         workSheets() {
+
             const workingSheets = this.sheets.filter(x => x.status === 0)
             const doSheets = workingSheets.filter(y => y.user_id === this.userid)
             if (this.sheetOrder === 0) {
@@ -95,7 +97,7 @@ export default {
                         return -1;
                     }
                 })
-            } else if (this.sheetOrder === 1){
+            } else if (this.sheetOrder === 1) {
                 return doSheets.sort(function (a, b) {
                     if (b.deadline > a.deadline) {
                         return 1;
@@ -116,7 +118,7 @@ export default {
                         return -1;
                     }
                 })
-            } else if (this.doneOrder === 1){
+            } else if (this.doneOrder === 1) {
                 return doneSheets.sort(function (a, b) {
                     if (b.deadline > a.deadline) {
                         return 1;
@@ -136,7 +138,7 @@ export default {
             showContent: false,
             sheetOrder: 0,
             doneOrder: 0,
-            dbSheet: this.$store.dispatch('sheet/dbSheet')
+
         }
     },
     methods: {
@@ -146,7 +148,27 @@ export default {
         closeModal() {
             this.showContent = false
         },
+
     },
+    created() {
+        var self = this;
+        axios.get('/api/sheets').then(function (response) {
+            self.res = response.data;
+            console.log(self.res)
+            self.res.forEach(function (elem) {
+                self.$store.dispatch('sheet/dbSheet', {
+                    title: elem.title,
+                    body: elem.body,
+                    deadline: elem.deadline,
+                    status: elem.status,
+                    user_id: elem.user_id
+                })
+            })
+
+        })
+
+    }
+
 }
 </script>
 

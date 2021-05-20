@@ -2041,8 +2041,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       showContent: false,
       sheetOrder: 0,
-      doneOrder: 0,
-      dbSheet: this.$store.dispatch('sheet/dbSheet')
+      doneOrder: 0
     };
   },
   methods: {
@@ -2052,6 +2051,22 @@ __webpack_require__.r(__webpack_exports__);
     closeModal: function closeModal() {
       this.showContent = false;
     }
+  },
+  created: function created() {
+    var self = this;
+    axios.get('/api/sheets').then(function (response) {
+      self.res = response.data;
+      console.log(self.res);
+      self.res.forEach(function (elem) {
+        self.$store.dispatch('sheet/dbSheet', {
+          title: elem.title,
+          body: elem.body,
+          deadline: elem.deadline,
+          status: elem.status,
+          user_id: elem.user_id
+        });
+      });
+    });
   }
 });
 
@@ -2852,25 +2867,17 @@ var mutations = {
       status: payload.status,
       user_id: payload.user_id
     });
-  },
-  dbSheet: function dbSheet(state, response) {
-    state.sheets.push({
-      title: response.title,
-      body: response.body,
-      deadline: moment__WEBPACK_IMPORTED_MODULE_0___default()(response.deadline).format("YYYY年MM月DD日"),
-      status: response.status,
-      user_id: response.user_id
-    });
   }
 };
 var actions = {
   addSheet: function addSheet(context, payload) {
     axios.post('/api/sheets', payload);
     context.commit('setSheet', payload);
+    console.log(payload);
   },
-  dbSheet: function dbSheet(context) {
-    var response = axios.get('/api/sheets');
-    context.commit('dbSheet', response);
+  dbSheet: function dbSheet(context, payload) {
+    context.commit('setSheet', payload);
+    console.log(payload);
   }
 };
 var getters = {
