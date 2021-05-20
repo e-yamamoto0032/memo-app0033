@@ -2059,6 +2059,7 @@ __webpack_require__.r(__webpack_exports__);
       console.log(self.res);
       self.res.forEach(function (elem) {
         self.$store.dispatch('sheet/dbSheet', {
+          id: elem.id,
           title: elem.title,
           body: elem.body,
           deadline: elem.deadline,
@@ -2861,6 +2862,7 @@ var state = {
 var mutations = {
   setSheet: function setSheet(state, payload) {
     state.sheets.push({
+      id: payload.id,
       title: payload.title,
       body: payload.body,
       deadline: moment__WEBPACK_IMPORTED_MODULE_0___default()(payload.deadline).format("YYYY年MM月DD日"),

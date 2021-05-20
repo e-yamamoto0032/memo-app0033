@@ -86,7 +86,6 @@ export default {
 
 
         workSheets() {
-
             const workingSheets = this.sheets.filter(x => x.status === 0)
             const doSheets = workingSheets.filter(y => y.user_id === this.userid)
             if (this.sheetOrder === 0) {
@@ -157,6 +156,7 @@ export default {
             console.log(self.res)
             self.res.forEach(function (elem) {
                 self.$store.dispatch('sheet/dbSheet', {
+                    id: elem.id,
                     title: elem.title,
                     body: elem.body,
                     deadline: elem.deadline,

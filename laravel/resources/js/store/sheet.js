@@ -1,5 +1,6 @@
 import moment from "moment";
 
+
 const state = {
     sheets: []
 }
@@ -7,6 +8,7 @@ const state = {
 const mutations = {
     setSheet(state, payload) {
         state.sheets.push({
+            id:payload.id,
             title: payload.title,
             body: payload.body,
             deadline: moment(payload.deadline).format("YYYY年MM月DD日"),
