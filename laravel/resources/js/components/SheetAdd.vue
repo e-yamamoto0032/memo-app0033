@@ -59,6 +59,7 @@ export default {
                 status: 0,
                 user_id:this.userid
             })
+            location.reload()
         }
     },
     computed: {

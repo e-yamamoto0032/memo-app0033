@@ -83,8 +83,6 @@ export default {
         sheets() {
             return this.$store.getters['sheet/getSheet']
         },
-
-
         workSheets() {
             const workingSheets = this.sheets.filter(x => x.status === 0)
             const doSheets = workingSheets.filter(y => y.user_id === this.userid)

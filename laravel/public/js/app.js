@@ -2300,11 +2300,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                _context2.next = 2;
+                if (!(_this2.username === _this2.$route.params.username)) {
+                  _context2.next = 4;
+                  break;
+                }
+
+                location.reload();
+                _context2.next = 8;
+                break;
+
+              case 4:
+                _context2.next = 6;
                 return _this2.$store.dispatch('sheet/resetSheet');
 
-              case 2:
-                _context2.next = 4;
+              case 6:
+                _context2.next = 8;
                 return _this2.$router.push({
                   name: 'board',
                   params: {
@@ -2312,7 +2322,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   }
                 });
 
-              case 4:
+              case 8:
               case "end":
                 return _context2.stop();
             }
@@ -2482,6 +2492,7 @@ __webpack_require__.r(__webpack_exports__);
         status: 0,
         user_id: this.userid
       });
+      location.reload();
     }
   },
   computed: {
