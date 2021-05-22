@@ -21,7 +21,7 @@
             <div class="card-deck justify-content-center">
                 <div v-for="(item, index) in workSheets">
                     <sheet
-                        :sheetId="item.id"
+                        :id="item.id"
                         :title="item.title"
                         :body="item.body"
                         :deadline="item.deadline"
@@ -168,7 +168,3 @@ export default {
 
 }
 </script>
-
-<style>
-
-</style>

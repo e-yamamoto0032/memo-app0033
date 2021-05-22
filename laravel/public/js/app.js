@@ -2409,6 +2409,10 @@ __webpack_require__.r(__webpack_exports__);
     sheetIndex: {
       type: Number,
       required: true
+    },
+    id: {
+      type: Number,
+      required: true
     }
   },
   computed: {
@@ -26197,7 +26201,7 @@ var render = function() {
             [
               _c("sheet", {
                 attrs: {
-                  sheetId: item.id,
+                  id: item.id,
                   title: item.title,
                   body: item.body,
                   deadline: item.deadline,

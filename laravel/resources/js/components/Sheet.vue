@@ -66,6 +66,10 @@ export default {
             type: Number,
             required: true
         },
+        id: {
+            type: Number,
+            required: true
+        }
 
     },
     computed: {
