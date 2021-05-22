@@ -43,21 +43,21 @@
 
 <script>
 export default {
-    data () {
+    data() {
         return {
-                title: '',
-                body: '',
-                deadline: '',
+            title: '',
+            body: '',
+            deadline: '',
         }
     },
     methods: {
         addSheet() {
             this.$store.dispatch('sheet/addSheet', {
-                title:this.title,
-                body:this.body,
-                deadline:this.deadline,
+                title: this.title,
+                body: this.body,
+                deadline: this.deadline,
                 status: 0,
-                user_id:this.userid
+                user_id: this.userid
             })
             location.reload()
         }

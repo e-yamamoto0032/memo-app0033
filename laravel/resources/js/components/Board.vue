@@ -151,7 +151,6 @@ export default {
         var self = this;
         axios.get('/api/sheets').then(function (response) {
             self.res = response.data;
-            console.log(self.res)
             self.res.forEach(function (elem) {
                 self.$store.dispatch('sheet/dbSheet', {
                     id: elem.id,

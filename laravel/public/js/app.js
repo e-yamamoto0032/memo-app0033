@@ -2056,7 +2056,6 @@ __webpack_require__.r(__webpack_exports__);
     var self = this;
     axios.get('/api/sheets').then(function (response) {
       self.res = response.data;
-      console.log(self.res);
       self.res.forEach(function (elem) {
         self.$store.dispatch('sheet/dbSheet', {
           id: elem.id,
@@ -2926,11 +2925,9 @@ var actions = {
   addSheet: function addSheet(context, payload) {
     axios.post('/api/sheets', payload);
     context.commit('setSheet', payload);
-    console.log(payload);
   },
   dbSheet: function dbSheet(context, payload) {
     context.commit('setSheet', payload);
-    console.log(payload);
   },
   resetSheet: function resetSheet(context) {
     context.commit('clearAuthData');
