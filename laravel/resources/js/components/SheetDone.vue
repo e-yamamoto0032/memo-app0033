@@ -6,30 +6,16 @@
                 <p class="card-text">{{ body }}</p>
                 <p class="card-text">完了日　{{ end_date }}</p>
             </div>
-            <div class="ml-auto card-text">
-                <div class="dropdown">
-                    <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-ellipsis-v"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" href="#">
-                            <i class="fas fa-pen mr-1"></i>記事を更新する
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item text-danger">
-                            <i class="fas fa-trash-alt mr-1"></i>記事を削除する
-                        </a>
-                    </div>
-                </div>
-            </div>
         </div>
         <div class="row justify-content-center">
-            <button type="submit" class="btn btn-danger btn-sm" @click="$emit('reverse')">戻す</button>
+            <button type="submit" class="btn btn-danger btn-sm" @click="reverseSheet">戻す</button>
         </div>
     </div>
 </template>
 
 <script>
+import moment from "moment";
+
 export default {
 
     props: {
@@ -46,7 +32,6 @@ export default {
         },
         end_date: {
             type: String,
-            required: true
         },
         status: {
             type: Number,
@@ -60,7 +45,31 @@ export default {
             type: Number,
             required: true
         },
+        id: {
+            type: Number,
+            required: true
+        }
 
+    },
+    methods: {
+        reverseSheet() {
+            axios.put('/api/sheets/' + this.id, {
+                status: this.reverseStatus,
+                id: this.id,
+                end_date: moment(),
+                deadline: moment(this.deadline, "YYYY年MM月DD日").format("YYYY-MM-DD"),
+                title: this.title,
+                body: this.body,
+                user_id: this.user_id
+            })
+            location.reload()
+
+        }
+    },
+    data() {
+        return {
+            reverseStatus: 0
+        }
     },
 
 }

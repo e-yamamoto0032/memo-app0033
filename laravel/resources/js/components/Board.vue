@@ -45,11 +45,12 @@
             <div class="card-deck justify-content-center">
                 <div v-for="(item, index) in doneSheets">
                     <sheet-done
-                        :sheetId="item.id"
+                        :id="item.id"
                         :title="item.title"
                         :body="item.body"
-                        :end_date="item.end_date"
+                        :deadline="item.deadline"
                         :status="item.status"
+                        :end_date="item.end_date"
                         :user_id="item.user_id"
                         :sheetIndex="index"
 
@@ -124,7 +125,6 @@ export default {
                     }
                 })
             }
-
         },
         totalSheet() {
             return this.workSheets.length
@@ -157,6 +157,7 @@ export default {
                     title: elem.title,
                     body: elem.body,
                     deadline: elem.deadline,
+                    end_date: elem.end_date,
                     status: elem.status,
                     user_id: elem.user_id
                 })

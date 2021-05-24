@@ -6,12 +6,12 @@
                     <div class="d-flex justify-content-end">
                         <button class="btn btn-link btn-sm" @click="$emit('close')">閉じる</button>
                     </div>
-                    <form class="" @submit.prevent="addSheet">
+                    <form class="" @submit.prevent="updateSheet">
                         <div class="form-group row">
                             <label for="title" class="col-sm-4 col-form-label">シート名</label>
                             <div class="col-sm-8">
                                 <input v-model="title" type="text" class="form-control" id="title"
-                                       placeholder="シート名を入力" value="">
+                                       placeholder="シート名を入力">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -31,7 +31,7 @@
                         </div>
                         <div class="d-flex justify-content-center">
                             <div>
-                                <button type="submit" class="btn btn-info" @click="$emit('close')">シートを追加</button>
+                                <button type="submit" class="btn btn-warning" @click="$emit('close')">シートを変更</button>
                             </div>
                         </div>
                     </form>
@@ -42,22 +42,54 @@
 </template>
 
 <script>
+import moment from "moment";
+
 export default {
+    props: {
+        update_title: {
+            type: String,
+            required: true
+        },
+        update_body: {
+            type: String,
+            required: true
+        },
+        update_deadline: {
+            type: String,
+            required: true
+        },
+        update_id: {
+            type: Number,
+            required: true
+        },
+        update_status: {
+            type: Number,
+            required: true
+        },
+        update_end_date: {
+            type: String,
+            required: true
+        }
+
+    },
     data() {
         return {
-            title: '',
-            body: '',
-            deadline: '',
+            title: this.$props.update_title,
+            body: this.$props.update_body,
+            deadline: moment(this.$props.update_deadline, "YYYY年MM月DD日").format("YYYY-MM-DD")
         }
+
     },
+
     methods: {
-        addSheet() {
-            axios.post('/api/sheets', {
+        updateSheet() {
+            axios.patch('/api/sheets/' + this.update_id, {
                 title: this.title,
                 body: this.body,
                 deadline: this.deadline,
-                status: 0,
-                user_id: this.userid
+                id: this.update_id,
+                status: this.update_status,
+                user_id: this.userid,
             })
             location.reload()
         }
@@ -66,7 +98,11 @@ export default {
         userid() {
             return this.$store.getters['auth/userid']
         },
+        sheet() {
+            return this.$store.getters['sheet/getSheet']
+        },
     }
+
 }
 
 
@@ -78,11 +114,10 @@ export default {
     z-index: 1;
 
     /*　画面全体を覆う設定　*/
-    position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     background-color: rgba(0, 0, 0, 0.5);
 
     /*　画面の中央に要素を表示させる設定　*/

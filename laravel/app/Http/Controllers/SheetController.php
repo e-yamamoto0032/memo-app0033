@@ -22,7 +22,18 @@ class SheetController extends Controller
         return $this->jsonResponse($sheets);
     }
 
+    public function update(Request $request)
+    {
+        $sheet = Sheet::find($request->id);
 
+        $sheet->title = $request->title;
+        $sheet->body = $request->body;
+        $sheet->end_date = $request->end_date;
+        $sheet->status = $request->status;
+        $sheet->user_id = $request->user_id;
+        $sheet->deadline = $request->deadline;
+        $sheet->save();
+    }
 
 
     public function store(Request $request)
@@ -37,8 +48,6 @@ class SheetController extends Controller
         $sheet->save();
 
     }
-
-
 
 
 }
