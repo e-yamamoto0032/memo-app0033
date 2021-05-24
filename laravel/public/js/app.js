@@ -2051,6 +2051,22 @@ __webpack_require__.r(__webpack_exports__);
     closeModal: function closeModal() {
       this.showContent = false;
     }
+  },
+  created: function created() {
+    var self = this;
+    axios.get('/api/sheets').then(function (response) {
+      self.res = response.data;
+      self.res.forEach(function (elem) {
+        self.$store.dispatch('sheet/dbSheet', {
+          id: elem.id,
+          title: elem.title,
+          body: elem.body,
+          deadline: elem.deadline,
+          status: elem.status,
+          user_id: elem.user_id
+        });
+      });
+    });
   }
 });
 
@@ -2147,7 +2163,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _this.$store.dispatch('auth/login', _this.loginForm);
 
               case 2:
-                //
                 _this.$router.push({
                   name: 'board',
                   params: {
@@ -2262,14 +2277,56 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 2:
                 _context.next = 4;
-                return _this.$router.push('/');
+                return _this.$store.dispatch('sheet/resetSheet');
 
               case 4:
+                _context.next = 6;
+                return _this.$router.push('/');
+
+              case 6:
               case "end":
                 return _context.stop();
             }
           }
         }, _callee);
+      }))();
+    },
+    myBoard: function myBoard() {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                if (!(_this2.username === _this2.$route.params.username)) {
+                  _context2.next = 4;
+                  break;
+                }
+
+                location.reload();
+                _context2.next = 8;
+                break;
+
+              case 4:
+                _context2.next = 6;
+                return _this2.$store.dispatch('sheet/resetSheet');
+
+              case 6:
+                _context2.next = 8;
+                return _this2.$router.push({
+                  name: 'board',
+                  params: {
+                    username: _this2.username
+                  }
+                });
+
+              case 8:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
       }))();
     }
   }
@@ -2350,6 +2407,10 @@ __webpack_require__.r(__webpack_exports__);
       required: true
     },
     sheetIndex: {
+      type: Number,
+      required: true
+    },
+    id: {
       type: Number,
       required: true
     }
@@ -2434,6 +2495,7 @@ __webpack_require__.r(__webpack_exports__);
         status: 0,
         user_id: this.userid
       });
+      location.reload();
     }
   },
   computed: {
@@ -2840,24 +2902,39 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
 
-var state = {
-  sheets: []
-};
+
+function getDefaultState() {
+  return {
+    sheets: []
+  };
+}
+
+var state = getDefaultState();
 var mutations = {
   setSheet: function setSheet(state, payload) {
     state.sheets.push({
+      id: payload.id,
       title: payload.title,
       body: payload.body,
       deadline: moment__WEBPACK_IMPORTED_MODULE_0___default()(payload.deadline).format("YYYY年MM月DD日"),
       status: payload.status,
       user_id: payload.user_id
     });
+  },
+  clearAuthData: function clearAuthData(state) {
+    Object.assign(state, getDefaultState());
   }
 };
 var actions = {
   addSheet: function addSheet(context, payload) {
     axios.post('/api/sheets', payload);
     context.commit('setSheet', payload);
+  },
+  dbSheet: function dbSheet(context, payload) {
+    context.commit('setSheet', payload);
+  },
+  resetSheet: function resetSheet(context) {
+    context.commit('clearAuthData');
   }
 };
 var getters = {
@@ -26124,7 +26201,7 @@ var render = function() {
             [
               _c("sheet", {
                 attrs: {
-                  sheetId: item.id,
+                  id: item.id,
                   title: item.title,
                   body: item.body,
                   deadline: item.deadline,
@@ -26585,9 +26662,15 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "navbar__menu" }, [
         _vm.isLogin
-          ? _c("span", { staticClass: "navbar__item" }, [
-              _vm._v("\n            " + _vm._s(_vm.username) + "\n        ")
-            ])
+          ? _c(
+              "span",
+              {
+                staticClass: "navbar__item",
+                staticStyle: { cursor: "pointer" },
+                on: { click: _vm.myBoard }
+              },
+              [_vm._v("\n            " + _vm._s(_vm.username) + "\n        ")]
+            )
           : _vm._e(),
         _vm._v(" "),
         _vm.isLogin

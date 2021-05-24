@@ -1,12 +1,18 @@
 import moment from "moment";
 
-const state = {
-    sheets: []
+function getDefaultState() {
+    return {
+        sheets: []
+
+    }
 }
+
+const state = getDefaultState()
 
 const mutations = {
     setSheet(state, payload) {
         state.sheets.push({
+            id: payload.id,
             title: payload.title,
             body: payload.body,
             deadline: moment(payload.deadline).format("YYYY年MM月DD日"),
@@ -14,6 +20,9 @@ const mutations = {
             user_id: payload.user_id
         })
     },
+    clearAuthData(state) {
+        Object.assign(state, getDefaultState())
+    }
 
 }
 
@@ -22,6 +31,12 @@ const actions = {
         axios.post('/api/sheets', payload)
         context.commit('setSheet', payload)
     },
+    dbSheet(context, payload) {
+        context.commit('setSheet', payload)
+    },
+    resetSheet(context) {
+        context.commit('clearAuthData')
+    }
 }
 
 const getters = {

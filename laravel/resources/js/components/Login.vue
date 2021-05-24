@@ -60,14 +60,11 @@ export default {
     },
     methods: {
         async login () {
-            // authストアのloginアクションを呼び出す
             await this.$store.dispatch('auth/login', this.loginForm)
 
-            //
             this.$router.push({ name: 'board', params: {username: this.username}})
         },
         async register () {
-            // authストアのresigterアクションを呼び出す
             await this.$store.dispatch('auth/register', this.registerForm)
 
             this.$router.push({ name: 'board', params: {username: this.username}})

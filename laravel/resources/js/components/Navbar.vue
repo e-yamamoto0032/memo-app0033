@@ -5,7 +5,7 @@
             MemoApp
         </RouterLink>
         <div class="navbar__menu">
-            <span v-if="isLogin" class="navbar__item">
+            <span v-if="isLogin" class="navbar__item" @click="myBoard" style="cursor: hand; cursor:pointer;">
                 {{ username }}
             </span>
             <div v-if="isLogin" class="navbar__item">
@@ -30,8 +30,16 @@ export default {
     methods: {
         async logout () {
             await this.$store.dispatch('auth/logout')
-
+            await this.$store.dispatch('sheet/resetSheet')
             await this.$router.push('/')
+        },
+        async myBoard () {
+            if(this.username === this.$route.params.username){
+                location.reload()
+            }else{
+                await this.$store.dispatch('sheet/resetSheet')
+                await this.$router.push({ name: 'board', params: {username: this.username}})
+            }
         }
     }
 }

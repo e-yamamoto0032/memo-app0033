@@ -66,6 +66,10 @@ export default {
             type: Number,
             required: true
         },
+        id: {
+            type: Number,
+            required: true
+        }
 
     },
     computed: {
@@ -73,6 +77,7 @@ export default {
             return moment().format("YYYY年MM月DD日")
         },
     },
+
 }
 
 </script>
