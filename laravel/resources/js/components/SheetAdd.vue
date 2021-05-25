@@ -58,8 +58,13 @@ export default {
                 deadline: this.deadline,
                 status: 0,
                 user_id: this.userid
+            }).then(()=>{
+                location.reload()
             })
-            location.reload()
+                // .catch(()=>{
+                //エラーハンドリングは別のブランチで実装
+
+            // })
         }
     },
     computed: {

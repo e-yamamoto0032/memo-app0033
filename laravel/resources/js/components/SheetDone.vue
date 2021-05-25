@@ -56,14 +56,12 @@ export default {
             axios.put('/api/sheets/' + this.id, {
                 status: this.reverseStatus,
                 id: this.id,
-                end_date: moment(),
-                deadline: moment(this.deadline, "YYYY年MM月DD日").format("YYYY-MM-DD"),
-                title: this.title,
-                body: this.body,
-                user_id: this.user_id
+            }).then(()=>{
+                location.reload()
             })
-            location.reload()
-
+                // .catch(()=>{
+                //エラーハンドリングは別のブランチで実装
+            // })
         }
     },
     data() {

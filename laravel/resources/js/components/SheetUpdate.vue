@@ -88,10 +88,12 @@ export default {
                 body: this.body,
                 deadline: this.deadline,
                 id: this.update_id,
-                status: this.update_status,
-                user_id: this.userid,
+            }).then(()=>{
+                location.reload()
             })
-            location.reload()
+                // .catch(()=>{
+                //エラーハンドリングは別のブランチで実装
+            // })
         }
     },
     computed: {

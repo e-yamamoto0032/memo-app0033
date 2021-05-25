@@ -2446,13 +2446,12 @@ __webpack_require__.r(__webpack_exports__);
       axios.patch('/api/sheets/' + this.id, {
         status: this.doneStatus,
         id: this.id,
-        end_date: moment__WEBPACK_IMPORTED_MODULE_0___default()().format("YYYY-MM-DD"),
-        deadline: moment__WEBPACK_IMPORTED_MODULE_0___default()(this.deadline, "YYYY年MM月DD日").format("YYYY-MM-DD"),
-        title: this.title,
-        body: this.body,
-        user_id: this.user_id
-      });
-      location.reload();
+        end_date: moment__WEBPACK_IMPORTED_MODULE_0___default()().format("YYYY-MM-DD")
+      }).then(function () {
+        location.reload();
+      }); // .catch(()=>{
+      //エラーハンドリングは別のブランチで実装
+      // })
     }
   },
   data: function data() {
@@ -2535,8 +2534,11 @@ __webpack_require__.r(__webpack_exports__);
         deadline: this.deadline,
         status: 0,
         user_id: this.userid
-      });
-      location.reload();
+      }).then(function () {
+        location.reload();
+      }); // .catch(()=>{
+      //エラーハンドリングは別のブランチで実装
+      // })
     }
   },
   computed: {
@@ -2614,14 +2616,12 @@ __webpack_require__.r(__webpack_exports__);
     reverseSheet: function reverseSheet() {
       axios.put('/api/sheets/' + this.id, {
         status: this.reverseStatus,
-        id: this.id,
-        end_date: moment__WEBPACK_IMPORTED_MODULE_0___default()(),
-        deadline: moment__WEBPACK_IMPORTED_MODULE_0___default()(this.deadline, "YYYY年MM月DD日").format("YYYY-MM-DD"),
-        title: this.title,
-        body: this.body,
-        user_id: this.user_id
-      });
-      location.reload();
+        id: this.id
+      }).then(function () {
+        location.reload();
+      }); // .catch(()=>{
+      //エラーハンドリングは別のブランチで実装
+      // })
     }
   },
   data: function data() {
@@ -2730,11 +2730,12 @@ __webpack_require__.r(__webpack_exports__);
         title: this.title,
         body: this.body,
         deadline: this.deadline,
-        id: this.update_id,
-        status: this.update_status,
-        user_id: this.userid
-      });
-      location.reload();
+        id: this.update_id
+      }).then(function () {
+        location.reload();
+      }); // .catch(()=>{
+      //エラーハンドリングは別のブランチで実装
+      // })
     }
   },
   computed: {

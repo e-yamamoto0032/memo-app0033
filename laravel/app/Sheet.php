@@ -13,6 +13,7 @@ class Sheet extends Model
         'deadline',
         'end_date',
         'status',
+        'user_id'
 
     ];
     public function user(): BelongsTo

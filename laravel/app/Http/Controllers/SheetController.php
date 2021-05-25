@@ -25,28 +25,14 @@ class SheetController extends Controller
     public function update(Request $request)
     {
         $sheet = Sheet::find($request->id);
-
-        $sheet->title = $request->title;
-        $sheet->body = $request->body;
-        $sheet->end_date = $request->end_date;
-        $sheet->status = $request->status;
-        $sheet->user_id = $request->user_id;
-        $sheet->deadline = $request->deadline;
-        $sheet->save();
+        $sheet->fill($request->all())->save();
     }
 
 
     public function store(Request $request)
     {
         $sheet = new Sheet();
-
-        $sheet->title = $request->title;
-        $sheet->body = $request->body;
-        $sheet->deadline = $request->deadline;
-        $sheet->status = $request->status;
-        $sheet->user_id = $request->user_id;
-        $sheet->save();
-
+        $sheet->fill($request->all())->save();
     }
 
 

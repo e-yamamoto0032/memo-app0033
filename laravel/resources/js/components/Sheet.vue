@@ -100,13 +100,13 @@ export default {
             axios.patch('/api/sheets/' + this.id, {
                 status: this.doneStatus,
                 id: this.id,
-                end_date: moment().format("YYYY-MM-DD"),
-                deadline: moment(this.deadline, "YYYY年MM月DD日").format("YYYY-MM-DD"),
-                title: this.title,
-                body: this.body,
-                user_id: this.user_id
+                end_date: moment().format("YYYY-MM-DD")
+            }).then(()=>{
+                location.reload()
             })
-            location.reload()
+                // .catch(()=>{
+                //エラーハンドリングは別のブランチで実装
+            // })
 
         }
 
