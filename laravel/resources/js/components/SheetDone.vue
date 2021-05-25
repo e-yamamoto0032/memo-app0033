@@ -53,7 +53,7 @@ export default {
     },
     methods: {
         reverseSheet() {
-            axios.put('/api/sheets/' + this.id, {
+            axios.patch('/api/sheets/done/' + this.id, {
                 status: this.reverseStatus,
                 id: this.id,
             }).then(()=>{

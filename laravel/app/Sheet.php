@@ -16,6 +16,7 @@ class Sheet extends Model
         'user_id'
 
     ];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo('App\User');

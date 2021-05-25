@@ -36,3 +36,4 @@ Route::resource('/sheets', 'SheetController',
     ['only' => ['index', 'show', 'store', 'update', 'destroy']]
 );
 
+Route::patch('/sheets/done/{sheet}', 'SheetController@done');

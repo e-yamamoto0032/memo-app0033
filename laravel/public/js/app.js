@@ -2443,7 +2443,7 @@ __webpack_require__.r(__webpack_exports__);
       this.showContent = false;
     },
     doneSheet: function doneSheet() {
-      axios.patch('/api/sheets/' + this.id, {
+      axios.patch('/api/sheets/done/' + this.id, {
         status: this.doneStatus,
         id: this.id,
         end_date: moment__WEBPACK_IMPORTED_MODULE_0___default()().format("YYYY-MM-DD")
@@ -2614,7 +2614,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     reverseSheet: function reverseSheet() {
-      axios.put('/api/sheets/' + this.id, {
+      axios.patch('/api/sheets/done/' + this.id, {
         status: this.reverseStatus,
         id: this.id
       }).then(function () {

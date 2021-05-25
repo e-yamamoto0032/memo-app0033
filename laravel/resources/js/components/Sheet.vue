@@ -97,7 +97,7 @@ export default {
             this.showContent = false
         },
         doneSheet() {
-            axios.patch('/api/sheets/' + this.id, {
+            axios.patch('/api/sheets/done/' + this.id, {
                 status: this.doneStatus,
                 id: this.id,
                 end_date: moment().format("YYYY-MM-DD")
