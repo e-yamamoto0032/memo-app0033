@@ -2111,17 +2111,30 @@ __webpack_require__.r(__webpack_exports__);
     delete_id: {
       type: Number,
       required: true
+    },
+    user_id: {
+      type: Number,
+      required: true
     }
   },
   methods: {
     deleteSheet: function deleteSheet() {
-      axios["delete"]('/api/sheets/' + this.delete_id, {
-        data: {
-          id: this.delete_id
-        }
-      }).then(function () {
-        location.reload();
-      });
+      if (this.user_id === this.userid) {
+        axios["delete"]('/api/sheets/' + this.delete_id, {
+          data: {
+            id: this.delete_id
+          }
+        }).then(function () {
+          location.reload();
+        });
+      } else {
+        location.href = '/';
+      }
+    }
+  },
+  computed: {
+    userid: function userid() {
+      return this.$store.getters['auth/userid'];
     }
   }
 });
@@ -2405,6 +2418,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _SheetUpdate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SheetUpdate */ "./resources/js/components/SheetUpdate.vue");
 /* harmony import */ var _DeleteSheet__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./DeleteSheet */ "./resources/js/components/DeleteSheet.vue");
+//
 //
 //
 //
@@ -27328,7 +27342,7 @@ var render = function() {
                     expression: "deleteContent"
                   }
                 ],
-                attrs: { delete_id: _vm.id }
+                attrs: { delete_id: _vm.id, user_id: _vm.user_id }
               })
             ],
             1

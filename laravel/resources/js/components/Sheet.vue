@@ -33,6 +33,7 @@
                     />
                     <delete-sheet v-show="deleteContent"
                                   :delete_id="id"
+                                  :user_id="user_id"
                     />
                 </div>
             </div>

@@ -26,18 +26,33 @@ export default {
             type: Number,
             required: true
         },
+        user_id: {
+            type: Number,
+            required: true
+        },
     },
     methods: {
         deleteSheet() {
-            axios.delete('/api/sheets/' + this.delete_id, {data:
-                {
-                    id: this.delete_id
-                }
-            }).then(()=>{
-                location.reload()
-            })
+            if(this.user_id === this.userid) {
+                axios.delete('/api/sheets/' + this.delete_id, {
+                    data:
+                        {
+                            id: this.delete_id
+                        }
+                })
+                    .then(() => {
+                    location.reload()
+                })
+            }else {
+                location.href = '/'
+            }
         }
     },
+    computed: {
+        userid() {
+            return this.$store.getters['auth/userid']
+        },
+    }
 }
 
 </script>
