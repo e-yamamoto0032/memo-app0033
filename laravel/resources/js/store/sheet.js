@@ -16,6 +16,7 @@ const mutations = {
             title: payload.title,
             body: payload.body,
             deadline: moment(payload.deadline).format("YYYY年MM月DD日"),
+            end_date: moment(payload.end_date).format("YYYY年MM月DD日"),
             status: payload.status,
             user_id: payload.user_id
         })
@@ -27,10 +28,6 @@ const mutations = {
 }
 
 const actions = {
-    addSheet(context, payload) {
-        axios.post('/api/sheets', payload)
-        context.commit('setSheet', payload)
-    },
     dbSheet(context, payload) {
         context.commit('setSheet', payload)
     },

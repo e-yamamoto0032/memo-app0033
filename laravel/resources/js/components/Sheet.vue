@@ -14,19 +14,27 @@
                         <i class="fas fa-ellipsis-v"></i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" href="#">
+                        <span class="dropdown-item" @click="openModal" style="cursor: hand; cursor:pointer;">
                             <i class="fas fa-pen mr-1"></i>記事を更新する
-                        </a>
+                        </span>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item text-danger">
+                        <span class="dropdown-item text-danger" style="cursor: hand; cursor:pointer;">
                             <i class="fas fa-trash-alt mr-1"></i>記事を削除する
-                        </a>
+                        </span>
                     </div>
+                    <sheet-update @close="closeModal" v-show="showContent"
+                                  :update_id="id"
+                                  :update_title="title"
+                                  :update_body="body"
+                                  :update_deadline="deadline"
+                                  :update_status="status"
+                                  :update_end_date="end_date"
+                    />
                 </div>
             </div>
         </div>
         <div class="row justify-content-center">
-            <button type="submit" class="btn btn-success btn-sm">完了</button>
+            <button type="submit" class="btn btn-success btn-sm" @click="doneSheet">完了</button>
         </div>
     </div>
 </template>
@@ -35,8 +43,12 @@
 
 
 import moment from "moment";
+import SheetUpdate from "./SheetUpdate";
 
 export default {
+    components: {
+        SheetUpdate
+    },
 
     props: {
         title: {
@@ -76,6 +88,34 @@ export default {
         dateAlert() {
             return moment().format("YYYY年MM月DD日")
         },
+    },
+    methods: {
+        openModal() {
+            this.showContent = true
+        },
+        closeModal() {
+            this.showContent = false
+        },
+        doneSheet() {
+            axios.patch('/api/sheets/done/' + this.id, {
+                status: this.doneStatus,
+                id: this.id,
+                end_date: moment().format("YYYY-MM-DD")
+            }).then(()=>{
+                location.reload()
+            })
+                // .catch(()=>{
+                //エラーハンドリングは別のブランチで実装
+            // })
+
+        }
+
+    },
+    data() {
+        return {
+            showContent: false,
+            doneStatus: 1
+        }
     },
 
 }
