@@ -42,5 +42,9 @@ class SheetController extends Controller
         $sheet->fill($request->all())->save();
     }
 
-
+    public function destroy(Request $request)
+    {
+        $sheet = Sheet::find($request->id);
+        $sheet->delete();
+    }
 }

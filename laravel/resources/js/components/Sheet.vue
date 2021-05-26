@@ -18,7 +18,8 @@
                             <i class="fas fa-pen mr-1"></i>記事を更新する
                         </span>
                         <div class="dropdown-divider"></div>
-                        <span class="dropdown-item text-danger" style="cursor: hand; cursor:pointer;">
+                        <span class="dropdown-item text-danger" data-toggle="modal" data-target="#exampleModal" @click="deleteModal"
+                              style="cursor: hand; cursor:pointer;">
                             <i class="fas fa-trash-alt mr-1"></i>記事を削除する
                         </span>
                     </div>
@@ -29,6 +30,9 @@
                                   :update_deadline="deadline"
                                   :update_status="status"
                                   :update_end_date="end_date"
+                    />
+                    <delete-sheet v-show="deleteContent"
+                                  :delete_id="id"
                     />
                 </div>
             </div>
@@ -44,9 +48,11 @@
 
 import moment from "moment";
 import SheetUpdate from "./SheetUpdate";
+import DeleteSheet from "./DeleteSheet";
 
 export default {
     components: {
+        DeleteSheet,
         SheetUpdate
     },
 
@@ -96,6 +102,10 @@ export default {
         closeModal() {
             this.showContent = false
         },
+        deleteModal() {
+            this.deleteContent = true
+
+        },
         doneSheet() {
             axios.patch('/api/sheets/done/' + this.id, {
                 status: this.doneStatus,
@@ -114,7 +124,8 @@ export default {
     data() {
         return {
             showContent: false,
-            doneStatus: 1
+            doneStatus: 1,
+            deleteContent: false,
         }
     },
 
