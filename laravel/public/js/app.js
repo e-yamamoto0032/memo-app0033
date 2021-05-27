@@ -2106,6 +2106,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     delete_id: {
@@ -2119,17 +2120,13 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     deleteSheet: function deleteSheet() {
-      if (this.user_id === this.userid) {
-        axios["delete"]('/api/sheets/' + this.delete_id, {
-          data: {
-            id: this.delete_id
-          }
-        }).then(function () {
-          location.reload();
-        });
-      } else {
-        location.href = '/';
-      }
+      axios["delete"]('/api/sheets/' + this.delete_id, {
+        data: {
+          id: this.delete_id
+        }
+      }).then(function () {
+        location.reload();
+      });
     }
   },
   computed: {
@@ -2233,10 +2230,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 2:
                 _this.$router.push({
-                  name: 'board',
-                  params: {
-                    username: _this.username
-                  }
+                  name: 'board'
                 });
 
               case 3:
@@ -2260,10 +2254,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 2:
                 _this2.$router.push({
-                  name: 'board',
-                  params: {
-                    username: _this2.username
-                  }
+                  name: 'board'
                 });
 
               case 3:
@@ -2368,7 +2359,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                if (!(_this2.username === _this2.$route.params.username)) {
+                if (!(location.pathname === '/board')) {
                   _context2.next = 4;
                   break;
                 }
@@ -2384,10 +2375,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 6:
                 _context2.next = 8;
                 return _this2.$router.push({
-                  name: 'board',
-                  params: {
-                    username: _this2.username
-                  }
+                  name: 'board'
                 });
 
               case 8:
@@ -2943,7 +2931,7 @@ var routes = [{
   path: '/',
   component: _components_Main_vue__WEBPACK_IMPORTED_MODULE_0__.default
 }, {
-  path: '/board/:username',
+  path: '/board',
   name: 'board',
   component: _components_Board_vue__WEBPACK_IMPORTED_MODULE_1__.default
 }, {

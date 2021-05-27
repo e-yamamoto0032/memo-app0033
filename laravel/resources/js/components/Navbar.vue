@@ -34,11 +34,11 @@ export default {
             await this.$router.push('/')
         },
         async myBoard () {
-            if(this.username === this.$route.params.username){
+            if(location.pathname === '/board'){
                 location.reload()
             }else{
                 await this.$store.dispatch('sheet/resetSheet')
-                await this.$router.push({ name: 'board', params: {username: this.username}})
+                await this.$router.push({ name: 'board'})
             }
         }
     }

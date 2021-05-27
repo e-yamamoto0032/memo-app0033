@@ -13,7 +13,6 @@ class SheetController extends Controller
 {
     public function __construct()
     {
-        // 認証が必要
         $this->middleware('auth');
     }
 
@@ -23,28 +22,44 @@ class SheetController extends Controller
         return $this->jsonResponse($sheets);
     }
 
-    public function update(SheetRequest $request)
+    public function update(SheetRequest $request, Sheet $sheet)
     {
-        $sheet = Sheet::find($request->id);
-        $sheet->fill($request->all())->save();
+        if ($request->user()->can('update', $sheet)) {
+            $sheet = Sheet::find($request->id);
+            $sheet->fill($request->all())->save();
+        } else {
+            abort(403);
+        }
     }
 
-    public function done(Request $request)
+    public function done(Request $request, Sheet $sheet)
     {
-        $sheet = Sheet::find($request->id);
-        $sheet->fill($request->all())->save();
+        if ($request->user()->can('done', $sheet)) {
+            $sheet = Sheet::find($request->id);
+            $sheet->fill($request->all())->save();
+        } else {
+            abort(403);
+        }
     }
 
 
     public function store(SheetRequest $request)
     {
-        $sheet = new Sheet();
-        $sheet->fill($request->all())->save();
+        if ($request->user_id === Auth::id()) {
+            $sheet = new Sheet();
+            $sheet->fill($request->all())->save();
+        } else {
+            abort(403);
+        }
     }
 
-    public function destroy(Request $request)
+    public function destroy(Request $request, Sheet $sheet)
     {
-        $sheet = Sheet::find($request->id);
-        $sheet->delete();
+        if ($request->user()->can('destroy', $sheet)) {
+            $sheet = Sheet::find($request->id);
+            $sheet->delete();
+        } else {
+            abort(403);
+        }
     }
 }

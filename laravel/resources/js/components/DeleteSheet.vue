@@ -1,5 +1,6 @@
 <template>
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -33,19 +34,14 @@ export default {
     },
     methods: {
         deleteSheet() {
-            if(this.user_id === this.userid) {
-                axios.delete('/api/sheets/' + this.delete_id, {
-                    data:
-                        {
-                            id: this.delete_id
-                        }
-                })
-                    .then(() => {
-                    location.reload()
-                })
-            }else {
-                location.href = '/'
-            }
+            axios.delete('/api/sheets/' + this.delete_id, {
+                data:
+                    {
+                        id: this.delete_id
+                    }
+            }).then(() => {
+                location.reload()
+            })
         }
     },
     computed: {

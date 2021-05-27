@@ -62,12 +62,12 @@ export default {
         async login () {
             await this.$store.dispatch('auth/login', this.loginForm)
 
-            this.$router.push({ name: 'board', params: {username: this.username}})
+            this.$router.push({ name: 'board'})
         },
         async register () {
             await this.$store.dispatch('auth/register', this.registerForm)
 
-            this.$router.push({ name: 'board', params: {username: this.username}})
+            this.$router.push({ name: 'board'})
         }
     },
     computed: {

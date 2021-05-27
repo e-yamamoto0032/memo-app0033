@@ -40,6 +40,6 @@ class User extends Authenticatable
 
     public function sheets(): hasmany
     {
-        return $this->hasMany('App\Sheet');
+        return $this->hasMany('Sheet');
     }
 }
