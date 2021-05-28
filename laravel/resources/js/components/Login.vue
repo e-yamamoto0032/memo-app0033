@@ -35,6 +35,17 @@
         </div>
         <div class="row justify-content-center" v-show="tab === 2">
             <form class="col-sm-5 form-group mt-3" @submit.prevent="register">
+                <div v-if="registerErrors" class="errors">
+                    <ul v-if="registerErrors.name">
+                        <li v-for="msg in registerErrors.name" :key="msg">{{ msg }}</li>
+                    </ul>
+                    <ul v-if="registerErrors.email">
+                        <li v-for="msg in registerErrors.email" :key="msg">{{ msg }}</li>
+                    </ul>
+                    <ul v-if="registerErrors.password">
+                        <li v-for="msg in registerErrors.password" :key="msg">{{ msg }}</li>
+                    </ul>
+                </div>
                 <label for="username">Name</label>
                 <input type="text" class="form-control" id="username" v-model="registerForm.name">
                 <label for="email">Email</label>
@@ -78,15 +89,17 @@ export default {
         },
         async register() {
             await this.$store.dispatch('auth/register', this.registerForm)
-
-            this.$router.push({name: 'board'})
+            if (this.apiStatus) {
+                this.$router.push({name: 'board'})
+            }
         },
-        clearError () {
+        clearError() {
             this.$store.commit('auth/setLoginErrorMessages', null)
+            this.$store.commit('auth/setRegisterErrorMessages', null)
         }
     },
 
-    created () {
+    created() {
         this.clearError()
     },
 
@@ -97,11 +110,14 @@ export default {
         username() {
             return this.$store.getters['auth/username']
         },
-        apiStatus () {
+        apiStatus() {
             return this.$store.state.auth.apiStatus
         },
-        loginErrors () {
+        loginErrors() {
             return this.$store.state.auth.loginErrorMessages
+        },
+        registerErrors() {
+            return this.$store.state.auth.registerErrorMessages
         }
 
     }
