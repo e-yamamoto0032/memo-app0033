@@ -26,20 +26,18 @@ class SheetController extends Controller
     {
         if (!$request->user()->can('update', $sheet)) {
             abort(403);
-        } else {
-            $sheet = Sheet::find($request->id);
-            $sheet->fill($request->all())->save();
         }
+        $sheet = Sheet::find($request->id);
+        $sheet->fill($request->all())->save();
     }
 
     public function done(Request $request, Sheet $sheet)
     {
         if (!$request->user()->can('done', $sheet)) {
             abort(403);
-        } else {
-            $sheet = Sheet::find($request->id);
-            $sheet->fill($request->all())->save();
         }
+        $sheet = Sheet::find($request->id);
+        $sheet->fill($request->all())->save();
     }
 
 
@@ -47,19 +45,17 @@ class SheetController extends Controller
     {
         if (!$request->user_id === Auth::id()) {
             abort(403);
-        } else {
-            $sheet = new Sheet();
-            $sheet->fill($request->all())->save();
         }
+        $sheet = new Sheet();
+        $sheet->fill($request->all())->save();
     }
 
     public function destroy(Request $request, Sheet $sheet)
     {
         if (!$request->user()->can('destroy', $sheet)) {
             abort(403);
-        } else {
-            $sheet = Sheet::find($request->id);
-            $sheet->delete();
         }
+        $sheet = Sheet::find($request->id);
+        $sheet->delete();
     }
 }
