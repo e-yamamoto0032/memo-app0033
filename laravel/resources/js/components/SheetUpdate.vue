@@ -56,7 +56,6 @@ export default {
         },
         update_deadline: {
             type: String,
-            required: true
         },
         update_id: {
             type: Number,
@@ -68,7 +67,6 @@ export default {
         },
         update_end_date: {
             type: String,
-            required: true
         }
 
     },

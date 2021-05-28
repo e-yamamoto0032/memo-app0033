@@ -4,7 +4,8 @@
             <div>
                 <h6 class="card-title">{{ title }}</h6>
                 <p class="card-text">{{ body }}</p>
-                <p class="card-text">期日　{{ deadline }}</p>
+                <p class="card-text" v-if="deadline === 'Invalid date'">期日未設定</p>
+                <p class="card-text" v-else>期日　{{ deadline }}</p>
                 <p class="card-text" v-if="dateAlert === deadline" style="color: blue; font-weight: bold">本日まで！</p>
                 <p class="card-text" v-if="dateAlert > deadline" style="color: red; font-weight: bold">期限切れ！</p>
             </div>
@@ -18,7 +19,9 @@
                             <i class="fas fa-pen mr-1"></i>記事を更新する
                         </span>
                         <div class="dropdown-divider"></div>
-                        <span class="dropdown-item text-danger" style="cursor: hand; cursor:pointer;">
+                        <span class="dropdown-item text-danger" data-toggle="modal" data-target="#exampleModal"
+                              @click="deleteModal"
+                              style="cursor: hand; cursor:pointer;">
                             <i class="fas fa-trash-alt mr-1"></i>記事を削除する
                         </span>
                     </div>
@@ -29,6 +32,10 @@
                                   :update_deadline="deadline"
                                   :update_status="status"
                                   :update_end_date="end_date"
+                    />
+                    <delete-sheet v-show="deleteContent"
+                                  :delete_id="id"
+                                  :user_id="user_id"
                     />
                 </div>
             </div>
@@ -44,9 +51,11 @@
 
 import moment from "moment";
 import SheetUpdate from "./SheetUpdate";
+import DeleteSheet from "./DeleteSheet";
 
 export default {
     components: {
+        DeleteSheet,
         SheetUpdate
     },
 
@@ -61,7 +70,6 @@ export default {
         },
         deadline: {
             type: String,
-            required: true
         },
         end_date: {
             type: String,
@@ -96,16 +104,19 @@ export default {
         closeModal() {
             this.showContent = false
         },
+        deleteModal() {
+            this.deleteContent = true
+        },
         doneSheet() {
             axios.patch('/api/sheets/done/' + this.id, {
                 status: this.doneStatus,
                 id: this.id,
                 end_date: moment().format("YYYY-MM-DD")
-            }).then(()=>{
+            }).then(() => {
                 location.reload()
             })
-                // .catch(()=>{
-                //エラーハンドリングは別のブランチで実装
+            // .catch(()=>{
+            //エラーハンドリングは別のブランチで実装
             // })
 
         }
@@ -114,7 +125,8 @@ export default {
     data() {
         return {
             showContent: false,
-            doneStatus: 1
+            doneStatus: 1,
+            deleteContent: false,
         }
     },
 

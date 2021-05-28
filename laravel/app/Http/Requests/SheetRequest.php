@@ -26,7 +26,6 @@ class SheetRequest extends FormRequest
         return [
             'title' => ['required', 'max:20'],
             'body' => ['required', 'max:40'],
-            'deadline' => ['required']
         ];
     }
 }
