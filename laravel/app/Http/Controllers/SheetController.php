@@ -24,42 +24,42 @@ class SheetController extends Controller
 
     public function update(SheetRequest $request, Sheet $sheet)
     {
-        if ($request->user()->can('update', $sheet)) {
+        if (!$request->user()->can('update', $sheet)) {
+            abort(403);
+        } else {
             $sheet = Sheet::find($request->id);
             $sheet->fill($request->all())->save();
-        } else {
-            abort(403);
         }
     }
 
     public function done(Request $request, Sheet $sheet)
     {
-        if ($request->user()->can('done', $sheet)) {
+        if (!$request->user()->can('done', $sheet)) {
+            abort(403);
+        } else {
             $sheet = Sheet::find($request->id);
             $sheet->fill($request->all())->save();
-        } else {
-            abort(403);
         }
     }
 
 
     public function store(SheetRequest $request)
     {
-        if ($request->user_id === Auth::id()) {
+        if (!$request->user_id === Auth::id()) {
+            abort(403);
+        } else {
             $sheet = new Sheet();
             $sheet->fill($request->all())->save();
-        } else {
-            abort(403);
         }
     }
 
     public function destroy(Request $request, Sheet $sheet)
     {
-        if ($request->user()->can('destroy', $sheet)) {
+        if (!$request->user()->can('destroy', $sheet)) {
+            abort(403);
+        } else {
             $sheet = Sheet::find($request->id);
             $sheet->delete();
-        } else {
-            abort(403);
         }
     }
 }

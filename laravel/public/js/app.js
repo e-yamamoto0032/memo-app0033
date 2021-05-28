@@ -2452,6 +2452,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 
@@ -2470,8 +2472,7 @@ __webpack_require__.r(__webpack_exports__);
       required: true
     },
     deadline: {
-      type: String,
-      required: true
+      type: String
     },
     end_date: {
       type: String
@@ -2768,8 +2769,7 @@ __webpack_require__.r(__webpack_exports__);
       required: true
     },
     update_deadline: {
-      type: String,
-      required: true
+      type: String
     },
     update_id: {
       type: Number,
@@ -2780,8 +2780,7 @@ __webpack_require__.r(__webpack_exports__);
       required: true
     },
     update_end_date: {
-      type: String,
-      required: true
+      type: String
     }
   },
   data: function data() {
@@ -27233,9 +27232,11 @@ var render = function() {
           _vm._v(" "),
           _c("p", { staticClass: "card-text" }, [_vm._v(_vm._s(_vm.body))]),
           _vm._v(" "),
-          _c("p", { staticClass: "card-text" }, [
-            _vm._v("期日　" + _vm._s(_vm.deadline))
-          ]),
+          _vm.deadline === "Invalid date"
+            ? _c("p", { staticClass: "card-text" }, [_vm._v("期日未設定")])
+            : _c("p", { staticClass: "card-text" }, [
+                _vm._v("期日　" + _vm._s(_vm.deadline))
+              ]),
           _vm._v(" "),
           _vm.dateAlert === _vm.deadline
             ? _c(
