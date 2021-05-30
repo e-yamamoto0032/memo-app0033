@@ -6,11 +6,11 @@
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">シートの削除</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+                        <span @click="$emit('close')">×</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    本当にこのシートを削除しますか？
+                    本当にこのシートを削除しますか？{{ id }}
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" @click="deleteSheet">削除</button>
@@ -25,22 +25,26 @@ export default {
     props: {
         delete_id: {
             type: Number,
-            required: true
         },
         user_id: {
             type: Number,
-            required: true
         },
+    },
+    data() {
+        return {
+            id: this.$props.delete_id,
+        }
+
     },
     methods: {
         deleteSheet() {
-            axios.delete('/api/sheets/' + this.delete_id, {
+            axios.delete('/api/sheets/' + this.id, {
                 data:
                     {
-                        id: this.delete_id
+                        id: this.id
                     }
             }).then(() => {
-                location.reload()
+                // location.reload()
             })
         }
     },

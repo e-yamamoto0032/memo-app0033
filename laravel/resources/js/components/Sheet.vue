@@ -33,7 +33,7 @@
                                   :update_status="status"
                                   :update_end_date="end_date"
                     />
-                    <delete-sheet v-show="deleteContent"
+                    <delete-sheet @close="closeDeleteModal" v-show="deleteContent"
                                   :delete_id="id"
                                   :user_id="user_id"
                     />
@@ -76,19 +76,15 @@ export default {
         },
         status: {
             type: Number,
-            required: true
         },
         user_id: {
             type: Number,
-            required: true
         },
         sheetIndex: {
             type: Number,
-            required: true
         },
         id: {
             type: Number,
-            required: true
         }
 
     },
@@ -106,6 +102,9 @@ export default {
         },
         deleteModal() {
             this.deleteContent = true
+        },
+        closeDeleteModal() {
+            this.deleteContent = false
         },
         doneSheet() {
             axios.patch('/api/sheets/done/' + this.id, {

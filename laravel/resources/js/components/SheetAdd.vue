@@ -7,6 +7,14 @@
                         <button class="btn btn-link btn-sm" @click="$emit('close')">閉じる</button>
                     </div>
                     <form class="" @submit.prevent="addSheet">
+                        <div v-if="addSheetErrors" class="errors">
+                            <ul v-if="addSheetErrors.title">
+                                <li v-for="msg in addSheetErrors.title" :key="msg">{{ msg }}</li>
+                            </ul>
+                            <ul v-if="addSheetErrors.body">
+                                <li v-for="msg in addSheetErrors.body" :key="msg">{{ msg }}</li>
+                            </ul>
+                        </div>
                         <div class="form-group row">
                             <label for="title" class="col-sm-4 col-form-label">シート名</label>
                             <div class="col-sm-8">
@@ -31,7 +39,7 @@
                         </div>
                         <div class="d-flex justify-content-center">
                             <div>
-                                <button type="submit" class="btn btn-info" @click="$emit('close')">シートを追加</button>
+                                <button type="submit" class="btn btn-info">シートを追加</button>
                             </div>
                         </div>
                     </form>
@@ -51,26 +59,29 @@ export default {
         }
     },
     methods: {
-        addSheet() {
-            axios.post('/api/sheets', {
+        async addSheet() {
+            await this.$store.dispatch('sheet/addSheet', {
                 title: this.title,
                 body: this.body,
                 deadline: this.deadline,
                 status: 0,
                 user_id: this.userid
-            }).then(()=>{
-                location.reload()
             })
-                // .catch(()=>{
-                //エラーハンドリングは別のブランチで実装
-
-            // })
-        }
+            if (this.apiStatus) {
+                location.reload()
+            }
+        },
     },
     computed: {
         userid() {
             return this.$store.getters['auth/userid']
         },
+        apiStatus() {
+            return this.$store.state.sheet.apiStatus
+        },
+        addSheetErrors() {
+            return this.$store.state.sheet.sheetErrorMessages
+        }
     }
 }
 

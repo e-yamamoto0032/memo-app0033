@@ -21,6 +21,7 @@
             <div class="card-deck justify-content-center">
                 <div v-for="(item, index) in workSheets">
                     <sheet
+                        :key="item.id"
                         :id="item.id"
                         :title="item.title"
                         :body="item.body"
@@ -45,6 +46,7 @@
             <div class="card-deck justify-content-center">
                 <div v-for="(item, index) in doneSheets">
                     <sheet-done
+                        :key="item.id"
                         :id="item.id"
                         :title="item.title"
                         :body="item.body"

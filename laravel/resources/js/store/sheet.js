@@ -1,9 +1,11 @@
 import moment from "moment";
+import { OK, UNPROCESSABLE_ENTITY } from '../util'
 
 function getDefaultState() {
     return {
-        sheets: []
-
+        sheets: [],
+        apiStatus: null,
+        sheetErrorMessages: null
     }
 }
 
@@ -23,6 +25,12 @@ const mutations = {
     },
     clearAuthData(state) {
         Object.assign(state, getDefaultState())
+    },
+    setApiStatus (state, status) {
+        state.apiStatus = status
+    },
+    setSheetErrorMessages (state, messages) {
+        state.sheetErrorMessages = messages
     }
 
 }
@@ -33,7 +41,39 @@ const actions = {
     },
     resetSheet(context) {
         context.commit('clearAuthData')
-    }
+    },
+    async addSheet(context, payload) {
+        context.commit('setApiStatus', null)
+        const response = await axios.post('/api/sheets', payload)
+            .catch(err => err.response || err)
+
+        if(response.status === OK) {
+            context.commit('setApiStatus', true)
+            return false
+        }
+        context.commit('setApiStatus', false)
+        if (response.status === UNPROCESSABLE_ENTITY) {
+            context.commit('setSheetErrorMessages', response.data.errors)
+        } else {
+            context.commit('error/setCode', response.status, { root: true })
+        }
+    },
+    async updateSheet(context, payload) {
+        context.commit('setApiStatus', null)
+        const response = await axios.patch('/api/sheets/' + payload.id, payload)
+            .catch(err => err.response || err)
+
+        if(response.status === OK) {
+            context.commit('setApiStatus', true)
+            return false
+        }
+        context.commit('setApiStatus', false)
+        if (response.status === UNPROCESSABLE_ENTITY) {
+            context.commit('setSheetErrorMessages', response.data.errors)
+        } else {
+            context.commit('error/setCode', response.status, { root: true })
+        }
+    },
 }
 
 const getters = {

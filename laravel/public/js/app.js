@@ -1977,6 +1977,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 
@@ -2130,22 +2132,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     delete_id: {
-      type: Number,
-      required: true
+      type: Number
     },
     user_id: {
-      type: Number,
-      required: true
+      type: Number
     }
+  },
+  data: function data() {
+    return {
+      id: this.$props.delete_id
+    };
   },
   methods: {
     deleteSheet: function deleteSheet() {
-      axios["delete"]('/api/sheets/' + this.delete_id, {
+      axios["delete"]('/api/sheets/' + this.id, {
         data: {
-          id: this.delete_id
+          id: this.id
         }
-      }).then(function () {
-        location.reload();
+      }).then(function () {// location.reload()
       });
     }
   },
@@ -2540,20 +2544,16 @@ __webpack_require__.r(__webpack_exports__);
       type: String
     },
     status: {
-      type: Number,
-      required: true
+      type: Number
     },
     user_id: {
-      type: Number,
-      required: true
+      type: Number
     },
     sheetIndex: {
-      type: Number,
-      required: true
+      type: Number
     },
     id: {
-      type: Number,
-      required: true
+      type: Number
     }
   },
   computed: {
@@ -2570,6 +2570,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     deleteModal: function deleteModal() {
       this.deleteContent = true;
+    },
+    closeDeleteModal: function closeDeleteModal() {
+      this.deleteContent = false;
     },
     doneSheet: function doneSheet() {
       axios.patch('/api/sheets/done/' + this.id, {
@@ -2605,6 +2608,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2658,22 +2677,45 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     addSheet: function addSheet() {
-      axios.post('/api/sheets', {
-        title: this.title,
-        body: this.body,
-        deadline: this.deadline,
-        status: 0,
-        user_id: this.userid
-      }).then(function () {
-        location.reload();
-      }); // .catch(()=>{
-      //エラーハンドリングは別のブランチで実装
-      // })
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return _this.$store.dispatch('sheet/addSheet', {
+                  title: _this.title,
+                  body: _this.body,
+                  deadline: _this.deadline,
+                  status: 0,
+                  user_id: _this.userid
+                });
+
+              case 2:
+                if (_this.apiStatus) {
+                  location.reload();
+                }
+
+              case 3:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
     }
   },
   computed: {
     userid: function userid() {
       return this.$store.getters['auth/userid'];
+    },
+    apiStatus: function apiStatus() {
+      return this.$store.state.sheet.apiStatus;
+    },
+    addSheetErrors: function addSheetErrors() {
+      return this.$store.state.sheet.sheetErrorMessages;
     }
   }
 });
@@ -2774,8 +2816,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_1__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2834,12 +2892,10 @@ __webpack_require__.r(__webpack_exports__);
       type: String
     },
     update_id: {
-      type: Number,
-      required: true
+      type: Number
     },
     update_status: {
-      type: Number,
-      required: true
+      type: Number
     },
     update_end_date: {
       type: String
@@ -2849,29 +2905,49 @@ __webpack_require__.r(__webpack_exports__);
     return {
       title: this.$props.update_title,
       body: this.$props.update_body,
-      deadline: moment__WEBPACK_IMPORTED_MODULE_0___default()(this.$props.update_deadline, "YYYY年MM月DD日").format("YYYY-MM-DD")
+      deadline: moment__WEBPACK_IMPORTED_MODULE_1___default()(this.$props.update_deadline, "YYYY年MM月DD日").format("YYYY-MM-DD")
     };
   },
   methods: {
     updateSheet: function updateSheet() {
-      axios.patch('/api/sheets/' + this.update_id, {
-        title: this.title,
-        body: this.body,
-        deadline: this.deadline,
-        id: this.update_id
-      }).then(function () {
-        location.reload();
-      }); // .catch(()=>{
-      //エラーハンドリングは別のブランチで実装
-      // })
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return _this.$store.dispatch('sheet/updateSheet', {
+                  title: _this.title,
+                  body: _this.body,
+                  deadline: _this.deadline,
+                  id: _this.update_id
+                });
+
+              case 2:
+                if (_this.apiStatus) {
+                  location.reload();
+                }
+
+              case 3:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
     }
   },
   computed: {
     userid: function userid() {
       return this.$store.getters['auth/userid'];
     },
-    sheet: function sheet() {
-      return this.$store.getters['sheet/getSheet'];
+    apiStatus: function apiStatus() {
+      return this.$store.state.sheet.apiStatus;
+    },
+    updateSheetErrors: function updateSheetErrors() {
+      return this.$store.state.sheet.sheetErrorMessages;
     }
   }
 });
@@ -3320,13 +3396,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _util__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../util */ "./resources/js/util.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
 
 
 function getDefaultState() {
   return {
-    sheets: []
+    sheets: [],
+    apiStatus: null,
+    sheetErrorMessages: null
   };
 }
 
@@ -3337,14 +3425,20 @@ var mutations = {
       id: payload.id,
       title: payload.title,
       body: payload.body,
-      deadline: moment__WEBPACK_IMPORTED_MODULE_0___default()(payload.deadline).format("YYYY年MM月DD日"),
-      end_date: moment__WEBPACK_IMPORTED_MODULE_0___default()(payload.end_date).format("YYYY年MM月DD日"),
+      deadline: moment__WEBPACK_IMPORTED_MODULE_1___default()(payload.deadline).format("YYYY年MM月DD日"),
+      end_date: moment__WEBPACK_IMPORTED_MODULE_1___default()(payload.end_date).format("YYYY年MM月DD日"),
       status: payload.status,
       user_id: payload.user_id
     });
   },
   clearAuthData: function clearAuthData(state) {
     Object.assign(state, getDefaultState());
+  },
+  setApiStatus: function setApiStatus(state, status) {
+    state.apiStatus = status;
+  },
+  setSheetErrorMessages: function setSheetErrorMessages(state, messages) {
+    state.sheetErrorMessages = messages;
   }
 };
 var actions = {
@@ -3353,6 +3447,92 @@ var actions = {
   },
   resetSheet: function resetSheet(context) {
     context.commit('clearAuthData');
+  },
+  addSheet: function addSheet(context, payload) {
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+      var response;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              context.commit('setApiStatus', null);
+              _context.next = 3;
+              return axios.post('/api/sheets', payload)["catch"](function (err) {
+                return err.response || err;
+              });
+
+            case 3:
+              response = _context.sent;
+
+              if (!(response.status === _util__WEBPACK_IMPORTED_MODULE_2__.OK)) {
+                _context.next = 7;
+                break;
+              }
+
+              context.commit('setApiStatus', true);
+              return _context.abrupt("return", false);
+
+            case 7:
+              context.commit('setApiStatus', false);
+
+              if (response.status === _util__WEBPACK_IMPORTED_MODULE_2__.UNPROCESSABLE_ENTITY) {
+                context.commit('setSheetErrorMessages', response.data.errors);
+              } else {
+                context.commit('error/setCode', response.status, {
+                  root: true
+                });
+              }
+
+            case 9:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }))();
+  },
+  updateSheet: function updateSheet(context, payload) {
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+      var response;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              context.commit('setApiStatus', null);
+              _context2.next = 3;
+              return axios.patch('/api/sheets/' + payload.id, payload)["catch"](function (err) {
+                return err.response || err;
+              });
+
+            case 3:
+              response = _context2.sent;
+
+              if (!(response.status === _util__WEBPACK_IMPORTED_MODULE_2__.OK)) {
+                _context2.next = 7;
+                break;
+              }
+
+              context.commit('setApiStatus', true);
+              return _context2.abrupt("return", false);
+
+            case 7:
+              context.commit('setApiStatus', false);
+
+              if (response.status === _util__WEBPACK_IMPORTED_MODULE_2__.UNPROCESSABLE_ENTITY) {
+                context.commit('setSheetErrorMessages', response.data.errors);
+              } else {
+                context.commit('error/setCode', response.status, {
+                  root: true
+                });
+              }
+
+            case 9:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }))();
   }
 };
 var getters = {
@@ -26867,6 +27047,7 @@ var render = function() {
             "div",
             [
               _c("sheet", {
+                key: item.id,
                 attrs: {
                   id: item.id,
                   title: item.title,
@@ -26928,6 +27109,7 @@ var render = function() {
             "div",
             [
               _c("sheet-done", {
+                key: item.id,
                 attrs: {
                   id: item.id,
                   title: item.title,
@@ -26986,11 +27168,47 @@ var render = function() {
     [
       _c("div", { staticClass: "modal-dialog", attrs: { role: "document" } }, [
         _c("div", { staticClass: "modal-content" }, [
-          _vm._m(0),
+          _c("div", { staticClass: "modal-header" }, [
+            _c(
+              "h5",
+              {
+                staticClass: "modal-title",
+                attrs: { id: "exampleModalLabel" }
+              },
+              [_vm._v("シートの削除")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "close",
+                attrs: {
+                  type: "button",
+                  "data-dismiss": "modal",
+                  "aria-label": "Close"
+                }
+              },
+              [
+                _c(
+                  "span",
+                  {
+                    on: {
+                      click: function($event) {
+                        return _vm.$emit("close")
+                      }
+                    }
+                  },
+                  [_vm._v("×")]
+                )
+              ]
+            )
+          ]),
           _vm._v(" "),
           _c("div", { staticClass: "modal-body" }, [
             _vm._v(
-              "\n                本当にこのシートを削除しますか？\n            "
+              "\n                本当にこのシートを削除しますか？" +
+                _vm._s(_vm.id) +
+                "\n            "
             )
           ]),
           _vm._v(" "),
@@ -27010,33 +27228,7 @@ var render = function() {
     ]
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
-      _c(
-        "h5",
-        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
-        [_vm._v("シートの削除")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "close",
-          attrs: {
-            type: "button",
-            "data-dismiss": "modal",
-            "aria-label": "Close"
-          }
-        },
-        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-      )
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -27639,7 +27831,8 @@ var render = function() {
                     expression: "deleteContent"
                   }
                 ],
-                attrs: { delete_id: _vm.id, user_id: _vm.user_id }
+                attrs: { delete_id: _vm.id, user_id: _vm.user_id },
+                on: { close: _vm.closeDeleteModal }
               })
             ],
             1
@@ -27731,6 +27924,30 @@ var render = function() {
               }
             },
             [
+              _vm.addSheetErrors
+                ? _c("div", { staticClass: "errors" }, [
+                    _vm.addSheetErrors.title
+                      ? _c(
+                          "ul",
+                          _vm._l(_vm.addSheetErrors.title, function(msg) {
+                            return _c("li", { key: msg }, [_vm._v(_vm._s(msg))])
+                          }),
+                          0
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.addSheetErrors.body
+                      ? _c(
+                          "ul",
+                          _vm._l(_vm.addSheetErrors.body, function(msg) {
+                            return _c("li", { key: msg }, [_vm._v(_vm._s(msg))])
+                          }),
+                          0
+                        )
+                      : _vm._e()
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
               _c("div", { staticClass: "form-group row" }, [
                 _c(
                   "label",
@@ -27849,23 +28066,7 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "d-flex justify-content-center" }, [
-                _c("div", [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-info",
-                      attrs: { type: "submit" },
-                      on: {
-                        click: function($event) {
-                          return _vm.$emit("close")
-                        }
-                      }
-                    },
-                    [_vm._v("シートを追加")]
-                  )
-                ])
-              ])
+              _vm._m(0)
             ]
           )
         ])
@@ -27873,7 +28074,22 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "d-flex justify-content-center" }, [
+      _c("div", [
+        _c(
+          "button",
+          { staticClass: "btn btn-info", attrs: { type: "submit" } },
+          [_vm._v("シートを追加")]
+        )
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -27979,6 +28195,30 @@ var render = function() {
               }
             },
             [
+              _vm.updateSheetErrors
+                ? _c("div", { staticClass: "errors" }, [
+                    _vm.updateSheetErrors.title
+                      ? _c(
+                          "ul",
+                          _vm._l(_vm.updateSheetErrors.title, function(msg) {
+                            return _c("li", { key: msg }, [_vm._v(_vm._s(msg))])
+                          }),
+                          0
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.updateSheetErrors.body
+                      ? _c(
+                          "ul",
+                          _vm._l(_vm.updateSheetErrors.body, function(msg) {
+                            return _c("li", { key: msg }, [_vm._v(_vm._s(msg))])
+                          }),
+                          0
+                        )
+                      : _vm._e()
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
               _c("div", { staticClass: "form-group row" }, [
                 _c(
                   "label",
@@ -27986,7 +28226,7 @@ var render = function() {
                     staticClass: "col-sm-4 col-form-label",
                     attrs: { for: "title" }
                   },
-                  [_vm._v("シート名")]
+                  [_vm._v("シート名" + _vm._s(_vm.update_id))]
                 ),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-sm-8" }, [
@@ -28096,23 +28336,7 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "d-flex justify-content-center" }, [
-                _c("div", [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-warning",
-                      attrs: { type: "submit" },
-                      on: {
-                        click: function($event) {
-                          return _vm.$emit("close")
-                        }
-                      }
-                    },
-                    [_vm._v("シートを変更")]
-                  )
-                ])
-              ])
+              _vm._m(0)
             ]
           )
         ])
@@ -28120,7 +28344,22 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "d-flex justify-content-center" }, [
+      _c("div", [
+        _c(
+          "button",
+          { staticClass: "btn btn-warning", attrs: { type: "submit" } },
+          [_vm._v("シートを変更")]
+        )
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
