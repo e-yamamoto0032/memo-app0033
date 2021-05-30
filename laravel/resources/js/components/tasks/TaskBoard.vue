@@ -1,10 +1,10 @@
 <template>
     <div>
         <header>
-            <h3 class="sheet-title">シートタイトル</h3>
+            <h3 class="sheet-title">{{ sheet_title }}</h3>
         </header>
         <main>
-            <p class="deadline">期限: 2021年05月05日</p>
+            <p class="deadline">期限: {{ sheet_deadline }}</p>
             <p class="all-task">All: {{ totalCardCount }} tasks</p>
             <div class="list-index">
                 <draggable :list="lists"
@@ -35,6 +35,20 @@ export default {
         draggable,
         ListAdd,
         List
+    },
+    props: {
+        sheet_id: {
+            type: Number
+        },
+        user_id: {
+            type: Number
+        },
+        sheet_title: {
+            type:String
+        },
+        sheet_deadline: {
+            type:String
+        }
     },
     computed: {
         totalCardCount() {

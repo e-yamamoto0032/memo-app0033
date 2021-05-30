@@ -22,9 +22,10 @@ const routes = [
     },
 
     {
-        path: '/board/task',
+        path: '/board/task/:sheet_id',
         name: 'task',
-        component: Task
+        component: Task,
+        props: true
     },
 
     {

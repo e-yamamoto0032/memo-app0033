@@ -2,9 +2,7 @@
     <div class="card mb-3" style="width: 21rem; height: 13rem;">
         <div class="card-body d-flex flex-row">
             <div>
-                <RouterLink style="cursor: hand; cursor:pointer; color: inherit;" to="/board/task">
-                    <h6 class="card-title">{{ title }}</h6>
-                </RouterLink>
+                <h6 class="card-title" @click="taskPage" style="cursor: hand; cursor:pointer;"> {{ title }}</h6>
                 <p class="card-text">{{ body }}</p>
                 <p class="card-text" v-if="deadline === 'Invalid date'">期日未設定</p>
                 <p class="card-text" v-else>期日　{{ deadline }}</p>
@@ -54,11 +52,14 @@
 import moment from "moment";
 import SheetUpdate from "./SheetUpdate";
 import DeleteSheet from "./DeleteSheet";
+import TaskBoard from "./tasks/TaskBoard";
+import router from "../router";
 
 export default {
     components: {
         DeleteSheet,
-        SheetUpdate
+        SheetUpdate,
+        TaskBoard
     },
 
     props: {
@@ -117,10 +118,16 @@ export default {
             }).then(() => {
                 location.reload()
             })
-            // .catch(()=>{
-            //エラーハンドリングは別のブランチで実装
-            // })
-
+        },
+        taskPage: function () {
+            router.push({
+                name: 'task', params: {
+                    sheet_id: this.id,
+                    user_id:this.user_id,
+                    sheet_title:this.title,
+                    sheet_deadline:this.deadline
+                }
+            })
         }
 
     },

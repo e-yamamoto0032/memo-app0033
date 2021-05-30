@@ -2406,6 +2406,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _SheetUpdate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SheetUpdate */ "./resources/js/components/SheetUpdate.vue");
 /* harmony import */ var _DeleteSheet__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./DeleteSheet */ "./resources/js/components/DeleteSheet.vue");
+/* harmony import */ var _tasks_TaskBoard__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./tasks/TaskBoard */ "./resources/js/components/tasks/TaskBoard.vue");
+/* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../router */ "./resources/js/router.js");
 //
 //
 //
@@ -2454,15 +2456,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
+
+
 
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
     DeleteSheet: _DeleteSheet__WEBPACK_IMPORTED_MODULE_2__.default,
-    SheetUpdate: _SheetUpdate__WEBPACK_IMPORTED_MODULE_1__.default
+    SheetUpdate: _SheetUpdate__WEBPACK_IMPORTED_MODULE_1__.default,
+    TaskBoard: _tasks_TaskBoard__WEBPACK_IMPORTED_MODULE_3__.default
   },
   props: {
     title: {
@@ -2518,9 +2521,18 @@ __webpack_require__.r(__webpack_exports__);
         end_date: moment__WEBPACK_IMPORTED_MODULE_0___default()().format("YYYY-MM-DD")
       }).then(function () {
         location.reload();
-      }); // .catch(()=>{
-      //エラーハンドリングは別のブランチで実装
-      // })
+      });
+    },
+    taskPage: function taskPage() {
+      _router__WEBPACK_IMPORTED_MODULE_4__.default.push({
+        name: 'task',
+        params: {
+          sheet_id: this.id,
+          user_id: this.user_id,
+          sheet_title: this.title,
+          sheet_deadline: this.deadline
+        }
+      });
     }
   },
   data: function data() {
@@ -3156,6 +3168,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     ListAdd: _ListAdd_vue__WEBPACK_IMPORTED_MODULE_1__.default,
     List: _List__WEBPACK_IMPORTED_MODULE_2__.default
   },
+  props: {
+    sheet_id: {
+      type: Number
+    },
+    user_id: {
+      type: Number
+    },
+    sheet_title: {
+      type: String
+    },
+    sheet_deadline: {
+      type: String
+    }
+  },
   computed: _objectSpread({
     totalCardCount: function totalCardCount() {
       return this.lists.length;
@@ -3303,9 +3329,10 @@ var routes = [{
   name: 'board',
   component: _components_Board_vue__WEBPACK_IMPORTED_MODULE_1__.default
 }, {
-  path: '/board/task',
+  path: '/board/task/:sheet_id',
   name: 'task',
-  component: _components_tasks_TaskBoard_vue__WEBPACK_IMPORTED_MODULE_4__.default
+  component: _components_tasks_TaskBoard_vue__WEBPACK_IMPORTED_MODULE_4__.default,
+  props: true
 }, {
   path: '/login',
   component: _components_Login_vue__WEBPACK_IMPORTED_MODULE_2__.default,
@@ -31783,54 +31810,47 @@ var render = function() {
     },
     [
       _c("div", { staticClass: "card-body d-flex flex-row" }, [
-        _c(
-          "div",
-          [
-            _c(
-              "RouterLink",
-              {
-                staticStyle: { cursor: "pointer", color: "inherit" },
-                attrs: { to: "/board/task" }
-              },
-              [
-                _c("h6", { staticClass: "card-title" }, [
-                  _vm._v(_vm._s(_vm.title))
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c("p", { staticClass: "card-text" }, [_vm._v(_vm._s(_vm.body))]),
-            _vm._v(" "),
-            _vm.deadline === "Invalid date"
-              ? _c("p", { staticClass: "card-text" }, [_vm._v("期日未設定")])
-              : _c("p", { staticClass: "card-text" }, [
-                  _vm._v("期日　" + _vm._s(_vm.deadline))
-                ]),
-            _vm._v(" "),
-            _vm.dateAlert === _vm.deadline
-              ? _c(
-                  "p",
-                  {
-                    staticClass: "card-text",
-                    staticStyle: { color: "blue", "font-weight": "bold" }
-                  },
-                  [_vm._v("本日まで！")]
-                )
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.dateAlert > _vm.deadline
-              ? _c(
-                  "p",
-                  {
-                    staticClass: "card-text",
-                    staticStyle: { color: "red", "font-weight": "bold" }
-                  },
-                  [_vm._v("期限切れ！")]
-                )
-              : _vm._e()
-          ],
-          1
-        ),
+        _c("div", [
+          _c(
+            "h6",
+            {
+              staticClass: "card-title",
+              staticStyle: { cursor: "pointer" },
+              on: { click: _vm.taskPage }
+            },
+            [_vm._v(" " + _vm._s(_vm.title))]
+          ),
+          _vm._v(" "),
+          _c("p", { staticClass: "card-text" }, [_vm._v(_vm._s(_vm.body))]),
+          _vm._v(" "),
+          _vm.deadline === "Invalid date"
+            ? _c("p", { staticClass: "card-text" }, [_vm._v("期日未設定")])
+            : _c("p", { staticClass: "card-text" }, [
+                _vm._v("期日　" + _vm._s(_vm.deadline))
+              ]),
+          _vm._v(" "),
+          _vm.dateAlert === _vm.deadline
+            ? _c(
+                "p",
+                {
+                  staticClass: "card-text",
+                  staticStyle: { color: "blue", "font-weight": "bold" }
+                },
+                [_vm._v("本日まで！")]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.dateAlert > _vm.deadline
+            ? _c(
+                "p",
+                {
+                  staticClass: "card-text",
+                  staticStyle: { color: "red", "font-weight": "bold" }
+                },
+                [_vm._v("期限切れ！")]
+              )
+            : _vm._e()
+        ]),
         _vm._v(" "),
         _c("div", { staticClass: "ml-auto card-text" }, [
           _c(
@@ -32649,10 +32669,16 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _vm._m(0),
+    _c("header", [
+      _c("h3", { staticClass: "sheet-title" }, [
+        _vm._v(_vm._s(_vm.sheet_title))
+      ])
+    ]),
     _vm._v(" "),
     _c("main", [
-      _c("p", { staticClass: "deadline" }, [_vm._v("期限: 2021年05月05日")]),
+      _c("p", { staticClass: "deadline" }, [
+        _vm._v("期限: " + _vm._s(_vm.sheet_deadline))
+      ]),
       _vm._v(" "),
       _c("p", { staticClass: "all-task" }, [
         _vm._v("All: " + _vm._s(_vm.totalCardCount) + " tasks")
@@ -32690,16 +32716,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("header", [
-      _c("h3", { staticClass: "sheet-title" }, [_vm._v("シートタイトル")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
