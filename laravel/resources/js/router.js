@@ -5,6 +5,7 @@ import Main from './components/Main.vue'
 import Board from './components/Board.vue'
 import Login from './components/Login.vue'
 import store from './store'
+import Task from './components/tasks/TaskBoard.vue'
 
 Vue.use(VueRouter)
 
@@ -18,6 +19,12 @@ const routes = [
         path: '/board',
         name: 'board',
         component: Board
+    },
+
+    {
+        path: '/board/task',
+        name: 'task',
+        component: Task
     },
 
     {
