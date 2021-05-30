@@ -2,7 +2,7 @@
   <div class="list">
     <div class="listheader">
       <p class="list-title">{{ title }}</p>
-      <p class="list-counter">total: {{ totalCardInList }}</p>
+      <p class="list-count">total: {{ totalCardInList }}</p>
       <div class="deletelist" @click="removeList">×</div>
     </div>
     <draggable group="cards"

@@ -1,7 +1,7 @@
 <template>
     <div>
         <header>
-            <h3>シートタイトル</h3>
+            <h3 class="sheet-title">シートタイトル</h3>
         </header>
         <main>
             <p class="deadline">期限: 2021年05月05日</p>
@@ -28,6 +28,7 @@
 import draggable from 'vuedraggable'
 import ListAdd from './ListAdd.vue'
 import List from './List'
+import {mapState} from 'vuex'
 
 export default {
     components: {
@@ -37,15 +38,20 @@ export default {
     },
     computed: {
         totalCardCount() {
-            return this.$store.getters.totalCardCount
+            return this.lists.length
         },
+        ...mapState(
+            {
+                lists: state => state.task.lists
+            }
+        )
     },
     methods: {
         movingCard: function () {
             this.$store.dispatch('updateList', {lists: this.lists})
         },
-        movingList: function() {
-            this.$store.dispatch('updateList', { lists: this.lists })
+        movingList: function () {
+            this.$store.dispatch('updateList', {lists: this.lists})
         }
     }
 

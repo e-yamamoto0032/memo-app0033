@@ -3113,6 +3113,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuedraggable__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vuedraggable__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _ListAdd_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ListAdd.vue */ "./resources/js/components/tasks/ListAdd.vue");
 /* harmony import */ var _List__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./List */ "./resources/js/components/tasks/List.vue");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -3139,6 +3146,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 
 
@@ -3148,11 +3156,15 @@ __webpack_require__.r(__webpack_exports__);
     ListAdd: _ListAdd_vue__WEBPACK_IMPORTED_MODULE_1__.default,
     List: _List__WEBPACK_IMPORTED_MODULE_2__.default
   },
-  computed: {
+  computed: _objectSpread({
     totalCardCount: function totalCardCount() {
-      return this.$store.getters.totalCardCount;
+      return this.lists.length;
     }
-  },
+  }, (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapState)({
+    lists: function lists(state) {
+      return state.task.lists;
+    }
+  })),
   methods: {
     movingCard: function movingCard() {
       this.$store.dispatch('updateList', {
@@ -3192,7 +3204,6 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
- // import '../css/app.css'
 
 
 
@@ -3464,19 +3475,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _auth__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./auth */ "./resources/js/store/auth.js");
 /* harmony import */ var _sheet__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./sheet */ "./resources/js/store/sheet.js");
+/* harmony import */ var _task__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./task */ "./resources/js/store/task.js");
 
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_2__.default.use(vuex__WEBPACK_IMPORTED_MODULE_3__.default);
-var store = new vuex__WEBPACK_IMPORTED_MODULE_3__.default.Store({
+
+vue__WEBPACK_IMPORTED_MODULE_3__.default.use(vuex__WEBPACK_IMPORTED_MODULE_4__.default);
+var store = new vuex__WEBPACK_IMPORTED_MODULE_4__.default.Store({
   modules: {
     auth: _auth__WEBPACK_IMPORTED_MODULE_0__.default,
-    sheet: _sheet__WEBPACK_IMPORTED_MODULE_1__.default
+    sheet: _sheet__WEBPACK_IMPORTED_MODULE_1__.default,
+    task: _task__WEBPACK_IMPORTED_MODULE_2__.default
   }
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (store);
@@ -3534,6 +3548,85 @@ var getters = {
     return state.sheets;
   }
 };
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  namespaced: true,
+  state: state,
+  getters: getters,
+  mutations: mutations,
+  actions: actions
+});
+
+/***/ }),
+
+/***/ "./resources/js/store/task.js":
+/*!************************************!*\
+  !*** ./resources/js/store/task.js ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+var state = {
+  lists: [{
+    title: 'Backlog',
+    cards: [{
+      body: 'English'
+    }, {
+      body: 'Mathematics'
+    }]
+  }, {
+    title: 'Todo',
+    cards: [{
+      body: 'Science'
+    }]
+  }, {
+    title: 'Doing',
+    cards: []
+  }]
+};
+var mutations = {
+  addlist: function addlist(state, payload) {
+    state.lists.push({
+      title: payload.title,
+      cards: []
+    });
+  },
+  removelist: function removelist(state, payload) {
+    state.lists.splice(payload.listIndex, 1);
+  },
+  addCardToList: function addCardToList(state, payload) {
+    state.lists[payload.listIndex].cards.push({
+      body: payload.body
+    });
+  },
+  removeCardFromList: function removeCardFromList(state, payload) {
+    state.lists[payload.listIndex].cards.splice(payload.cardIndex, 1);
+  },
+  updateList: function updateList(state, payload) {
+    state.lists = payload.lists;
+  }
+};
+var actions = {
+  addlist: function addlist(context, payload) {
+    context.commit('addlist', payload);
+  },
+  removelist: function removelist(context, payload) {
+    context.commit('removelist', payload);
+  },
+  addCardToList: function addCardToList(context, payload) {
+    context.commit('addCardToList', payload);
+  },
+  removeCardFromList: function removeCardFromList(context, payload) {
+    context.commit('removeCardFromList', payload);
+  },
+  updateList: function updateList(context, payload) {
+    context.commit('updateList', payload);
+  }
+};
+var getters = {};
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   namespaced: true,
   state: state,
@@ -3610,7 +3703,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "html {\n    font-family: 'Avenir', Helvetica, Arial, 'system-ui', sans-serif;\n    -webkit-font-smoothing: antialiased;\n    -moz-osx-font-smoothing: grayscale;\n    color: #2c3e50;\n    width: 100%;\n    height: 100%;\n    overflow-x: scroll;\n}\n\nmain {\n    padding: 0 10px;\n    width: calc(100% - 40px);\n    height: 100%;\n}\n\n.deadline {\n    margin: 0 0 20px 20px;\n    color: red;\n    font-weight: bold;\n\n}\n\n.all-task{\n    margin-left: 20px;\n}\n\n.list-index {\n    display: flex;\n}\n\n.addlist {\n    margin: 0 10px auto;\n    display: inline-block;\n    flex-direction: column;\n    align-items: flex-start;\n    min-width: 320px;\n    width: 320px;\n}\n\n.text-input {\n    padding: 20px 15px;\n    width: calc(100% - 30px);\n    background-color: #ccc;\n    border-radius: 8px;\n    cursor: pointer;\n    border: none;\n    font-family: \"Noto Sans Japanese\", \"Noto Sans\", 'system-ui', sans-serif;\n    font-weight: 700;\n    font-size: 24px;\n    color: #242424;\n    cursor: pointer;\n    overflow: overlay;\n}\n\n.text-input:focus {\n    outline: 0;\n    cursor: initial;\n}\n\n.add-button {\n    margin-top: 15px;\n    padding: 15px 18px;\n    background-color: #999;\n    border: none;\n    border-radius: 8px;\n    font-family: \"Noto Sans Japanese\", \"Noto Sans\", 'system-ui', sans-serif;\n    font-weight: 700;\n    font-size: 18px;\n    color: #fff;\n}\n\n.add-button:hover {\n    opacity: 0.8;\n    cursor: pointer;\n}\n\n.active .text-input {\n    background-color: #fff;\n}\n.addable .add-button {\n    background-color: #00d78f;\n    pointer-events: auto;\n    cursor: pointer;\n}\n\n.add-button:active {\n    background-color: #00d78f;\n}\n\n.list {\n    margin: 0 5px auto;\n    position: relative;\n    display: inline-block;\n    flex-direction: column;\n    align-items: flex-start;\n    min-width: 290px;\n    width: 290px;\n    background-color: #e0e0e0;\n    border-radius: 8px;\n    padding: 15px;\n    border: solid #ddd 1px;\n    color: gray;\n    vertical-align: top;\n}\n\n.listheader {\n    width: 290px;\n    display: inline-flex;\n    justify-content: space-between;\n}\n\n.list-title {\n    font-size: 20px;\n    font-weight: bold;\n    padding: 15px;\n}\n\n.list-counter {\n    color: rgb(0, 140, 255);\n    padding: 15px;\n}\n\n.deletelist {\n    position: absolute;\n    top: 6px;\n    right: 14px;\n    font-size: 28px;\n}\n\n.deletelist:hover {\n    opacity: 0.8;\n    cursor: pointer;\n}\n\n.task-card {\n    margin-top: 10px;\n    margin-bottom: 10px;\n    position: relative;\n    display: flex;\n    padding: 30px 15px 40px;\n    background-color: #fff;\n    border-radius: 8px;\n    width: 260px;\n    cursor: pointer;\n}\n\n.close-button {\n    position: absolute;\n    top: 6px;\n    right: 15px;\n    font-size: 22px;\n    cursor: pointer;\n    border-radius: 8px;\n    border-color: red;\n    border-style: solid;\n    background-color: red;\n    color: white;\n    margin: 5px;\n}\n\n.body {\n    font-size: 18px;\n    width: 100%;\n    word-wrap: break-word;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "html {\n    font-family: 'Avenir', Helvetica, Arial, 'system-ui', sans-serif;\n    -webkit-font-smoothing: antialiased;\n    -moz-osx-font-smoothing: grayscale;\n    color: #2c3e50;\n    width: 100%;\n    height: 100%;\n    overflow-x: scroll;\n}\n\nmain {\n    padding: 0 10px;\n    width: calc(100% - 40px);\n    height: 100%;\n}\n\n.sheet-title {\n    margin-left: 20px;\n}\n\n.deadline {\n    margin: 0 0 20px 20px;\n    color: red;\n    font-weight: bold;\n\n}\n\n.all-task{\n    margin-left: 20px;\n}\n\n.list-index {\n    display: flex;\n}\n\n.addlist {\n    margin: 0 10px auto;\n    display: inline-block;\n    flex-direction: column;\n    align-items: flex-start;\n    min-width: 320px;\n    width: 320px;\n}\n\n.text-input {\n    padding: 20px 15px;\n    width: calc(100% - 30px);\n    background-color: #ccc;\n    border-radius: 8px;\n    cursor: pointer;\n    border: none;\n    font-family: \"Noto Sans Japanese\", \"Noto Sans\", 'system-ui', sans-serif;\n    font-weight: 700;\n    font-size: 24px;\n    color: #242424;\n    cursor: pointer;\n    overflow: overlay;\n}\n\n.text-input:focus {\n    outline: 0;\n    cursor: initial;\n}\n\n.add-button {\n    margin-top: 15px;\n    padding: 15px 18px;\n    background-color: #999;\n    border: none;\n    border-radius: 8px;\n    font-family: \"Noto Sans Japanese\", \"Noto Sans\", 'system-ui', sans-serif;\n    font-weight: 700;\n    font-size: 18px;\n    color: #fff;\n}\n\n.add-button:hover {\n    opacity: 0.8;\n    cursor: pointer;\n}\n\n.active .text-input {\n    background-color: #fff;\n}\n.addable .add-button {\n    background-color: #00d78f;\n    pointer-events: auto;\n    cursor: pointer;\n}\n\n.add-button:active {\n    background-color: #00d78f;\n}\n\n.list {\n    margin: 0 5px auto;\n    position: relative;\n    display: inline-block;\n    flex-direction: column;\n    align-items: flex-start;\n    min-width: 290px;\n    width: 290px;\n    background-color: #e0e0e0;\n    border-radius: 8px;\n    padding: 15px;\n    border: solid #ddd 1px;\n    color: gray;\n    vertical-align: top;\n}\n\n.listheader {\n    width: 290px;\n    display: inline-flex;\n    justify-content: space-between;\n}\n\n.list-title {\n    font-size: 20px;\n    font-weight: bold;\n    padding: 15px;\n}\n\n.list-count {\n    color: rgb(0, 140, 255);\n    padding: 30px;\n}\n\n.deletelist {\n    position: absolute;\n    top: 6px;\n    right: 14px;\n    font-size: 28px;\n}\n\n.deletelist:hover {\n    opacity: 0.8;\n    cursor: pointer;\n}\n\n.task-card {\n    margin-top: 10px;\n    margin-bottom: 10px;\n    position: relative;\n    display: flex;\n    padding: 30px 15px 40px;\n    background-color: #fff;\n    border-radius: 8px;\n    width: 260px;\n    cursor: pointer;\n}\n\n.close-button {\n    position: absolute;\n    top: 6px;\n    right: 15px;\n    font-size: 22px;\n    cursor: pointer;\n    border-radius: 8px;\n    border-color: red;\n    border-style: solid;\n    background-color: red;\n    color: white;\n    margin: 5px;\n}\n\n.body {\n    font-size: 18px;\n    width: 100%;\n    word-wrap: break-word;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -32424,7 +32517,7 @@ var render = function() {
       _c("div", { staticClass: "listheader" }, [
         _c("p", { staticClass: "list-title" }, [_vm._v(_vm._s(_vm.title))]),
         _vm._v(" "),
-        _c("p", { staticClass: "list-counter" }, [
+        _c("p", { staticClass: "list-count" }, [
           _vm._v("total: " + _vm._s(_vm.totalCardInList))
         ]),
         _vm._v(" "),
@@ -32602,7 +32695,9 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("header", [_c("h3", [_vm._v("シートタイトル")])])
+    return _c("header", [
+      _c("h3", { staticClass: "sheet-title" }, [_vm._v("シートタイトル")])
+    ])
   }
 ]
 render._withStripped = true
