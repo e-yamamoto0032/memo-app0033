@@ -43,8 +43,6 @@ export default {
                     {
                         id: this.id
                     }
-            }).then(() => {
-                // location.reload()
             })
         }
     },

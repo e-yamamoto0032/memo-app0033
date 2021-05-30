@@ -2149,7 +2149,6 @@ __webpack_require__.r(__webpack_exports__);
         data: {
           id: this.id
         }
-      }).then(function () {// location.reload()
       });
     }
   },
@@ -2581,9 +2580,7 @@ __webpack_require__.r(__webpack_exports__);
         end_date: moment__WEBPACK_IMPORTED_MODULE_0___default()().format("YYYY-MM-DD")
       }).then(function () {
         location.reload();
-      }); // .catch(()=>{
-      //エラーハンドリングは別のブランチで実装
-      // })
+      });
     }
   },
   data: function data() {
@@ -2791,9 +2788,7 @@ __webpack_require__.r(__webpack_exports__);
         id: this.id
       }).then(function () {
         location.reload();
-      }); // .catch(()=>{
-      //エラーハンドリングは別のブランチで実装
-      // })
+      });
     }
   },
   data: function data() {

@@ -114,10 +114,6 @@ export default {
             }).then(() => {
                 location.reload()
             })
-            // .catch(()=>{
-            //エラーハンドリングは別のブランチで実装
-            // })
-
         }
 
     },
