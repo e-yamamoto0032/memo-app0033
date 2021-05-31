@@ -4,13 +4,13 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">シートの削除</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">シートの削除 (id:{{ delete_id }})</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span @click="$emit('close')">×</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    本当にこのシートを削除しますか？{{ id }}
+                    本当にこのシートを削除しますか？ (id:{{ id }})
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" @click="deleteSheet">削除</button>

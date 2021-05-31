@@ -16,7 +16,7 @@
                             </ul>
                         </div>
                         <div class="form-group row">
-                            <label for="title" class="col-sm-4 col-form-label">シート名{{ update_id }}</label>
+                            <label for="title" class="col-sm-4 col-form-label">シート名 (id:{{ update_id }})</label>
                             <div class="col-sm-8">
                                 <input v-model="title" type="text" class="form-control" id="title"
                                        placeholder="シート名を入力">

@@ -2,7 +2,7 @@
     <div class="card mb-3" style="width: 21rem; height: 13rem;">
         <div class="card-body d-flex flex-row">
             <div>
-                <h6 class="card-title">{{ title }}</h6>
+                <h6 class="card-title">{{ title }} (id:{{ id }})</h6>
                 <p class="card-text">{{ body }}</p>
                 <p class="card-text" v-if="deadline === 'Invalid date'">期日未設定</p>
                 <p class="card-text" v-else>期日　{{ deadline }}</p>

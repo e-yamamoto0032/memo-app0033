@@ -27170,7 +27170,7 @@ var render = function() {
                 staticClass: "modal-title",
                 attrs: { id: "exampleModalLabel" }
               },
-              [_vm._v("シートの削除")]
+              [_vm._v("シートの削除 (id:" + _vm._s(_vm.delete_id) + ")")]
             ),
             _vm._v(" "),
             _c(
@@ -27201,9 +27201,9 @@ var render = function() {
           _vm._v(" "),
           _c("div", { staticClass: "modal-body" }, [
             _vm._v(
-              "\n                本当にこのシートを削除しますか？" +
+              "\n                本当にこのシートを削除しますか？ (id:" +
                 _vm._s(_vm.id) +
-                "\n            "
+                ")\n            "
             )
           ]),
           _vm._v(" "),
@@ -27723,7 +27723,9 @@ var render = function() {
     [
       _c("div", { staticClass: "card-body d-flex flex-row" }, [
         _c("div", [
-          _c("h6", { staticClass: "card-title" }, [_vm._v(_vm._s(_vm.title))]),
+          _c("h6", { staticClass: "card-title" }, [
+            _vm._v(_vm._s(_vm.title) + " (id:" + _vm._s(_vm.id) + ")")
+          ]),
           _vm._v(" "),
           _c("p", { staticClass: "card-text" }, [_vm._v(_vm._s(_vm.body))]),
           _vm._v(" "),
@@ -28113,7 +28115,9 @@ var render = function() {
     [
       _c("div", { staticClass: "card-body d-flex flex-row" }, [
         _c("div", [
-          _c("h6", { staticClass: "card-title" }, [_vm._v(_vm._s(_vm.title))]),
+          _c("h6", { staticClass: "card-title" }, [
+            _vm._v(_vm._s(_vm.title) + " (id:" + _vm._s(_vm.id) + ")")
+          ]),
           _vm._v(" "),
           _c("p", { staticClass: "card-text" }, [_vm._v(_vm._s(_vm.body))]),
           _vm._v(" "),
@@ -28221,7 +28225,7 @@ var render = function() {
                     staticClass: "col-sm-4 col-form-label",
                     attrs: { for: "title" }
                   },
-                  [_vm._v("シート名" + _vm._s(_vm.update_id))]
+                  [_vm._v("シート名 (id:" + _vm._s(_vm.update_id) + ")")]
                 ),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-sm-8" }, [
