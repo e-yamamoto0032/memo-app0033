@@ -127,6 +127,8 @@ export default {
                     sheet_title:this.title,
                     sheet_deadline:this.deadline
                 }
+            }).then(() => {
+                this.$store.dispatch('sheet/resetSheet')
             })
         }
 

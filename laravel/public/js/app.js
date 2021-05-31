@@ -2524,6 +2524,8 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     taskPage: function taskPage() {
+      var _this = this;
+
       _router__WEBPACK_IMPORTED_MODULE_4__.default.push({
         name: 'task',
         params: {
@@ -2532,6 +2534,8 @@ __webpack_require__.r(__webpack_exports__);
           sheet_title: this.title,
           sheet_deadline: this.deadline
         }
+      }).then(function () {
+        _this.$store.dispatch('sheet/resetSheet');
       });
     }
   },
