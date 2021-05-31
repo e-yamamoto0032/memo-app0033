@@ -35,6 +35,7 @@
                     />
                     <delete-sheet @close="closeDeleteModal" v-show="deleteContent"
                                   :delete_id="id"
+                                  :delete_title="title"
                                   :user_id="user_id"
                     />
                 </div>
