@@ -17,12 +17,8 @@
         <div class="row justify-content-center" v-show="tab === 1">
             <form class="col-sm-5 form-group mt-3 " @submit.prevent="login">
                 <div v-if="loginErrors" class="errors">
-                    <ul v-if="loginErrors.email">
-                        <li v-for="msg in loginErrors.email" :key="msg">{{ msg }}</li>
-                    </ul>
-                    <ul v-if="loginErrors.password">
-                        <li v-for="msg in loginErrors.password" :key="msg">{{ msg }}</li>
-                    </ul>
+                    <div v-if="loginErrors.email">メールアドレスが正しく入力されていません</div>
+                    <div v-if="loginErrors.password">パスワードが正しく入力されていません</div>
                 </div>
                 <label for="login-email">Email</label>
                 <input type="text" class="form-control" id="login-email" v-model="loginForm.email">
@@ -36,15 +32,9 @@
         <div class="row justify-content-center" v-show="tab === 2">
             <form class="col-sm-5 form-group mt-3" @submit.prevent="register">
                 <div v-if="registerErrors" class="errors">
-                    <ul v-if="registerErrors.name">
-                        <li v-for="msg in registerErrors.name" :key="msg">{{ msg }}</li>
-                    </ul>
-                    <ul v-if="registerErrors.email">
-                        <li v-for="msg in registerErrors.email" :key="msg">{{ msg }}</li>
-                    </ul>
-                    <ul v-if="registerErrors.password">
-                        <li v-for="msg in registerErrors.password" :key="msg">{{ msg }}</li>
-                    </ul>
+                    <div v-if="registerErrors.name">お名前が正しく入力されていませ</div>
+                    <div v-if="registerErrors.email">メールアドレスが正しく入力されていません</div>
+                    <div v-if="registerErrors.password">パスワードが正しく入力されていません</div>
                 </div>
                 <label for="username">Name</label>
                 <input type="text" class="form-control" id="username" v-model="registerForm.name">
@@ -118,8 +108,7 @@ export default {
         },
         registerErrors() {
             return this.$store.state.auth.registerErrorMessages
-        }
-
+        },
     }
 }
 </script>

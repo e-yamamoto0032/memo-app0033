@@ -8,12 +8,8 @@
                     </div>
                     <form class="" @submit.prevent="addSheet">
                         <div v-if="addSheetErrors" class="errors">
-                            <ul v-if="addSheetErrors.title">
-                                <li v-for="msg in addSheetErrors.title" :key="msg">{{ msg }}</li>
-                            </ul>
-                            <ul v-if="addSheetErrors.body">
-                                <li v-for="msg in addSheetErrors.body" :key="msg">{{ msg }}</li>
-                            </ul>
+                            <div v-if="addSheetErrors.title">シート名が正しく入力されていません。</div>
+                            <div v-if="addSheetErrors.body">内容が正しく入力されていません。</div>
                         </div>
                         <div class="form-group row">
                             <label for="title" class="col-sm-4 col-form-label">シート名</label>
