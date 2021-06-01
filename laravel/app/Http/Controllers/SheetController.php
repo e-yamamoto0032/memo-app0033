@@ -49,8 +49,14 @@ class SheetController extends Controller
         $sheet->fill($request->all())->save();
     }
 
-    public function show($id) {
+    public function show($id)
+    {
         $sheet = Sheet::find($id);
+
+
+        if ($sheet->user_id !== Auth::id()) {
+            abort(403);
+        }
         return $this->jsonResponse($sheet);
     }
 
