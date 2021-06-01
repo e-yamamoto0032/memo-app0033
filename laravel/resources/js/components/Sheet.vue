@@ -123,9 +123,6 @@ export default {
             router.push({
                 name: 'task', params: {
                     sheet_id: this.id,
-                    user_id:this.user_id,
-                    sheet_title:this.title,
-                    sheet_deadline:this.deadline
                 }
             }).then(() => {
                 this.$store.dispatch('sheet/resetSheet')

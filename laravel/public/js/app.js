@@ -2385,6 +2385,39 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee2);
       }))();
+    },
+    toHome: function toHome() {
+      var _this3 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                if (!(location.pathname === '/')) {
+                  _context3.next = 4;
+                  break;
+                }
+
+                location.reload();
+                _context3.next = 8;
+                break;
+
+              case 4:
+                _context3.next = 6;
+                return _this3.$store.dispatch('sheet/resetSheet');
+
+              case 6:
+                _context3.next = 8;
+                return _this3.$router.push('/');
+
+              case 8:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }))();
     }
   }
 });
@@ -2529,10 +2562,7 @@ __webpack_require__.r(__webpack_exports__);
       _router__WEBPACK_IMPORTED_MODULE_4__.default.push({
         name: 'task',
         params: {
-          sheet_id: this.id,
-          user_id: this.user_id,
-          sheet_title: this.title,
-          sheet_deadline: this.deadline
+          sheet_id: this.id
         }
       }).then(function () {
         _this.$store.dispatch('sheet/resetSheet');
@@ -3172,29 +3202,28 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     ListAdd: _ListAdd_vue__WEBPACK_IMPORTED_MODULE_1__.default,
     List: _List__WEBPACK_IMPORTED_MODULE_2__.default
   },
-  props: {
-    sheet_id: {
-      type: Number
+  computed: _objectSpread(_objectSpread({
+    userid: function userid() {
+      return this.$store.getters['auth/userid'];
     },
-    user_id: {
-      type: Number
-    },
-    sheet_title: {
-      type: String
-    },
-    sheet_deadline: {
-      type: String
-    }
-  },
-  computed: _objectSpread({
     totalCardCount: function totalCardCount() {
       return this.lists.length;
+    },
+    sheet_id: function sheet_id() {
+      return this.$route.params.sheet_id;
     }
   }, (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapState)({
     lists: function lists(state) {
       return state.task.lists;
     }
-  })),
+  })), {}, {
+    sheet_title: function sheet_title() {
+      return this.$store.getters['sheet/taskSheet'].title;
+    },
+    sheet_deadline: function sheet_deadline() {
+      return this.$store.getters['sheet/taskSheet'].deadline;
+    }
+  }),
   methods: {
     movingCard: function movingCard() {
       this.$store.dispatch('updateList', {
@@ -3205,7 +3234,22 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.$store.dispatch('updateList', {
         lists: this.lists
       });
+    },
+    request: function request() {
+      var self = this;
+      axios.get('/api/sheets/' + this.sheet_id).then(function (response) {
+        self.res = response.data;
+        self.$store.dispatch('sheet/taskSheet', {
+          id: self.res.id,
+          title: self.res.title,
+          deadline: self.res.deadline,
+          user_id: self.res.user_id
+        });
+      });
     }
+  },
+  created: function created() {
+    this.request();
   }
 });
 
@@ -3545,7 +3589,8 @@ __webpack_require__.r(__webpack_exports__);
 
 function getDefaultState() {
   return {
-    sheets: []
+    sheets: [],
+    sheet: {}
   };
 }
 
@@ -3564,6 +3609,14 @@ var mutations = {
   },
   clearAuthData: function clearAuthData(state) {
     Object.assign(state, getDefaultState());
+  },
+  setTask: function setTask(state, payload) {
+    state.sheet = {
+      id: payload.id,
+      title: payload.title,
+      deadline: moment__WEBPACK_IMPORTED_MODULE_0___default()(payload.deadline).format("YYYY年MM月DD日"),
+      user_id: payload.user_id
+    };
   }
 };
 var actions = {
@@ -3572,11 +3625,17 @@ var actions = {
   },
   resetSheet: function resetSheet(context) {
     context.commit('clearAuthData');
+  },
+  taskSheet: function taskSheet(context, payload) {
+    context.commit('setTask', payload);
   }
 };
 var getters = {
   getSheet: function getSheet(state) {
     return state.sheets;
+  },
+  taskSheet: function taskSheet(state) {
+    return state.sheet;
   }
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -3600,6 +3659,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+// TODO: 仮の値、動的に出力部分
 var state = {
   lists: [{
     title: 'Backlog',
@@ -31748,10 +31808,18 @@ var render = function() {
     "nav",
     { staticClass: "navbar navbar-dark bg-dark text-white mt-3 mb-3" },
     [
-      _c("RouterLink", { staticClass: "navbar__brand", attrs: { to: "/" } }, [
-        _c("i", { staticClass: "fas fa-sticky-note fa-lg" }),
-        _vm._v("\n        MemoApp\n    ")
-      ]),
+      _c(
+        "div",
+        {
+          staticClass: "navbar__brand",
+          staticStyle: { cursor: "pointer" },
+          on: { click: _vm.toHome }
+        },
+        [
+          _c("i", { staticClass: "fas fa-sticky-note fa-lg" }),
+          _vm._v("\n        MemoApp\n    ")
+        ]
+      ),
       _vm._v(" "),
       _c("div", { staticClass: "navbar__menu" }, [
         _vm.isLogin
@@ -31779,8 +31847,7 @@ var render = function() {
             ])
           : _vm._e()
       ])
-    ],
-    1
+    ]
   )
 }
 var staticRenderFns = []

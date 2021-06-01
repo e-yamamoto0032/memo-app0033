@@ -40,7 +40,6 @@ class SheetController extends Controller
         $sheet->fill($request->all())->save();
     }
 
-
     public function store(SheetRequest $request)
     {
         if (!$request->user_id === Auth::id()) {
@@ -48,6 +47,11 @@ class SheetController extends Controller
         }
         $sheet = new Sheet();
         $sheet->fill($request->all())->save();
+    }
+
+    public function show($id) {
+        $sheet = Sheet::find($id);
+        return $this->jsonResponse($sheet);
     }
 
     public function destroy(Request $request, Sheet $sheet)

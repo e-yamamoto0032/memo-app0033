@@ -36,29 +36,28 @@ export default {
         ListAdd,
         List
     },
-    props: {
-        sheet_id: {
-            type: Number
-        },
-        user_id: {
-            type: Number
-        },
-        sheet_title: {
-            type:String
-        },
-        sheet_deadline: {
-            type:String
-        }
-    },
+
     computed: {
+        userid() {
+            return this.$store.getters['auth/userid']
+        },
         totalCardCount() {
             return this.lists.length
+        },
+        sheet_id: function () {
+            return this.$route.params.sheet_id;
         },
         ...mapState(
             {
                 lists: state => state.task.lists
             }
-        )
+        ),
+        sheet_title() {
+            return this.$store.getters['sheet/taskSheet'].title
+        },
+        sheet_deadline() {
+            return this.$store.getters['sheet/taskSheet'].deadline
+        },
     },
     methods: {
         movingCard: function () {
@@ -66,9 +65,25 @@ export default {
         },
         movingList: function () {
             this.$store.dispatch('updateList', {lists: this.lists})
-        }
-    }
+        },
+        request: function () {
+            var self = this;
+            axios.get('/api/sheets/' + this.sheet_id).then(function (response) {
+                self.res = response.data;
+                self.$store.dispatch('sheet/taskSheet', {
+                    id: self.res.id,
+                    title: self.res.title,
+                    deadline: self.res.deadline,
+                    user_id: self.res.user_id
+                })
 
+            })
+        }
+    },
+    created() {
+        this.request()
+
+    }
 }
 
 

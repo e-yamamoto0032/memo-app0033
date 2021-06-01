@@ -1,9 +1,9 @@
 <template>
     <nav class="navbar navbar-dark bg-dark text-white mt-3 mb-3">
-        <RouterLink class="navbar__brand" to="/">
+        <div class="navbar__brand" @click="toHome" style="cursor: hand; cursor:pointer;">
             <i class="fas fa-sticky-note fa-lg"></i>
             MemoApp
-        </RouterLink>
+        </div>
         <div class="navbar__menu">
             <span v-if="isLogin" class="navbar__item" @click="myBoard" style="cursor: hand; cursor:pointer;">
                 {{ username }}
@@ -18,27 +18,35 @@
 <script>
 export default {
     computed: {
-        isLogin () {
+        isLogin() {
             return this.$store.getters['auth/check']
         },
-        username () {
+        username() {
             return this.$store.getters['auth/username']
         },
 
 
     },
     methods: {
-        async logout () {
+        async logout() {
             await this.$store.dispatch('auth/logout')
             await this.$store.dispatch('sheet/resetSheet')
             await this.$router.push('/')
         },
-        async myBoard () {
-            if(location.pathname === '/board'){
+        async myBoard() {
+            if (location.pathname === '/board') {
                 location.reload()
-            }else{
+            } else {
                 await this.$store.dispatch('sheet/resetSheet')
-                await this.$router.push({ name: 'board'})
+                await this.$router.push({name: 'board'})
+            }
+        },
+        async toHome() {
+            if (location.pathname === '/') {
+                location.reload()
+            } else {
+                await this.$store.dispatch('sheet/resetSheet')
+                await this.$router.push('/')
             }
         }
     }
