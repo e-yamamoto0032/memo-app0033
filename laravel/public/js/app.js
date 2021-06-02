@@ -2847,9 +2847,7 @@ __webpack_require__.r(__webpack_exports__);
         id: this.update_id
       }).then(function () {
         location.reload();
-      }); // .catch(()=>{
-      //エラーハンドリングは別のブランチで実装
-      // })
+      });
     }
   },
   computed: {

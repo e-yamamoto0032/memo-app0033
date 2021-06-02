@@ -76,7 +76,6 @@ export default {
                     deadline: self.res.deadline,
                     user_id: self.res.user_id
                 })
-
             })
         }
     },

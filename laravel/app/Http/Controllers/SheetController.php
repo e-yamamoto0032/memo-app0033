@@ -42,7 +42,7 @@ class SheetController extends Controller
 
     public function store(SheetRequest $request)
     {
-        if (!$request->user_id === Auth::id()) {
+        if ($request->user_id !== Auth::id()) {
             abort(403);
         }
         $sheet = new Sheet();
@@ -52,7 +52,6 @@ class SheetController extends Controller
     public function show($id)
     {
         $sheet = Sheet::find($id);
-
 
         if ($sheet->user_id !== Auth::id()) {
             abort(403);
