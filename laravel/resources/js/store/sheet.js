@@ -6,8 +6,7 @@ function getDefaultState() {
         sheets: [],
         sheet: {},
         apiStatus: null,
-        sheetErrorMessages: null
-
+        sheetErrorMessages: null,
     }
 }
 
@@ -37,7 +36,8 @@ const mutations = {
     setTask(state, payload) {
         state.sheet = {
             id: payload.id,
-            title: payload.title, deadline: moment(payload.deadline).format("YYYY年MM月DD日"),
+            title: payload.title,
+            deadline: moment(payload.deadline).format("YYYY年MM月DD日"),
             user_id: payload.user_id
         }
     },
