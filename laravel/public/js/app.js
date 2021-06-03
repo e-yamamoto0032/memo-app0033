@@ -2234,6 +2234,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -2650,6 +2657,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -2807,6 +2818,10 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
+//
+//
+//
 //
 //
 //
@@ -27307,15 +27322,23 @@ var render = function() {
             _vm.loginErrors
               ? _c("div", { staticClass: "errors" }, [
                   _vm.loginErrors.email
-                    ? _c("div", [
-                        _vm._v("メールアドレスが正しく入力されていません")
-                      ])
+                    ? _c(
+                        "ul",
+                        _vm._l(_vm.loginErrors.email, function(msg) {
+                          return _c("li", { key: msg }, [_vm._v(_vm._s(msg))])
+                        }),
+                        0
+                      )
                     : _vm._e(),
                   _vm._v(" "),
                   _vm.loginErrors.password
-                    ? _c("div", [
-                        _vm._v("パスワードが正しく入力されていません")
-                      ])
+                    ? _c(
+                        "ul",
+                        _vm._l(_vm.loginErrors.password, function(msg) {
+                          return _c("li", { key: msg }, [_vm._v(_vm._s(msg))])
+                        }),
+                        0
+                      )
                     : _vm._e()
                 ])
               : _vm._e(),
@@ -27404,20 +27427,24 @@ var render = function() {
           [
             _vm.registerErrors
               ? _c("div", { staticClass: "errors" }, [
-                  _vm.registerErrors.name
-                    ? _c("div", [_vm._v("お名前が正しく入力されていませ")])
-                    : _vm._e(),
-                  _vm._v(" "),
                   _vm.registerErrors.email
-                    ? _c("div", [
-                        _vm._v("メールアドレスが正しく入力されていません")
-                      ])
+                    ? _c(
+                        "ul",
+                        _vm._l(_vm.registerErrors.email, function(msg) {
+                          return _c("li", { key: msg }, [_vm._v(_vm._s(msg))])
+                        }),
+                        0
+                      )
                     : _vm._e(),
                   _vm._v(" "),
                   _vm.registerErrors.password
-                    ? _c("div", [
-                        _vm._v("パスワードが正しく入力されていません")
-                      ])
+                    ? _c(
+                        "ul",
+                        _vm._l(_vm.registerErrors.password, function(msg) {
+                          return _c("li", { key: msg }, [_vm._v(_vm._s(msg))])
+                        }),
+                        0
+                      )
                     : _vm._e()
                 ])
               : _vm._e(),
@@ -27907,14 +27934,22 @@ var render = function() {
               _vm.addSheetErrors
                 ? _c("div", { staticClass: "errors" }, [
                     _vm.addSheetErrors.title
-                      ? _c("div", [
-                          _vm._v("シート名が正しく入力されていません。")
-                        ])
+                      ? _c(
+                          "ul",
+                          _vm._l(_vm.addSheetErrors.title, function(msg) {
+                            return _c("li", { key: msg }, [_vm._v(_vm._s(msg))])
+                          }),
+                          0
+                        )
                       : _vm._e(),
                     _vm._v(" "),
-                    _vm.addSheetErrors.body
-                      ? _c("div", [_vm._v("内容が正しく入力されていません。")])
-                      : _vm._e()
+                    _c(
+                      "ul",
+                      _vm._l(_vm.addSheetErrors.body, function(msg) {
+                        return _c("li", { key: msg }, [_vm._v(_vm._s(msg))])
+                      }),
+                      0
+                    )
                   ])
                 : _vm._e(),
               _vm._v(" "),
@@ -28170,14 +28205,22 @@ var render = function() {
               _vm.updateSheetErrors
                 ? _c("div", { staticClass: "errors" }, [
                     _vm.updateSheetErrors.title
-                      ? _c("div", [
-                          _vm._v("シート名が正しく入力されていません。")
-                        ])
+                      ? _c(
+                          "ul",
+                          _vm._l(_vm.updateSheetErrors.title, function(msg) {
+                            return _c("li", { key: msg }, [_vm._v(_vm._s(msg))])
+                          }),
+                          0
+                        )
                       : _vm._e(),
                     _vm._v(" "),
-                    _vm.updateSheetErrors.body
-                      ? _c("div", [_vm._v("内容が正しく入力されていません。")])
-                      : _vm._e()
+                    _c(
+                      "ul",
+                      _vm._l(_vm.updateSheetErrors.body, function(msg) {
+                        return _c("li", { key: msg }, [_vm._v(_vm._s(msg))])
+                      }),
+                      0
+                    )
                   ])
                 : _vm._e(),
               _vm._v(" "),
