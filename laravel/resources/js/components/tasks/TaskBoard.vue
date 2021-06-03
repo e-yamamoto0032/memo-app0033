@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-cloak>
         <header>
             <h3 class="sheet-title">{{ sheet_title }}</h3>
         </header>
@@ -66,9 +66,12 @@ export default {
         movingList: function () {
             this.$store.dispatch('updateList', {lists: this.lists})
         },
-        request: function () {
+        request: async function () {
             var self = this;
-            axios.get('/api/sheets/' + this.sheet_id).then(function (response) {
+            await axios.get('/api/sheets/' + this.sheet_id).then(function (response) {
+                if (response.status === 401 || response.status === 403) {
+                    location.href = '/';
+                }
                 self.res = response.data;
                 self.$store.dispatch('sheet/taskSheet', {
                     id: self.res.id,
@@ -87,3 +90,9 @@ export default {
 
 
 </script>
+
+<style>
+[v-cloak] {
+    display: none;
+}
+</style>
