@@ -6,7 +6,7 @@
                     <div class="d-flex justify-content-end">
                         <button class="btn btn-link btn-sm" @click="$emit('close')">閉じる</button>
                     </div>
-                    <h5 class="card-title">シート名：{{ delete_title }}(id:{{ delete_id }})</h5>
+                    <h5 class="card-title">シート名：{{ delete_title }}</h5>
                     <p class="card-text">このシートを削除してもよろしいですか？</p>
                     <div class="d-flex justify-content-center">
                         <div>
