@@ -1,11 +1,13 @@
 import moment from "moment";
-import { OK, UNPROCESSABLE_ENTITY } from '../util'
+import {OK, UNPROCESSABLE_ENTITY} from '../util'
 
 function getDefaultState() {
     return {
         sheets: [],
+        sheet: {},
         apiStatus: null,
         sheetErrorMessages: null
+
     }
 }
 
@@ -26,11 +28,18 @@ const mutations = {
     clearAuthData(state) {
         Object.assign(state, getDefaultState())
     },
-    setApiStatus (state, status) {
+    setApiStatus(state, status) {
         state.apiStatus = status
     },
-    setSheetErrorMessages (state, messages) {
+    setSheetErrorMessages(state, messages) {
         state.sheetErrorMessages = messages
+    },
+    setTask(state, payload) {
+        state.sheet = {
+            id: payload.id,
+            title: payload.title, deadline: moment(payload.deadline).format("YYYY年MM月DD日"),
+            user_id: payload.user_id
+        }
     },
 }
 
@@ -46,7 +55,7 @@ const actions = {
         const response = await axios.post('/api/sheets', payload)
             .catch(err => err.response || err)
 
-        if(response.status === OK) {
+        if (response.status === OK) {
             context.commit('setApiStatus', true)
             return false
         }
@@ -54,7 +63,7 @@ const actions = {
         if (response.status === UNPROCESSABLE_ENTITY) {
             context.commit('setSheetErrorMessages', response.data.errors)
         } else {
-            context.commit('error/setCode', response.status, { root: true })
+            context.commit('error/setCode', response.status, {root: true})
         }
     },
     async updateSheet(context, payload) {
@@ -62,7 +71,7 @@ const actions = {
         const response = await axios.patch('/api/sheets/' + payload.id, payload)
             .catch(err => err.response || err)
 
-        if(response.status === OK) {
+        if (response.status === OK) {
             context.commit('setApiStatus', true)
             return false
         }
@@ -70,13 +79,17 @@ const actions = {
         if (response.status === UNPROCESSABLE_ENTITY) {
             context.commit('setSheetErrorMessages', response.data.errors)
         } else {
-            context.commit('error/setCode', response.status, { root: true })
+            context.commit('error/setCode', response.status, {root: true})
         }
     },
+    taskSheet(context, payload) {
+        context.commit('setTask', payload)
+    }
 }
 
 const getters = {
-    getSheet: state => state.sheets
+    getSheet: state => state.sheets,
+    taskSheet: state => state.sheet
 }
 
 

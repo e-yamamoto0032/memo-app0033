@@ -2,7 +2,7 @@
     <div class="card mb-3" style="width: 21rem; height: 13rem;">
         <div class="card-body d-flex flex-row">
             <div>
-                <h6 class="card-title">{{ title }} (id:{{ id }})</h6>
+                <h6 class="card-title" @click="taskPage" style="cursor: hand; cursor:pointer;"> {{ title }}</h6>
                 <p class="card-text">{{ body }}</p>
                 <p class="card-text" v-if="deadline === 'Invalid date'">期日未設定</p>
                 <p class="card-text" v-else>期日　{{ deadline }}</p>
@@ -53,11 +53,14 @@
 import moment from "moment";
 import SheetUpdate from "./SheetUpdate";
 import DeleteSheet from "./DeleteSheet";
+import TaskBoard from "./tasks/TaskBoard";
+import router from "../router";
 
 export default {
     components: {
         DeleteSheet,
-        SheetUpdate
+        SheetUpdate,
+        TaskBoard
     },
 
     props: {
@@ -115,6 +118,15 @@ export default {
                 end_date: moment().format("YYYY-MM-DD")
             }).then(() => {
                 location.reload()
+            })
+        },
+        taskPage: function () {
+            router.push({
+                name: 'task', params: {
+                    sheet_id: this.id,
+                }
+            }).then(() => {
+                this.$store.dispatch('sheet/resetSheet')
             })
         }
     },
