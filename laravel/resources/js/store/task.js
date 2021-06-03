@@ -1,5 +1,7 @@
+// TODO: 仮の値、動的に出力部分
 const state = {
     lists:[
+
         {
             title: 'Backlog',
             cards: [
