@@ -2,7 +2,8 @@ import moment from "moment";
 
 function getDefaultState() {
     return {
-        sheets: []
+        sheets: [],
+        sheet: {}
 
     }
 }
@@ -23,8 +24,15 @@ const mutations = {
     },
     clearAuthData(state) {
         Object.assign(state, getDefaultState())
-    }
-
+    },
+    setTask(state, payload) {
+        state.sheet = {
+            id: payload.id,
+            title: payload.title,
+            deadline: moment(payload.deadline).format("YYYY年MM月DD日"),
+            user_id: payload.user_id
+        }
+    },
 }
 
 const actions = {
@@ -33,11 +41,15 @@ const actions = {
     },
     resetSheet(context) {
         context.commit('clearAuthData')
-    }
+    },
+    taskSheet(context, payload) {
+        context.commit('setTask', payload)
+    },
 }
 
 const getters = {
-    getSheet: state => state.sheets
+    getSheet: state => state.sheets,
+    taskSheet: state => state.sheet
 }
 
 
