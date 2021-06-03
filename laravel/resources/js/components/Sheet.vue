@@ -100,6 +100,7 @@ export default {
         },
         closeModal() {
             this.showContent = false
+            this.$store.commit('sheet/setSheetErrorMessages', null)
         },
         deleteModal() {
             this.deleteContent = true
@@ -116,7 +117,6 @@ export default {
                 location.reload()
             })
         }
-
     },
     data() {
         return {

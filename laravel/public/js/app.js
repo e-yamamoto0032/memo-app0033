@@ -2073,6 +2073,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     closeModal: function closeModal() {
       this.showContent = false;
+      this.$store.commit('sheet/setSheetErrorMessages', null);
     }
   },
   created: function created() {
@@ -2563,6 +2564,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     closeModal: function closeModal() {
       this.showContent = false;
+      this.$store.commit('sheet/setSheetErrorMessages', null);
     },
     deleteModal: function deleteModal() {
       this.deleteContent = true;

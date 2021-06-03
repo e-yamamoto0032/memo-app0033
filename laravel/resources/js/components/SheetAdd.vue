@@ -70,7 +70,7 @@ export default {
             if (this.apiStatus) {
                 location.reload()
             }
-        },
+        }
     },
     computed: {
         userid() {

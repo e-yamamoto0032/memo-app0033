@@ -146,6 +146,7 @@ export default {
         },
         closeModal() {
             this.showContent = false
+            this.$store.commit('sheet/setSheetErrorMessages', null)
         },
 
     },

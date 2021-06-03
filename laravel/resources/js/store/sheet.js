@@ -31,8 +31,7 @@ const mutations = {
     },
     setSheetErrorMessages (state, messages) {
         state.sheetErrorMessages = messages
-    }
-
+    },
 }
 
 const actions = {
