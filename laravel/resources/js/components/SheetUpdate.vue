@@ -6,7 +6,15 @@
                     <div class="d-flex justify-content-end">
                         <button class="btn btn-link btn-sm" @click="$emit('close')">閉じる</button>
                     </div>
-                    <form class="" @submit.prevent="updateSheet">
+                    <form @submit.prevent="updateSheet">
+                        <div v-if="updateSheetErrors" class="errors">
+                            <ul v-if="updateSheetErrors.title">
+                                <li v-for="msg in updateSheetErrors.title" :key="msg">{{ msg }}</li>
+                            </ul>
+                            <ul>
+                                <li v-for="msg in updateSheetErrors.body" :key="msg">{{ msg }}</li>
+                            </ul>
+                        </div>
                         <div class="form-group row">
                             <label for="title" class="col-sm-4 col-form-label">シート名</label>
                             <div class="col-sm-8">
@@ -31,7 +39,7 @@
                         </div>
                         <div class="d-flex justify-content-center">
                             <div>
-                                <button type="submit" class="btn btn-warning" @click="$emit('close')">シートを変更</button>
+                                <button type="submit" class="btn btn-warning" >シートを変更</button>
                             </div>
                         </div>
                     </form>
@@ -59,11 +67,9 @@ export default {
         },
         update_id: {
             type: Number,
-            required: true
         },
         update_status: {
             type: Number,
-            required: true
         },
         update_end_date: {
             type: String,
@@ -80,24 +86,28 @@ export default {
     },
 
     methods: {
-        updateSheet() {
-            axios.patch('/api/sheets/' + this.update_id, {
+        async updateSheet() {
+            await this.$store.dispatch('sheet/updateSheet', {
                 title: this.title,
                 body: this.body,
                 deadline: this.deadline,
                 id: this.update_id,
-            }).then(()=>{
-                location.reload()
             })
-        }
+            if (this.apiStatus) {
+                location.reload()
+            }
+        },
     },
     computed: {
         userid() {
             return this.$store.getters['auth/userid']
         },
-        sheet() {
-            return this.$store.getters['sheet/getSheet']
+        apiStatus() {
+            return this.$store.state.sheet.apiStatus
         },
+        updateSheetErrors() {
+            return this.$store.state.sheet.sheetErrorMessages
+        }
     }
 
 }

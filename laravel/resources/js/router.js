@@ -5,6 +5,7 @@ import Main from './components/Main.vue'
 import Board from './components/Board.vue'
 import Login from './components/Login.vue'
 import store from './store'
+import SystemError from './components/errors/System.vue'
 import Task from './components/tasks/TaskBoard.vue'
 
 Vue.use(VueRouter)
@@ -38,6 +39,11 @@ const routes = [
                 next()
             }
         }
+    },
+
+    {
+        path: '/500',
+        component: SystemError
     },
 
 

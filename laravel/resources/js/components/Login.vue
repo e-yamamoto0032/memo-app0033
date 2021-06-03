@@ -5,15 +5,25 @@
                 class="col-sm-2 nav-item text-center"
                 :class="{'nav-link active': tab === 1}"
                 @click="tab = 1"
-            >Login</li>
+            >Login
+            </li>
             <li
                 class="col-sm-2 nav-item text-center"
                 :class="{'nav-link active': tab === 2}"
                 @click="tab = 2"
-            >Register</li>
+            >Register
+            </li>
         </ul>
         <div class="row justify-content-center" v-show="tab === 1">
             <form class="col-sm-5 form-group mt-3 " @submit.prevent="login">
+                <div v-if="loginErrors" class="errors">
+                    <ul v-if="loginErrors.email">
+                        <li v-for="msg in loginErrors.email" :key="msg">{{ msg }}</li>
+                    </ul>
+                    <ul v-if="loginErrors.password">
+                        <li v-for="msg in loginErrors.password" :key="msg">{{ msg }}</li>
+                    </ul>
+                </div>
                 <label for="login-email">Email</label>
                 <input type="text" class="form-control" id="login-email" v-model="loginForm.email">
                 <label for="login-password">Password</label>
@@ -25,6 +35,14 @@
         </div>
         <div class="row justify-content-center" v-show="tab === 2">
             <form class="col-sm-5 form-group mt-3" @submit.prevent="register">
+                <div v-if="registerErrors" class="errors">
+                    <ul v-if="registerErrors.email">
+                        <li v-for="msg in registerErrors.email" :key="msg">{{ msg }}</li>
+                    </ul>
+                    <ul v-if="registerErrors.password">
+                        <li v-for="msg in registerErrors.password" :key="msg">{{ msg }}</li>
+                    </ul>
+                </div>
                 <label for="username">Name</label>
                 <input type="text" class="form-control" id="username" v-model="registerForm.name">
                 <label for="email">Email</label>
@@ -32,7 +50,8 @@
                 <label for="password">Password</label>
                 <input type="password" class="form-control" id="password" v-model="registerForm.password">
                 <label for="password-confirmation">Password (confirm)</label>
-                <input type="password" class="form-control" id="password-confirmation" v-model="registerForm.password_confirmation">
+                <input type="password" class="form-control" id="password-confirmation"
+                       v-model="registerForm.password_confirmation">
                 <div class="form__button">
                     <button type="submit" class="btn btn-success">register</button>
                 </div>
@@ -43,7 +62,7 @@
 
 <script>
 export default {
-    data () {
+    data() {
         return {
             tab: 1,
             loginForm: {
@@ -59,25 +78,44 @@ export default {
         }
     },
     methods: {
-        async login () {
+        async login() {
             await this.$store.dispatch('auth/login', this.loginForm)
-
-            this.$router.push({ name: 'board'})
+            if (this.apiStatus) {
+                this.$router.push({name: 'board'})
+            }
         },
-        async register () {
+        async register() {
             await this.$store.dispatch('auth/register', this.registerForm)
-
-            this.$router.push({ name: 'board'})
+            if (this.apiStatus) {
+                this.$router.push({name: 'board'})
+            }
+        },
+        clearError() {
+            this.$store.commit('auth/setLoginErrorMessages', null)
+            this.$store.commit('auth/setRegisterErrorMessages', null)
         }
     },
+
+    created() {
+        this.clearError()
+    },
+
     computed: {
-        userid () {
+        userid() {
             return this.$store.getters['auth/userid']
         },
         username() {
             return this.$store.getters['auth/username']
         },
-
+        apiStatus() {
+            return this.$store.state.auth.apiStatus
+        },
+        loginErrors() {
+            return this.$store.state.auth.loginErrorMessages
+        },
+        registerErrors() {
+            return this.$store.state.auth.registerErrorMessages
+        },
     }
 }
 </script>
