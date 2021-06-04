@@ -18,7 +18,8 @@
                           @change="movingCard"
                     />
                 </draggable>
-                <list-add/>
+                <list-add
+                />
             </div>
         </main>
     </div>

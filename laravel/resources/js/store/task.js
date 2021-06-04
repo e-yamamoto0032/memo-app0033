@@ -1,30 +1,14 @@
-// TODO: 仮の値、動的に出力部分
 const state = {
-    lists:[
-
-        {
-            title: 'Backlog',
-            cards: [
-                {body: 'English'},
-                {body: 'Mathematics'},
-            ]
-        },
-        {
-            title: 'Todo',
-            cards: [
-                {body: 'Science'}
-            ]
-        },
-        {
-            title: 'Doing',
-            cards: []
-        }
-    ],
+    lists: [],
 }
 
 const mutations = {
     addlist(state, payload) {
-        state.lists.push({title: payload.title, cards: []})
+        state.lists.push({
+            title: payload.title,
+            cards: [],
+            order: payload.order
+        })
     },
     removelist(state, payload) {
         state.lists.splice(payload.listIndex, 1)
@@ -41,8 +25,10 @@ const mutations = {
 }
 
 const actions = {
-    addlist(context, payload) {
+    async addlist(context, payload) {
         context.commit('addlist', payload)
+        console.log(payload)
+        await axios.post('/api/tasks', payload)
     }
     ,
     removelist(context, payload) {
@@ -62,9 +48,7 @@ const actions = {
     }
 }
 
-const getters = {
-
-}
+const getters = {}
 export default {
     namespaced: true,
     state,
