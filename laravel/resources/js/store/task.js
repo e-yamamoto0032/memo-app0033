@@ -27,22 +27,20 @@ const mutations = {
 const actions = {
     async addlist(context, payload) {
         context.commit('addlist', payload)
-        console.log(payload)
         await axios.post('/api/tasks', payload)
-    }
-    ,
+    },
+    async dblist(context, payload) {
+        context.commit('addlist', payload)
+    },
     removelist(context, payload) {
         context.commit('removelist', payload)
-    }
-    ,
+    },
     addCardToList(context, payload) {
         context.commit('addCardToList', payload)
-    }
-    ,
+    },
     removeCardFromList(context, payload) {
         context.commit('removeCardFromList', payload)
-    }
-    ,
+    },
     updateList(context, payload) {
         context.commit('updateList', payload)
     }

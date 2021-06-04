@@ -14,7 +14,7 @@
                           :key="item.id"
                           :title="item.title"
                           :cards="item.cards"
-                          :listIndex="index"
+                          :order="item.order"
                           @change="movingCard"
                     />
                 </draggable>
@@ -81,10 +81,25 @@ export default {
                     user_id: self.res.user_id
                 })
             })
+        },
+        getTask() {
+            var self = this;
+            axios.get('/api/tasks').then(function (response) {
+                self.res = response.data;
+                self.res.forEach(function (elem) {
+                    self.$store.dispatch('task/dblist', {
+                        id: elem.id,
+                        title: elem.title,
+                        order: elem.order,
+                        sheet_id: elem.sheet_id,
+                    })
+                })
+            })
         }
     },
     created() {
         this.request()
+        this.getTask()
 
     }
 }

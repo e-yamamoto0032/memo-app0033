@@ -18,6 +18,8 @@
 
 
 <script>
+import {mapState} from 'vuex'
+
 export default {
     data: function () {
         return {
@@ -40,17 +42,24 @@ export default {
         titleExists() {
             return this.title.length > 0
         },
-        sheet_id: function () {
+        sheet_id() {
             return this.$route.params.sheet_id;
         },
+        ...mapState(
+            {
+                task_length: state => state.task.lists.length
+
+            }
+        ),
     },
 
     methods: {
         addList: function () {
+            console.log(this.task_length)
             this.$store.dispatch('task/addlist', {
                 title: this.title,
                 sheet_id: this.sheet_id,
-                order: 0
+                order: this.task_length
 
             })
             this.title = ''
