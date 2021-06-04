@@ -20,7 +20,7 @@ class CreateSheetsTable extends Migration
             $table->date('deadline')->nullable();
             $table->date('end_date')->nullable();
             $table->tinyInteger('status')->nullable();
-            $table->bigInteger('user_id')->nullable();
+            $table->unsignedInteger('user_id')->nullable();
             $table->softDeletes()->nullable();
             $table->timestamps();
 
