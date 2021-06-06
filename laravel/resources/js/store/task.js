@@ -1,13 +1,18 @@
-const state = {
-    lists: [],
+function getDefaultState() {
+    return {
+        lists: [],
+    }
 }
+
+const state = getDefaultState()
 
 const mutations = {
     addlist(state, payload) {
         state.lists.push({
             title: payload.title,
             cards: [],
-            order: payload.order
+            order: payload.order,
+            id: payload.id,
         })
     },
     removelist(state, payload) {
@@ -21,7 +26,11 @@ const mutations = {
     },
     updateList(state, payload) {
         state.lists = payload.lists
-    }
+    },
+    clearData(state) {
+        Object.assign(state, getDefaultState())
+    },
+
 }
 
 const actions = {
@@ -42,8 +51,12 @@ const actions = {
         context.commit('removeCardFromList', payload)
     },
     updateList(context, payload) {
+        console.log(payload)
         context.commit('updateList', payload)
-    }
+    },
+    resetTask(context) {
+        context.commit('clearData')
+    },
 }
 
 const getters = {}

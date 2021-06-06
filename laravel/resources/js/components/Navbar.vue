@@ -31,6 +31,7 @@ export default {
         async logout() {
             await this.$store.dispatch('auth/logout')
             await this.$store.dispatch('sheet/resetSheet')
+            await this.$store.dispatch('task/resetTask')
             await this.$router.push('/')
         },
         async myBoard() {
@@ -38,6 +39,7 @@ export default {
                 location.reload()
             } else {
                 await this.$store.dispatch('sheet/resetSheet')
+                await this.$store.dispatch('task/resetTask')
                 await this.$router.push({name: 'board'})
             }
         },
@@ -46,6 +48,7 @@ export default {
                 location.reload()
             } else {
                 await this.$store.dispatch('sheet/resetSheet')
+                await this.$store.dispatch('task/resetTask')
                 await this.$router.push('/')
             }
         }

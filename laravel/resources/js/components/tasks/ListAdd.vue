@@ -45,24 +45,35 @@ export default {
         sheet_id() {
             return this.$route.params.sheet_id;
         },
+
         ...mapState(
             {
-                task_length: state => state.task.lists.length
-
+                tasks: state => state.task.lists,
+                task_length: state => state.task.lists.length,
             }
         ),
+        tasks_id() {
+            return this.tasks.map(item => item.id)
+        },
+        tasks_max() {
+            if (Math.max.apply(null, this.tasks_id) === -Infinity) {
+                return 1
+            }
+            return Math.max.apply(null, this.tasks_id) + 1
+        }
     },
 
     methods: {
         addList: function () {
-            console.log(this.task_length)
             this.$store.dispatch('task/addlist', {
                 title: this.title,
                 sheet_id: this.sheet_id,
-                order: this.task_length
+                order: this.tasks_max
 
+            }).then(() => {
+                this.title = ''
+                location.reload()
             })
-            this.title = ''
         },
         startEditing() {
             this.isEditing = true
