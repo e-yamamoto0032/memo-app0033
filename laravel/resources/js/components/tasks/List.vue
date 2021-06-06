@@ -5,17 +5,17 @@
             <p class="list-count">total: {{ totalCardInList }}</p>
             <div class="deletelist" @click="removeList">×</div>
         </div>
-        <!--    <draggable group="cards"-->
-        <!--               :list="cards"-->
-        <!--               @end="$emit('change')">-->
-        <!--      <card v-for="(item, index) in cards"-->
-        <!--            :body="item.body"-->
-        <!--            :key="item.id"-->
-        <!--            :cardIndex="index"-->
-        <!--            :listIndex="listIndex"-->
-        <!--      />-->
-        <!--    </draggable>-->
-        <!--    <card-add :listIndex="listIndex"/>-->
+            <draggable group="cards"
+                       :list="cards"
+                       @end="$emit('change')">
+              <card v-for="(item, index) in cards"
+                    :body="item.body"
+                    :key="item.id"
+                    :cardIndex="index"
+                    :listIndex="listIndex"
+              />
+            </draggable>
+            <card-add :listIndex="listIndex"/>
     </div>
 </template>
 
@@ -41,6 +41,10 @@ export default {
             required: true
         },
         order: {
+            type: Number,
+            required: true
+        },
+        listIndex: {
             type: Number,
             required: true
         }

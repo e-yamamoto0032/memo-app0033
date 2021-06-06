@@ -3,7 +3,7 @@
     <input type="text"
            class="text-input"
            v-model="body"
-           placeholder="Add new card"
+           placeholder="カードの追加"
            @focusin="startEditing"
            @focusout="finishEditing"
     >
@@ -11,7 +11,7 @@
             class="add-button"
             v-if="isEditing || bodyExists"
     >
-      Add
+      追加
     </button>
   </form>
 </template>
@@ -55,7 +55,7 @@ export default {
       this.isEditing = false
     },
     addCardToList: function() {
-      this.$store.dispatch('addCardToList', { body: this.body, listIndex: this.listIndex })
+      this.$store.dispatch('task/addCardToList', { body: this.body, listIndex: this.listIndex })
       this.body = ''
     }
   }

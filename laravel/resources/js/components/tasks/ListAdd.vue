@@ -10,7 +10,7 @@
         <button type="submit"
                 class="add-button"
                 v-if="isEditing || titleExists">
-            Add
+            追加
         </button>
     </form>
 

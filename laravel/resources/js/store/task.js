@@ -51,7 +51,6 @@ const actions = {
         context.commit('removeCardFromList', payload)
     },
     updateList(context, payload) {
-        console.log(payload)
         context.commit('updateList', payload)
     },
     resetTask(context) {

@@ -14,7 +14,8 @@
                           :key="item.id"
                           :title="item.title"
                           :cards="item.cards"
-                          :order="index"
+                          :order="item.order"
+                          :listIndex="index"
                           @change="movingCard"
                     />
                 </draggable>
@@ -62,7 +63,7 @@ export default {
     },
     methods: {
         movingCard: function () {
-            this.$store.dispatch('updateList', {lists: this.lists})
+            this.$store.dispatch('task/updateList', {lists: this.lists})
         },
         movingList: function () {
             this.$store.dispatch('task/updateList', {lists: this.lists})
