@@ -7,10 +7,10 @@
             <p class="deadline">期限: {{ sheet_deadline }}</p>
             <p class="all-task">All: {{ totalCardCount }} tasks</p>
             <div class="list-index">
-                <draggable :list="lists"
+                <draggable :list="taskList"
                            @end="movingList"
                            class="list-index">
-                    <list v-for="(item, index) in lists"
+                    <list v-for="(item, index) in taskList"
                           :key="item.id"
                           :title="item.title"
                           :cards="item.cards"
@@ -44,7 +44,7 @@ export default {
             return this.$store.getters['auth/userid']
         },
         totalCardCount() {
-            return this.lists.length
+            return this.taskList.length
         },
         sheet_id: function () {
             return this.$route.params.sheet_id;
@@ -59,6 +59,16 @@ export default {
         },
         sheet_deadline() {
             return this.$store.getters['sheet/taskSheet'].deadline
+        },
+        taskList() {
+            const tasks = this.lists.filter(x => x.sheet_id == this.sheet_id)
+            return tasks.sort(function (a, b) {
+                if (a.order > b.order) {
+                    return 1;
+                } else {
+                    return -1;
+                }
+            })
         },
     },
     methods: {

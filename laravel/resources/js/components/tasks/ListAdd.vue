@@ -1,5 +1,10 @@
 <template>
     <form :class="classList" @submit.prevent="addList">
+        <div v-if="addTaskErrors" class="errors">
+            <ul v-if="addTaskErrors.title">
+                <li v-for="msg in addTaskErrors.title" :key="msg">{{ msg }}</li>
+            </ul>
+        </div>
         <input v-model="title"
                type="text"
                class="text-input"
@@ -60,20 +65,26 @@ export default {
                 return 1
             }
             return Math.max.apply(null, this.tasks_id) + 1
+        },
+        apiStatus() {
+            return this.$store.state.task.apiStatus
+        },
+        addTaskErrors() {
+            return this.$store.state.task.taskErrorMessages
         }
     },
 
     methods: {
-        addList: function () {
-            this.$store.dispatch('task/addlist', {
+        async addList() {
+            await this.$store.dispatch('task/addlist', {
                 title: this.title,
                 sheet_id: this.sheet_id,
                 order: this.tasks_max
 
-            }).then(() => {
-                this.title = ''
-                location.reload()
             })
+            if (this.apiStatus) {
+                location.reload()
+            }
         },
         startEditing() {
             this.isEditing = true
