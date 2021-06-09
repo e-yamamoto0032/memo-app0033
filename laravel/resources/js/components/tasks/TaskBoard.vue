@@ -68,16 +68,27 @@ export default {
     methods: {
         movingCard: function () {
             this.$store.dispatch('task/updateList', {
-                lists: this.taskList})
+                lists: this.taskList
+            })
         },
         movingList: async function () {
             console.log(this.taskList)
             this.$store.dispatch('task/updateList', {
-                lists: this.taskList})
-
-            await axios.patch('/api/tasks/sort', {
                 lists: this.taskList
             })
+            let order = 0
+            for (const elem of this.taskList) {
+                console.log(elem.id)
+                console.log(elem)
+                console.log(order)
+                await axios.patch('/api/tasks/' + elem.id, {
+                    order: order,
+                    id: elem.id,
+                    sheet_id: elem.sheet_id,
+                    title: elem.title
+                })
+                order += 1
+            }
         },
         request: async function () {
             var self = this;
