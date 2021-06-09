@@ -20,4 +20,13 @@ class TaskController extends Controller
         $task = new Task();
         $task->fill($request->all())->save();
     }
+
+    public function sort(Request $request, $loop)
+    {
+        $tasks = Task::all();
+        foreach($tasks as $task) {
+//            $task->order = $request->index;
+//            $task->save();
+        }
+    }
 }
