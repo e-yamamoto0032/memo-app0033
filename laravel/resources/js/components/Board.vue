@@ -148,26 +148,32 @@ export default {
             this.showContent = false
             this.$store.commit('sheet/setSheetErrorMessages', null)
         },
+        getSheet() {
+            var self = this;
+            axios.get('/api/sheets').then(function (response) {
+                self.res = response.data;
+                self.res.forEach(function (elem) {
+                    self.$store.dispatch('sheet/dbSheet', {
+                        id: elem.id,
+                        title: elem.title,
+                        body: elem.body,
+                        deadline: elem.deadline,
+                        end_date: elem.end_date,
+                        status: elem.status,
+                        user_id: elem.user_id
+                    })
+                })
+
+            })
+        },
+        async clearSheet() {
+            await this.$store.dispatch('sheet/resetSheet')
+        }
 
     },
     created() {
-        var self = this;
-        axios.get('/api/sheets').then(function (response) {
-            self.res = response.data;
-            self.res.forEach(function (elem) {
-                self.$store.dispatch('sheet/dbSheet', {
-                    id: elem.id,
-                    title: elem.title,
-                    body: elem.body,
-                    deadline: elem.deadline,
-                    end_date: elem.end_date,
-                    status: elem.status,
-                    user_id: elem.user_id
-                })
-            })
-
-        })
-
+        this.clearSheet()
+        this.getSheet()
     }
 
 }

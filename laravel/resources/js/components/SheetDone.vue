@@ -2,7 +2,7 @@
     <div class="card mb-3" style="width: 21rem;">
         <div class="card-body d-flex flex-row">
             <div>
-                <h6 class="card-title">{{ title }} (id:{{ id }})</h6>
+                <h6 class="card-title">{{ title }}</h6>
                 <p class="card-text">{{ body }}</p>
                 <p class="card-text">完了日　{{ end_date }}</p>
             </div>

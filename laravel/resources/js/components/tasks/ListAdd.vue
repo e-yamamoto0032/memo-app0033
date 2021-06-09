@@ -1,59 +1,98 @@
 <template>
-  <form :class="classList" @submit.prevent="addList">
-    <input v-model="title"
-           type="text"
-           class="text-input"
-           placeholder="Add new list"
-           @focusin="startEditing"
-           @focusout="finishEditing"
-    >
-    <button type="submit"
-            class="add-button"
-            v-if="isEditing || titleExists">
-      Add
-    </button>
-  </form>
+    <form :class="classList" @submit.prevent="addList">
+        <div v-if="addTaskErrors" class="errors">
+            <ul v-if="addTaskErrors.title">
+                <li v-for="msg in addTaskErrors.title" :key="msg">{{ msg }}</li>
+            </ul>
+        </div>
+        <input v-model="title"
+               type="text"
+               class="text-input"
+               placeholder="タスクの追加"
+               @focusin="startEditing"
+               @focusout="finishEditing"
+        >
+        <button type="submit"
+                class="add-button"
+                v-if="isEditing || titleExists">
+            追加
+        </button>
+    </form>
 
 </template>
 
 
 <script>
+import {mapState} from 'vuex'
+
 export default {
-  data: function() {
-    return {
-      title: '',
-      isEditing: false,
+    data: function () {
+        return {
+            title: '',
+            isEditing: false,
+        }
+    },
+
+    computed: {
+        classList() {
+            const classList = ['addlist']
+            if (this.isEditing) {
+                classList.push('active')
+            }
+            if (this.titleExists) {
+                classList.push('addable')
+            }
+            return classList
+        },
+        titleExists() {
+            return this.title.length > 0
+        },
+        sheet_id() {
+            return this.$route.params.sheet_id;
+        },
+
+        ...mapState(
+            {
+                tasks: state => state.task.lists,
+                task_length: state => state.task.lists.length,
+            }
+        ),
+        tasks_id() {
+            return this.tasks.map(item => item.id)
+        },
+        tasks_max() {
+            if (Math.max.apply(null, this.tasks_id) === -Infinity) {
+                return 1
+            }
+            return Math.max.apply(null, this.tasks_id) + 1
+        },
+        apiStatus() {
+            return this.$store.state.task.apiStatus
+        },
+        addTaskErrors() {
+            return this.$store.state.task.taskErrorMessages
+        }
+    },
+
+    methods: {
+        async addList() {
+            await this.$store.dispatch('task/addlist', {
+                title: this.title,
+                sheet_id: this.sheet_id,
+                order: this.tasks_max
+
+            })
+            if (this.apiStatus) {
+                location.reload()
+            }
+        },
+        startEditing() {
+            this.isEditing = true
+        },
+        finishEditing() {
+            this.isEditing = false
+        },
     }
-  },
-
-  computed: {
-    classList() {
-      const classList = ['addlist']
-      if (this.isEditing) {
-        classList.push('active')
-      }
-      if (this.titleExists) {
-        classList.push('addable')
-      }
-      return classList
-    },
-    titleExists() {
-      return this.title.length > 0
-    },
-  },
-
-  methods: {
-    addList: function() {
-      this.$store.dispatch('addlist', { title: this.title })
-      this.title = ''
-    },
-    startEditing() {
-      this.isEditing = true
-    },
-    finishEditing() {
-      this.isEditing = false
-    },
-  }
 }
 
 </script>

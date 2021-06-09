@@ -10,7 +10,7 @@ html {
 
 main {
     padding: 0 10px;
-    width: calc(100% - 40px);
+    width: 100%;
     height: 100%;
 }
 
@@ -31,15 +31,18 @@ main {
 
 .list-index {
     display: flex;
+    -webkit-flex-wrap: wrap;          /* Safari etc. */
+    -ms-flex-wrap    : wrap;          /* IE10        */
+    flex-wrap        : wrap;
 }
 
 .addlist {
-    margin: 0 10px auto;
+    margin: 10px 10px auto;
     display: inline-block;
     flex-direction: column;
     align-items: flex-start;
-    min-width: 320px;
-    width: 320px;
+    min-width: 310px;
+    width: 310px;
 }
 
 .text-input {
@@ -80,7 +83,7 @@ main {
 }
 
 .active .text-input {
-    background-color: #fff;
+    background-color: lightblue;
 }
 .addable .add-button {
     background-color: #00d78f;
@@ -93,7 +96,7 @@ main {
 }
 
 .list {
-    margin: 0 5px auto;
+    margin: 5px 5px auto;
     position: relative;
     display: inline-block;
     flex-direction: column;
