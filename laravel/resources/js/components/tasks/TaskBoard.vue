@@ -83,10 +83,11 @@ export default {
             for (const elem of this.taskList) {
                 taskIds.push(elem.id)
             }
-            await axios.post('/api/tasks/sort', {
+            await this.clearTask()
+            axios.post('/api/tasks/sort', {
                 taskIds: taskIds
             }).then(() => {
-                location.reload()
+                this.getTask()
             })
         },
         request: async function () {
