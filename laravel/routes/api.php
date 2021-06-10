@@ -42,4 +42,4 @@ Route::resource('/tasks', 'TaskController',
     ['only' => ['index', 'show', 'store', 'update', 'destroy']]
 );
 
-Route::patch('/tasks/sort', 'TaskController@sort');
+

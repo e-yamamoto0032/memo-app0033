@@ -23,10 +23,12 @@ class TaskController extends Controller
 
     public function sort(Request $request, $loop)
     {
-        $tasks = Task::all();
-        foreach($tasks as $task) {
-//            $task->order = $request->index;
-//            $task->save();
-        }
+
+    }
+
+    public function destroy(Request $request)
+    {
+        $task = Task::find($request->id);
+        $task->delete();
     }
 }

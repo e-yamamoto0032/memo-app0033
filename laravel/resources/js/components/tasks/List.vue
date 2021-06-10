@@ -47,6 +47,10 @@ export default {
         listIndex: {
             type: Number,
             required: true
+        },
+        id: {
+            type: Number,
+            required: true
         }
     },
 
@@ -59,7 +63,15 @@ export default {
     methods: {
         removeList: function () {
             if (confirm('本当にこのリストを削除しますか？')) {
-                this.$store.dispatch('task/removelist', {listIndex: this.listIndex})
+
+                    axios.delete('/api/tasks/' + this.id, {
+                        data:
+                            {
+                                id: this.id
+                            }
+                    }).then(() => {
+                        location.reload()
+                    })
             }
         },
     },

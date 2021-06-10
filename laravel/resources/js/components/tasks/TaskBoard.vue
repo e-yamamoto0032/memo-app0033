@@ -12,6 +12,7 @@
                            class="list-index">
                     <list v-for="(item, index) in taskList"
                           :key="item.id"
+                          :id="item.id"
                           :title="item.title"
                           :cards="item.cards"
                           :order="item.order"
@@ -71,13 +72,7 @@ export default {
                 lists: this.taskList})
         },
         movingList: async function () {
-            console.log(this.taskList)
-            this.$store.dispatch('task/updateList', {
-                lists: this.taskList})
 
-            await axios.patch('/api/tasks/sort', {
-                lists: this.taskList
-            })
         },
         request: async function () {
             var self = this;
