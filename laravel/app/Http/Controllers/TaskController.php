@@ -21,10 +21,16 @@ class TaskController extends Controller
         $task->fill($request->all())->save();
     }
 
-    public function update(TaskRequest $request, Task $task)
+    public function sort(Request $request)
     {
-        $task = Task::find($request->id);
-        $task->fill($request->all())->save();
+
+        $order = 0;
+        foreach($request->taskIds as $item) {
+            $task = Task::find($item);
+            $task->order = $order;
+            $task->save();
+            $order++;
+        }
     }
 
 }

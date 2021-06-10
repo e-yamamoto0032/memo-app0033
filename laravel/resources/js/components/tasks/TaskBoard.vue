@@ -62,6 +62,13 @@ export default {
         },
         taskList() {
             const tasks = this.lists.filter(x => x.sheet_id == this.sheet_id)
+            return tasks.sort(function (a, b) {
+                if (a.order > b.order) {
+                    return 1;
+                } else {
+                    return -1;
+                }
+            })
             return tasks
         },
     },
@@ -72,23 +79,15 @@ export default {
             })
         },
         movingList: async function () {
-            console.log(this.taskList)
-            this.$store.dispatch('task/updateList', {
-                lists: this.taskList
-            })
-            let order = 0
+            let taskIds = []
             for (const elem of this.taskList) {
-                console.log(elem.id)
-                console.log(elem)
-                console.log(order)
-                await axios.patch('/api/tasks/' + elem.id, {
-                    order: order,
-                    id: elem.id,
-                    sheet_id: elem.sheet_id,
-                    title: elem.title
-                })
-                order += 1
+                taskIds.push(elem.id)
             }
+            await axios.post('/api/tasks/sort', {
+                taskIds: taskIds
+            }).then(() => {
+                location.reload()
+            })
         },
         request: async function () {
             var self = this;
