@@ -62,21 +62,32 @@ export default {
         },
         taskList() {
             const tasks = this.lists.filter(x => x.sheet_id == this.sheet_id)
+            return tasks.sort(function (a, b) {
+                if (a.order > b.order) {
+                    return 1;
+                } else {
+                    return -1;
+                }
+            })
             return tasks
         },
     },
     methods: {
         movingCard: function () {
             this.$store.dispatch('task/updateList', {
-                lists: this.taskList})
+                lists: this.taskList
+            })
         },
         movingList: async function () {
-            console.log(this.taskList)
-            this.$store.dispatch('task/updateList', {
-                lists: this.taskList})
-
-            await axios.patch('/api/tasks/sort', {
-                lists: this.taskList
+            let taskIds = []
+            for (const elem of this.taskList) {
+                taskIds.push(elem.id)
+            }
+            await this.clearTask()
+            axios.post('/api/tasks/sort', {
+                taskIds: taskIds
+            }).then(() => {
+                this.getTask()
             })
         },
         request: async function () {

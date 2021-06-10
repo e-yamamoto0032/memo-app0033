@@ -60,12 +60,6 @@ export default {
         tasks_id() {
             return this.tasks.map(item => item.id)
         },
-        tasks_max() {
-            if (Math.max.apply(null, this.tasks_id) === -Infinity) {
-                return 1
-            }
-            return Math.max.apply(null, this.tasks_id) + 1
-        },
         apiStatus() {
             return this.$store.state.task.apiStatus
         },
@@ -79,7 +73,7 @@ export default {
             await this.$store.dispatch('task/addlist', {
                 title: this.title,
                 sheet_id: this.sheet_id,
-                order: this.tasks_max
+                order: 0
 
             })
             if (this.apiStatus) {
