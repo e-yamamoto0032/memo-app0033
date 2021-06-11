@@ -65,6 +65,7 @@ export default {
             const tasks = this.lists.filter(x => x.sheet_id == this.sheet_id)
             return tasks
         },
+
     },
     methods: {
         movingCard: function () {

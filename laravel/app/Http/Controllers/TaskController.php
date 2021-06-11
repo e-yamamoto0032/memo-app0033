@@ -5,9 +5,15 @@ namespace App\Http\Controllers;
 use App\Task;
 use Illuminate\Http\Request;
 use App\Http\Requests\TaskRequest;
+use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $tasks = Task::all();
@@ -17,6 +23,9 @@ class TaskController extends Controller
 
     public function store(TaskRequest $request)
     {
+        if ($request->user_id !== Auth::id()) {
+            abort(403);
+        }
         $task = new Task();
         $task->fill($request->all())->save();
     }
@@ -28,6 +37,9 @@ class TaskController extends Controller
 
     public function destroy(Request $request)
     {
+        if ($request->user_id !== Auth::id()) {
+            abort(403);
+        }
         $task = Task::find($request->id);
         $task->delete();
     }
