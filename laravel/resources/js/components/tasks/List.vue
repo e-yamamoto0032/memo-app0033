@@ -47,19 +47,35 @@ export default {
         listIndex: {
             type: Number,
             required: true
+        },
+        id: {
+            type: Number,
+            required: true
         }
     },
 
     computed: {
         totalCardInList() {
             return this.cards.length
-        }
+        },
+        userid() {
+            return this.$store.getters['auth/userid']
+        },
     },
 
     methods: {
         removeList: function () {
             if (confirm('本当にこのリストを削除しますか？')) {
-                this.$store.dispatch('task/removelist', {listIndex: this.listIndex})
+
+                    axios.delete('/api/tasks/' + this.id, {
+                        data:
+                            {
+                                id: this.id,
+                                user_id: this.userid
+                            }
+                    }).then(() => {
+                        location.reload()
+                    })
             }
         },
     },

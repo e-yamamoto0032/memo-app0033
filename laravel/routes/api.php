@@ -42,4 +42,6 @@ Route::resource('/tasks', 'TaskController',
     ['only' => ['index', 'show', 'store', 'update', 'destroy']]
 );
 
+
 Route::post('/tasks/sort', 'TaskController@sort');
+

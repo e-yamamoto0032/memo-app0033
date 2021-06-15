@@ -29,9 +29,6 @@ const mutations = {
     setTaskErrorMessages(state, messages) {
         state.taskErrorMessages = messages
     },
-    removelist(state, payload) {
-        state.lists.splice(payload.listIndex, 1)
-    },
     addCardToList(state, payload) {
         state.lists[payload.listIndex].cards.push({body: payload.body})
     },
@@ -63,9 +60,6 @@ const actions = {
     },
     async dblist(context, payload) {
         context.commit('addlist', payload)
-    },
-    removelist(context, payload) {
-        context.commit('removelist', payload)
     },
     addCardToList(context, payload) {
         context.commit('addCardToList', payload)

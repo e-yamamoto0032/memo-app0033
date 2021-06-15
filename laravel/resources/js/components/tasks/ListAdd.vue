@@ -65,7 +65,10 @@ export default {
         },
         addTaskErrors() {
             return this.$store.state.task.taskErrorMessages
-        }
+        },
+        userid() {
+            return this.$store.getters['auth/userid']
+        },
     },
 
     methods: {
@@ -73,7 +76,8 @@ export default {
             await this.$store.dispatch('task/addlist', {
                 title: this.title,
                 sheet_id: this.sheet_id,
-                order: 0
+                order: this.tasks_max,
+                user_id: this.userid
 
             })
             if (this.apiStatus) {

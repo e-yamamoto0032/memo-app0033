@@ -12,6 +12,7 @@
                            class="list-index">
                     <list v-for="(item, index) in taskList"
                           :key="item.id"
+                          :id="item.id"
                           :title="item.title"
                           :cards="item.cards"
                           :order="item.order"
@@ -71,6 +72,7 @@ export default {
             })
             return tasks
         },
+
     },
     methods: {
         movingCard: function () {
@@ -79,6 +81,7 @@ export default {
             })
         },
         movingList: async function () {
+
             let taskIds = []
             for (const elem of this.taskList) {
                 taskIds.push(elem.id)

@@ -89,7 +89,7 @@ const actions = {
 
 const getters = {
     getSheet: state => state.sheets,
-    taskSheet: state => state.sheet
+    taskSheet: state => state.sheet,
 }
 
 
