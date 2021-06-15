@@ -30,8 +30,14 @@ class TaskController extends Controller
         $task->fill($request->all())->save();
     }
 
-    public function sort(Request $request, $loop)
+    public function sort(Request $request)
     {
+      $order = 0;
+        foreach($request->taskIds as $item) {
+            $task = Task::find($item);
+            $task->order = $order;
+            $task->save();
+            $order++;
 
     }
 
@@ -39,8 +45,10 @@ class TaskController extends Controller
     {
         if ($request->user_id !== Auth::id()) {
             abort(403);
+
         }
         $task = Task::find($request->id);
         $task->delete();
     }
+
 }

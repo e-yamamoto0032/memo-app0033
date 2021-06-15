@@ -60,12 +60,6 @@ export default {
         tasks_id() {
             return this.tasks.map(item => item.id)
         },
-        tasks_max() {
-            if (Math.max.apply(null, this.tasks_id) === -Infinity) {
-                return 1
-            }
-            return Math.max.apply(null, this.tasks_id) + 1
-        },
         apiStatus() {
             return this.$store.state.task.apiStatus
         },

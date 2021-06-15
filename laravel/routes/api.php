@@ -43,3 +43,5 @@ Route::resource('/tasks', 'TaskController',
 );
 
 
+Route::post('/tasks/sort', 'TaskController@sort');
+

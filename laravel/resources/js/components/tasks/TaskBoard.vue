@@ -63,6 +63,13 @@ export default {
         },
         taskList() {
             const tasks = this.lists.filter(x => x.sheet_id == this.sheet_id)
+            return tasks.sort(function (a, b) {
+                if (a.order > b.order) {
+                    return 1;
+                } else {
+                    return -1;
+                }
+            })
             return tasks
         },
 
@@ -70,10 +77,21 @@ export default {
     methods: {
         movingCard: function () {
             this.$store.dispatch('task/updateList', {
-                lists: this.taskList})
+                lists: this.taskList
+            })
         },
         movingList: async function () {
 
+            let taskIds = []
+            for (const elem of this.taskList) {
+                taskIds.push(elem.id)
+            }
+            await this.clearTask()
+            axios.post('/api/tasks/sort', {
+                taskIds: taskIds
+            }).then(() => {
+                this.getTask()
+            })
         },
         request: async function () {
             var self = this;
