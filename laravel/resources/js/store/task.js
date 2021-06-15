@@ -5,6 +5,7 @@ function getDefaultState() {
         lists: [],
         apiStatus: null,
         taskErrorMessages: null,
+        cardErrorMessages: null,
     }
 }
 
@@ -29,8 +30,12 @@ const mutations = {
     setTaskErrorMessages(state, messages) {
         state.taskErrorMessages = messages
     },
+    setCardErrorMessages(state, messages) {
+        state.cardErrorMessages = messages
+    },
     addCardToList(state, payload) {
-        state.lists[payload.listIndex].cards.push({body: payload.body})
+        const result = state.lists.find((v) => v.id === payload.task_id )
+        result.cards.push({body: payload.body})
     },
     removeCardFromList(state, payload) {
         state.lists[payload.listIndex].cards.splice(payload.cardIndex, 1)
@@ -61,8 +66,21 @@ const actions = {
     async dblist(context, payload) {
         context.commit('addlist', payload)
     },
-    addCardToList(context, payload) {
-        context.commit('addCardToList', payload)
+    async addCardToList(context, payload) {
+        context.commit('setApiStatus', null)
+        const response = await axios.post('/api/cards', payload)
+            .catch(err => err.response || err)
+
+        if(response.status === OK) {
+            context.commit('setApiStatus', true)
+            return false
+        }
+        context.commit('setApiStatus', false)
+        if (response.status === UNPROCESSABLE_ENTITY) {
+            context.commit('setCardErrorMessages', response.data.errors)
+        } else {
+            context.commit('error/setCode', response.status, {root: true})
+        }
     },
     removeCardFromList(context, payload) {
         context.commit('removeCardFromList', payload)

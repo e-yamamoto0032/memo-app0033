@@ -13,7 +13,7 @@ class CardRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,16 @@ class CardRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'body' => ['required','max:10', 'regex:/^[ぁ-んァ-ヶ一-龥々０-９ａ-ｚＡ-Ｚー・’＠]+$/u']
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'body.required' => '内容は必須です。',
+            'body.max' => '内容は１０文字以内で入力して下さい。',
+            'body.regex' => '内容は全角で入力して下さい。',
         ];
     }
 }

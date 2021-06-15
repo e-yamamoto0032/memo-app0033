@@ -13,9 +13,14 @@
                     :key="item.id"
                     :cardIndex="index"
                     :listIndex="listIndex"
+                    :order="order"
               />
             </draggable>
-            <card-add :listIndex="listIndex"/>
+
+            <card-add :listIndex="listIndex"
+                      :task_id="id"
+                      :order="order"
+            />
     </div>
 </template>
 

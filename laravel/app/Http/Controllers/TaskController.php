@@ -32,16 +32,18 @@ class TaskController extends Controller
 
     public function sort(Request $request)
     {
-      $order = 0;
-        foreach($request->taskIds as $item) {
+        $order = 0;
+        foreach ($request->taskIds as $item) {
             $task = Task::find($item);
             $task->order = $order;
             $task->save();
             $order++;
 
+        }
     }
 
-    public function destroy(Request $request)
+    public
+    function destroy(Request $request)
     {
         if ($request->user_id !== Auth::id()) {
             abort(403);

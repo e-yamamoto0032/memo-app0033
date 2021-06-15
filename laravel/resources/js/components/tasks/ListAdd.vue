@@ -76,7 +76,7 @@ export default {
             await this.$store.dispatch('task/addlist', {
                 title: this.title,
                 sheet_id: this.sheet_id,
-                order: this.tasks_max,
+                order: this.task_length,
                 user_id: this.userid
 
             })
