@@ -24,7 +24,7 @@ export default {
             type: Number,
             required: true
         },
-        order: {
+        task_order: {
             type: Number,
             required: true
         },

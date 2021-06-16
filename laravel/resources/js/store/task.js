@@ -82,6 +82,9 @@ const actions = {
             context.commit('error/setCode', response.status, {root: true})
         }
     },
+    dbCard(context, payload) {
+        context.commit('addCardToList', payload)
+    },
     removeCardFromList(context, payload) {
         context.commit('removeCardFromList', payload)
     },

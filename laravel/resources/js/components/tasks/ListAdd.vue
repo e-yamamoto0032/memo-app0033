@@ -78,7 +78,6 @@ export default {
                 sheet_id: this.sheet_id,
                 order: this.task_length,
                 user_id: this.userid
-
             })
             if (this.apiStatus) {
                 location.reload()

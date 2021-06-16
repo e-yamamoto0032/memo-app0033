@@ -15,6 +15,12 @@ class CardController extends Controller
         $this->middleware('auth');
     }
 
+    public function index()
+    {
+        $cards = Card::all();
+        return $this->jsonResponse($cards);
+    }
+
     public function store(CardRequest $request)
     {
         if ($request->user_id !== Auth::id()) {

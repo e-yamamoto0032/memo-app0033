@@ -120,6 +120,20 @@ export default {
                         sheet_id: elem.sheet_id,
                     })
                 })
+            }).then(() => {
+                var self = this;
+                axios.get('/api/cards').then(function (response) {
+                    self.res = response.data;
+                    self.res.forEach(function (elem) {
+                        self.$store.dispatch('task/dbCard', {
+                            id: elem.id,
+                            body: elem.body,
+                            order: elem.order,
+                            sheet_id: elem.sheet_id,
+                            task_id: elem.task_id
+                        })
+                    })
+                })
             })
         },
         async clearTask() {
@@ -127,11 +141,11 @@ export default {
         }
     },
     created() {
+        this.getTask()
         this.clearTask()
         this.request()
-        this.getTask()
+    },
 
-    }
 }
 
 

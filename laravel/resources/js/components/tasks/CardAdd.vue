@@ -1,10 +1,5 @@
 <template>
     <form :class="classList" @submit.prevent="addCardToList">
-        <div v-if="addCardErrors" class="errors">
-            <ul v-if="addCardErrors.body">
-                <li v-for="msg in addCardErrors.body" :key="msg">{{ msg }}</li>
-            </ul>
-        </div>
         <input type="text"
                class="text-input"
                v-model="body"
@@ -15,6 +10,7 @@
         <button type="submit"
                 class="add-button"
                 v-if="isEditing || bodyExists"
+                @click="$emit('error')"
         >
             追加
         </button>
@@ -32,7 +28,7 @@ export default {
             type: Number,
             required: true,
         },
-        order: {
+        task_order: {
             type: Number,
             required: true
         },
@@ -58,9 +54,6 @@ export default {
         bodyExists() {
             return this.body.length > 0
         },
-        addCardErrors() {
-            return this.$store.state.task.cardErrorMessages
-        },
         userid() {
             return this.$store.getters['auth/userid']
         },
@@ -79,12 +72,15 @@ export default {
         addCardToList: function () {
             this.$store.dispatch('task/addCardToList', {
                 body: this.body,
-                order: this.order,
+                task_order: this.task_order,
+                order: 0,
                 task_id: this.task_id,
                 user_id: this.userid,
                 sheet_id: this.sheet_id
             })
-            this.body = ''
+            if (this.apiStatus) {
+                location.reload()
+            }
         }
     }
 }
