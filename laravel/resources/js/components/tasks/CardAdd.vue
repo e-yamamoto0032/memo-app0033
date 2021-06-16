@@ -60,6 +60,9 @@ export default {
         sheet_id: function () {
             return this.$route.params.sheet_id;
         },
+        apiStatus() {
+            return this.$store.state.task.apiStatus
+        },
     },
 
     methods: {
