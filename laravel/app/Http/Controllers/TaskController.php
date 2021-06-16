@@ -42,8 +42,7 @@ class TaskController extends Controller
         }
     }
 
-    public
-    function destroy(Request $request)
+    public function destroy(Request $request)
     {
         if ($request->user_id !== Auth::id()) {
             abort(403);

@@ -28,11 +28,30 @@ export default {
             type: Number,
             required: true
         },
+        id: {
+            type: Number,
+            required: true
+        }
     },
+
+    computed: {
+        userid() {
+            return this.$store.getters['auth/userid']
+        }
+    },
+
     methods: {
         removeCardFromList() {
             if (confirm('本当にこのカードを削除しますか？')) {
-                this.$store.dispatch('removeCardFromList', {cardIndex: this.cardIndex, listIndex: this.listIndex})
+                axios.delete('/api/cards/' + this.id, {
+                    data:
+                        {
+                            id: this.id,
+                            user_id: this.userid
+                        }
+                }).then(() => {
+                    location.reload()
+                })
             }
         }
     },
