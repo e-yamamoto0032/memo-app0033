@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Card;
+use App\Task;
+use App\Sheet;
 use Illuminate\Http\Request;
 use App\Http\Requests\CardRequest;
 use Illuminate\Support\Facades\Auth;
@@ -23,7 +25,9 @@ class CardController extends Controller
 
     public function store(CardRequest $request)
     {
-        if ($request->user_id !== Auth::id()) {
+        $task = Task::find($request->task_id);
+        $sheet = Sheet::find($task->sheet_id);
+        if ($sheet->user_id !== Auth::id()) {
             abort(403);
         }
         $card = new Card();

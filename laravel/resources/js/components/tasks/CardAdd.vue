@@ -72,13 +72,11 @@ export default {
         finishEditing: function () {
             this.isEditing = false
         },
-        addCardToList: function () {
-            this.$store.dispatch('task/addCardToList', {
+        async addCardToList () {
+            await this.$store.dispatch('task/addCardToList', {
                 body: this.body,
-                task_order: this.task_order,
                 order: 0,
                 task_id: this.task_id,
-                user_id: this.userid,
                 sheet_id: this.sheet_id
             })
             if (this.apiStatus) {
