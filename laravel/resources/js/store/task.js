@@ -35,7 +35,13 @@ const mutations = {
     },
     addCardToList(state, payload) {
         const result = state.lists.find((v) => v.id === payload.task_id )
-        result.cards.push({body: payload.body})
+        result.cards.push({
+            id: payload.id,
+            body: payload.body,
+            order: payload.order,
+            sheet_id: payload.sheet_id,
+            task_id: payload.task_id
+        })
     },
     removeCardFromList(state, payload) {
         state.lists[payload.listIndex].cards.splice(payload.cardIndex, 1)

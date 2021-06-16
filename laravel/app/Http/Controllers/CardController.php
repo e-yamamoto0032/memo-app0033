@@ -29,4 +29,14 @@ class CardController extends Controller
         $card = new Card();
         $card->fill($request->all())->save();
     }
+
+    public function destroy(Request $request)
+    {
+        if ($request->user_id !== Auth::id()) {
+            abort(403);
+
+        }
+        $task = Card::find($request->id);
+        $task->delete();
+    }
 }

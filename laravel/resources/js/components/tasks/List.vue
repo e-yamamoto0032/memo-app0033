@@ -11,6 +11,7 @@
             <card v-for="(item, index) in cards"
                   :body="item.body"
                   :key="item.id"
+                  :id="item.id"
                   :cardIndex="index"
                   :listIndex="listIndex"
                   :task_order="order"
