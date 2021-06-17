@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+
 
 class Sheet extends Model
 {
@@ -20,5 +22,10 @@ class Sheet extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo('User');
+    }
+
+    public function cards(): hasmany
+    {
+        return $this->hasMany('Card');
     }
 }

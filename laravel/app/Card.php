@@ -20,4 +20,9 @@ class Card extends Model
         return $this->belongsTo('Sheet');
     }
 
+    public function task(): BelongsTo
+    {
+        return $this->belongsTo('Task');
+    }
+
 }

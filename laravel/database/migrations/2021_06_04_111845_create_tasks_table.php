@@ -21,7 +21,7 @@ class CreateTasksTable extends Migration
             $table->softDeletes()->nullable();
             $table->timestamps();
 
-            $table->foreign('sheet_id')->references('id')->on('sheets');
+            $table->foreign('sheet_id')->references('id')->on('sheets')->onDelete('cascade');
         });
     }
 
