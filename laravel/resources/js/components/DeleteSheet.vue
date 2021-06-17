@@ -39,10 +39,9 @@ export default {
                     {
                         id: this.delete_id
                     }
+            }).then(() => {
+                location.reload()
             })
-            //     .then(() => {
-            //     location.reload()
-            // })
         }
     },
     computed: {

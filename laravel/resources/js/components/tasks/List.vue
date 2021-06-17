@@ -5,17 +5,31 @@
             <p class="list-count">total: {{ totalCardInList }}</p>
             <div class="deletelist" @click="removeList">×</div>
         </div>
-            <draggable group="cards"
-                       :list="cards"
-                       @end="$emit('change')">
-              <card v-for="(item, index) in cards"
-                    :body="item.body"
-                    :key="item.id"
-                    :cardIndex="index"
-                    :listIndex="listIndex"
-              />
-            </draggable>
-            <card-add :listIndex="listIndex"/>
+        <draggable group="cards"
+                   :list="cards"
+                   @end="$emit('change')">
+            <card v-for="(item, index) in cards"
+                  :body="item.body"
+                  :key="item.id"
+                  :id="item.id"
+                  :cardIndex="index"
+                  :listIndex="listIndex"
+                  :task_order="order"
+            />
+        </draggable>
+
+        <card-add :listIndex="listIndex"
+                  :task_id="id"
+                  :task_order="order"
+                  @error="errorCardStatus"
+        />
+        <div v-show="errorCard">
+            <div v-if="addCardErrors" class="errors">
+                <ul v-if="addCardErrors.body">
+                    <li v-for="msg in addCardErrors.body" :key="msg">{{ msg }}</li>
+                </ul>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -29,6 +43,12 @@ export default {
         CardAdd,
         Card,
         draggable,
+    },
+
+    data() {
+        return {
+            errorCard: false,
+        }
     },
 
     props: {
@@ -61,23 +81,29 @@ export default {
         userid() {
             return this.$store.getters['auth/userid']
         },
+        addCardErrors() {
+            return this.$store.state.task.cardErrorMessages
+        },
     },
 
     methods: {
         removeList: function () {
             if (confirm('本当にこのリストを削除しますか？')) {
 
-                    axios.delete('/api/tasks/' + this.id, {
-                        data:
-                            {
-                                id: this.id,
-                                user_id: this.userid
-                            }
-                    }).then(() => {
-                        location.reload()
-                    })
+                axios.delete('/api/tasks/' + this.id, {
+                    data:
+                        {
+                            id: this.id,
+                            user_id: this.userid
+                        }
+                }).then(() => {
+                    location.reload()
+                })
             }
         },
+        errorCardStatus() {
+            this.errorCard = true
+        }
     },
 }
 </script>

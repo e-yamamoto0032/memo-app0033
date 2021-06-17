@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Card extends Model
 {
     protected $fillable =[
-        'title',
+        'body',
         'order',
         'sheet_id',
         'task_id'
