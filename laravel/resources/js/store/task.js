@@ -43,13 +43,6 @@ const mutations = {
             task_id: payload.task_id
         })
     },
-    removeCardFromList(state, payload) {
-        state.lists[payload.listIndex].cards.splice(payload.cardIndex, 1)
-    },
-    updateList(state, payload) {
-        state.lists = payload.lists
-    },
-
 }
 
 const actions = {
@@ -90,12 +83,6 @@ const actions = {
     },
     dbCard(context, payload) {
         context.commit('addCardToList', payload)
-    },
-    removeCardFromList(context, payload) {
-        context.commit('removeCardFromList', payload)
-    },
-    updateList(context, payload) {
-        context.commit('updateList', payload)
     },
     resetTask(context) {
         context.commit('clearData')

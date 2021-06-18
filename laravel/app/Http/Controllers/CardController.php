@@ -43,4 +43,24 @@ class CardController extends Controller
         $task = Card::find($request->id);
         $task->delete();
     }
+
+    public function sort(Request $request)
+    {
+        for ($i = 0; $i < count($request->cardIdsArray); $i++) {
+            foreach ($request->cardIdsArray[$i] as $item) {
+                $card = Card::find($item);
+                $card->task_id = $request->taskIds[$i];
+                $card->save();
+            }
+        }
+        $order = 0;
+        for ($i = 0; $i < count($request->cardIdsArray); $i++) {
+            foreach ($request->cardIdsArray[$i] as $item) {
+                $card = Card::find($item);
+                $card->order = $order;
+                $card->save();
+                $order++;
+            }
+        }
+    }
 }
