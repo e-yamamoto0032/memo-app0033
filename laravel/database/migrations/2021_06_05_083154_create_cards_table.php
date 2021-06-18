@@ -18,11 +18,12 @@ class CreateCardsTable extends Migration
             $table->string('body');
             $table->tinyInteger('order');
             $table->unsignedInteger('sheet_id');
-            $table->bigInteger('task_id');
+            $table->unsignedInteger('task_id');
             $table->softDeletes()->nullable();
             $table->timestamps();
 
-            $table->foreign('sheet_id')->references('id')->on('sheets');
+            $table->foreign('sheet_id')->references('id')->on('sheets')->onDelete('cascade');
+            $table->foreign('task_id')->references('id')->on('tasks')->onDelete('cascade');
         });
     }
 
