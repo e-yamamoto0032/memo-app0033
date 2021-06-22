@@ -31,6 +31,10 @@ export default {
         id: {
             type: Number,
             required: true
+        },
+        task_id: {
+            type: Number,
+            required: true
         }
     },
 

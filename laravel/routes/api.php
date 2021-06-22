@@ -49,3 +49,4 @@ Route::resource('/cards', 'CardController',
     ['only' => ['index', 'show', 'store', 'update', 'destroy']]
 );
 
+Route::post('/cards/sort', 'CardController@sort');

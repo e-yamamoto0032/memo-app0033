@@ -12,6 +12,7 @@
                   :body="item.body"
                   :key="item.id"
                   :id="item.id"
+                  :task_id="item.task_id"
                   :cardIndex="index"
                   :listIndex="listIndex"
                   :task_order="order"

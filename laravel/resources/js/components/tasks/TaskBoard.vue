@@ -70,18 +70,41 @@ export default {
                     return -1;
                 }
             })
-            return tasks
         },
 
     },
     methods: {
-        movingCard: function () {
-            this.$store.dispatch('task/updateList', {
-                lists: this.taskList
+        movingCard: async function () {
+            let taskIds = []
+            for (const elem of this.taskList) {
+                taskIds.push(elem.id)
+            }
+
+            let cards = []
+            for (const elem of this.taskList) {
+                cards.push(elem.cards)
+            }
+
+            let cardIdsArray = []
+            for (let i = 0; i < cards.length; i++) {
+                let cardIds = []
+                for(const elem of cards[i]){
+                    cardIds.push(elem.id)
+                }
+                cardIdsArray.push(cardIds)
+            }
+
+            await this.clearTask()
+            axios.post('/api/cards/sort', {
+                taskIds: taskIds,
+                cardIdsArray: cardIdsArray,
+                user_id: this.userid
+
+            }).then(() => {
+                this.getTask()
             })
         },
         movingList: async function () {
-
             let taskIds = []
             for (const elem of this.taskList) {
                 taskIds.push(elem.id)
@@ -123,7 +146,13 @@ export default {
             }).then(() => {
                 var self = this;
                 axios.get('/api/cards').then(function (response) {
-                    self.res = response.data;
+                    self.res = response.data.sort(function (a, b) {
+                        if (a.order > b.order) {
+                            return 1;
+                        } else {
+                            return -1;
+                        }
+                    })
                     self.res.forEach(function (elem) {
                         self.$store.dispatch('task/dbCard', {
                             id: elem.id,
