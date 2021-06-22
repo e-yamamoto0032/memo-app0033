@@ -31,4 +31,22 @@ Route::get('/user', function () {
     return Auth::user();
 })->name('user');
 
-Route::post('/sheets', 'SheetController@store');
+//Route::post('/sheets', 'SheetController@store');
+Route::resource('/sheets', 'SheetController',
+    ['only' => ['index', 'show', 'store', 'update', 'destroy']]
+);
+
+Route::patch('/sheets/done/{sheet}', 'SheetController@done');
+
+Route::resource('/tasks', 'TaskController',
+    ['only' => ['index', 'show', 'store', 'update', 'destroy']]
+);
+
+Route::post('/tasks/sort', 'TaskController@sort');
+
+
+Route::resource('/cards', 'CardController',
+    ['only' => ['index', 'show', 'store', 'update', 'destroy']]
+);
+
+Route::post('/cards/sort', 'CardController@sort');

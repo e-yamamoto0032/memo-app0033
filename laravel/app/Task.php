@@ -7,21 +7,19 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 
-class Sheet extends Model
+
+class Task extends Model
 {
     protected $fillable =[
         'title',
-        'body',
-        'deadline',
-        'end_date',
-        'status',
-        'user_id'
+        'order',
+        'sheet_id'
 
     ];
 
-    public function user(): BelongsTo
+    public function sheet(): BelongsTo
     {
-        return $this->belongsTo('User');
+        return $this->belongsTo('Sheet');
     }
 
     public function cards(): hasmany

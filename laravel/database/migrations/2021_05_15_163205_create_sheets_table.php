@@ -15,16 +15,16 @@ class CreateSheetsTable extends Migration
     {
         Schema::create('sheets', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('title');
-            $table->string('body');
-            $table->date('deadline');
+            $table->string('title')->nullable();
+            $table->string('body')->nullable();
+            $table->date('deadline')->nullable();
             $table->date('end_date')->nullable();
             $table->tinyInteger('status')->nullable();
-            $table->bigInteger('user_id')->nullable();
+            $table->unsignedInteger('user_id')->nullable();
             $table->softDeletes()->nullable();
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
