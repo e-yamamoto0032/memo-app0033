@@ -46,6 +46,9 @@ class CardController extends Controller
 
     public function sort(Request $request)
     {
+        if ($request->user_id !== Auth::id()) {
+            abort(403);
+        }
         for ($i = 0; $i < count($request->cardIdsArray); $i++) {
             foreach ($request->cardIdsArray[$i] as $item) {
                 $card = Card::find($item);

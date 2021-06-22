@@ -97,7 +97,8 @@ export default {
             await this.clearTask()
             axios.post('/api/cards/sort', {
                 taskIds: taskIds,
-                cardIdsArray: cardIdsArray
+                cardIdsArray: cardIdsArray,
+                user_id: this.userid
 
             }).then(() => {
                 this.getTask()
